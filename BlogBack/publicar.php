@@ -1,5 +1,4 @@
 <?php
-$label_tags = "Tags selecionadas:";
 $label_categoria = "Selecione a categoria:";
 $botao_categoria = [
     "f1" => "Formula 1",
@@ -12,5 +11,5 @@ $botao_categoria = [
 ];
 $botao_publicar = "Publicar Notícia";
 
-require "../View/publicar-view.php"
+require "views/publicar-view.php"
 ?>

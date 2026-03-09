@@ -10,7 +10,7 @@ $botao1 = [
     "Conheça a História de Senna"
 ];
 $sub_titulo = [
-    "Quer escrever para o Blog da F1?",
+    "Quer escrever para o Blog?",
     "Seja parte da nossa equipe de jornalistas!",
     "Homenageie o tricampeão mundial"
 ];
@@ -25,5 +25,5 @@ $botao3 = [
     "Escrever sobre Senna"
 ];
 
-require "../View/slider-view.php"
+require "views/slider-view.php"
 ?>

@@ -1,4 +1,12 @@
 <?php
+$botao_login = [
+    "Entrar",
+    "Criar Conta"
+];
+$botao_criar = "Criar Conta";
+$label_email = "E-mail";
+$label_senha = "Senha";
+
 $label_nome = "Nome Completo";
 $label_usuario = "Nome de Usuário";
 $label_email = "E-mail";
@@ -8,5 +16,5 @@ $label_senha = "Senha";
 $label_confirmar_senha = "Confirmar Senha";
 $label_criar_conta = "Criar Conta";
 
-require "../View/registro-view.php"
+require "views/pag-login-view.php"
 ?>

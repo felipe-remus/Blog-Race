@@ -1,3 +1,17 @@
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/filtros.css">
+<link rel="stylesheet" href="../css/footer.css">
+<link rel="stylesheet" href="../css/header.css">
+<link rel="stylesheet" href="../css/historia.css">
+<link rel="stylesheet" href="../css/login.css">
+<link rel="stylesheet" href="../css/noticias.css">
+<link rel="stylesheet" href="../css/paginacao.css">
+<link rel="stylesheet" href="../css/publicar.css">
+<link rel="stylesheet" href="../css/slider.css">
+<link rel="stylesheet" href="../css/tags.css">
+
+<script src="../script/script.js" defer></script>
+
 <!-- Container de paginação -->
 <div class="paginacao-container" id="paginacao">
     <button class="paginacao-btn" id="btn-primeira" title="Primeira página">
