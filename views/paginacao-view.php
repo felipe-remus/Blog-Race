@@ -14,30 +14,47 @@
 
 <!-- Container de paginação -->
 <div class="paginacao-container" id="paginacao">
-    <button class="paginacao-btn" id="btn-primeira" title="Primeira página">
+    
+    <!-- Botão Primeira -->
+    <button class="paginacao-btn" 
+            id="btn-primeira" 
+            title="Primeira página"
+            <?= $pagina_atual === 1 ? 'disabled' : '' ?>
+            onclick="window.location.href='?page=1'">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <polyline points="11 17 6 12 11 7"></polyline>
             <polyline points="18 17 13 12 18 7"></polyline>
         </svg>
     </button>
     
-    <button class="paginacao-btn" id="btn-anterior" title="Página anterior">
+    <!-- Botão Anterior -->
+    <button class="paginacao-btn" 
+            id="btn-anterior" 
+            title="Página anterior"
+            <?= $pagina_atual === 1 ? 'disabled' : '' ?>
+            onclick="window.location.href='?page=<?= max(1, $pagina_atual - 1) ?>'">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <polyline points="15 18 9 12 15 6"></polyline>
         </svg>
     </button>
     
-    <div class="paginacao-numeros" id="numeros-paginas">
-        <!-- Números serão gerados dinamicamente -->
-    </div>
-    
-    <button class="paginacao-btn" id="btn-proxima" title="Próxima página">
+    <!-- Botão Próxima -->
+    <button class="paginacao-btn" 
+            id="btn-proxima" 
+            title="Próxima página"
+            <?= $pagina_atual === $total_paginas ? 'disabled' : '' ?>
+            onclick="window.location.href='?page=<?= min($total_paginas, $pagina_atual + 1) ?>'">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <polyline points="9 18 15 12 9 6"></polyline>
         </svg>
     </button>
     
-    <button class="paginacao-btn" id="btn-ultima" title="Última página">
+    <!-- Botão Última -->
+    <button class="paginacao-btn" 
+            id="btn-ultima" 
+            title="Última página"
+            <?= $pagina_atual === $total_paginas ? 'disabled' : '' ?>
+            onclick="window.location.href='?page=<?= $total_paginas ?>'">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <polyline points="13 17 18 12 13 7"></polyline>
             <polyline points="6 17 11 12 6 7"></polyline>
@@ -45,9 +62,10 @@
     </button>
 </div>
 
+<!-- Info: "Mostrando X-Y de Z notícias" -->
 <div class="info-paginacao" id="info-paginacao">
     Mostrando 
-    <span id="info-inicio">1</span>-<span id="info-fim">20</span> 
+    <span id="info-inicio"><?= $inicio ?></span>-<span id="info-fim"><?= $fim ?></span> 
     de 
     <span id="info-total"><?= $total_noticias ?></span> notícias
 </div>

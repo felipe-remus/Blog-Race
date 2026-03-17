@@ -20,7 +20,7 @@
     <!-- Filtro por categoria -->
     <div class="filtro-container">
         <select id="filtro-categoria" name="categoria" class="filtro-select">
-        <option value="" disabled selected>Selecione a Categoria</option>
+        <option value="">Selecione a Categoria</option>
         
         <option value="f1" ><?= $categorias["f1"]?></option>
         <option value="f2" ><?= $categorias["f2"]?></option>

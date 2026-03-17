@@ -218,10 +218,64 @@
     margin: 0 0 1.2rem;
     font-weight: 400;
 
-    /* Limitar a 4 linhas */
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+    /* Limite de 5 linhas - Versão agressiva */
+    display: -webkit-box !important;
+    -webkit-box-orient: vertical !important;
+    -webkit-line-clamp: 5 !important;
+    line-clamp: 5 !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
+/* ----------------------------------------
+    BOTÕES DE AÇÃO
+---------------------------------------- */
+.card-acoes {
+    display: flex;
+    gap: 0.6rem;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-rule);
+    justify-content: flex-end;
+}
+
+.btn-acao {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 0.95rem;
+    font-family: var(--font-ui);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    border: 1.5px solid var(--color-rule);
+    border-radius: var(--radius-badge);
+    background: var(--color-white);
+    color: var(--color-ink-soft);
+    cursor: pointer;
+    transition: all 0.24s ease;
+    outline: none;
+}
+
+.btn-acao:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+    background: rgba(200, 16, 46, 0.04);
+}
+
+.btn-acao:active {
+    transform: scale(0.96);
+}
+
+.btn-acao svg {
+    stroke-width: 2.5;
+}
+
+.btn-deletar:hover {
+    border-color: #dc2626;
+    color: #dc2626;
+    background: rgba(220, 38, 38, 0.04);
 }
 
 /* ----------------------------------------
@@ -356,6 +410,13 @@
     font-weight: 400;
     display: block;
     overflow: visible;
+    -webkit-line-clamp: unset;
+    line-clamp: unset;
+    -webkit-box-orient: initial;
+}
+
+.modal-card .card-acoes {
+    display: none;
 }
 
 .modal-card .card-tags {
@@ -423,4 +484,24 @@ body.modal-aberto { overflow: hidden; }
     .modal-card .card-body  { padding: 1.5rem 1.2rem 2rem; }
     .modal-card h2          { font-size: 1.35rem; padding-right: 2rem; }
     .modal-card .card-conteudo { font-size: 1rem; }
+}
+
+/* ÚLTIMO RECURSO - Máxima prioridade */
+.card-conteudo {
+    display: -webkit-box !important;
+    -webkit-box-orient: vertical !important;
+    -webkit-line-clamp: 5 !important;
+    line-clamp: 5 !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    max-height: 8.25rem !important;
+    word-break: break-word !important;
+}
+
+.modal-card .card-conteudo {
+    display: block !important;
+    -webkit-line-clamp: unset !important;
+    line-clamp: unset !important;
+    overflow: visible !important;
+    max-height: none !important;
 }

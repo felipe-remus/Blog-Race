@@ -1,15 +1,14 @@
 <?php
-$categorias = [
-    "f1" => "Formula 1",
-    "f2" => "Formula 2",
-    "f3" => "Formula 3",
-    "f4" => "Formula 4",
-    "f1academy" => "F1 Academy",
-    "fe" => "Formula E",
-    "indy" => "IndyCar",
-    "wec" => "WEC",
-    "nascar" => "Nascar",
-    "wrc" => "WRC",
-    "moto" => "MotoGP",
-];
+//Conexão 
+$string_conexao = 'sqlite:banco/blog_racing.db';
+$con = new PDO($string_conexao);
+
+//Consulta
+$sql_categorias = "SELECT sigla_categoria, nome_categoria FROM categorias";
+$rs = $con->query($sql_categorias);
+    
+$categorias = [];
+while ($linha = $rs->fetch(PDO::FETCH_ASSOC)) {
+    $categorias[$linha['sigla_categoria']] = $linha['nome_categoria'];
+}
 ?>

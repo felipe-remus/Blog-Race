@@ -1,13 +1,4 @@
 // ============================================================
-// CONFIGURAÇÃO
-// ============================================================
-
-const NOTICIAS_POR_PAGINA = 20;
-let paginaAtual  = 1;
-let totalPaginas = 1;
-
-
-// ============================================================
 // SLIDER HERO
 // ============================================================
 
@@ -158,111 +149,6 @@ document.body.addEventListener('htmx:afterSwap', e => {
 });
 
 // ============================================================
-// PAGINAÇÃO
-// ============================================================
-
-function aplicarPaginacao() {
-    const cards = document.querySelectorAll('.card-noticia');
-
-    cards.forEach(card => card.classList.remove('paginacao-oculto'));
-
-    const cardsVisiveis = Array.from(cards).filter(card => card.style.display !== 'none');
-    const totalNoticias = cardsVisiveis.length;
-
-    totalPaginas = Math.ceil(totalNoticias / NOTICIAS_POR_PAGINA) || 1;
-    if (paginaAtual > totalPaginas) paginaAtual = totalPaginas;
-    if (paginaAtual < 1)            paginaAtual = 1;
-
-    cardsVisiveis.forEach(card => card.classList.add('paginacao-oculto'));
-
-    const inicio = (paginaAtual - 1) * NOTICIAS_POR_PAGINA;
-    const fim    = inicio + NOTICIAS_POR_PAGINA;
-    cardsVisiveis.slice(inicio, fim).forEach(card => card.classList.remove('paginacao-oculto'));
-
-    _atualizarControlesPaginacao(totalNoticias, inicio, fim);
-}
-
-function _atualizarControlesPaginacao(totalNoticias, inicio, fim) {
-    const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
-    set('info-inicio', totalNoticias > 0 ? inicio + 1 : 0);
-    set('info-fim',    Math.min(fim, totalNoticias));
-    set('info-total',  totalNoticias);
-
-    const setDisabled = (id, val) => { const el = document.getElementById(id); if (el) el.disabled = val; };
-    setDisabled('btn-primeira', paginaAtual === 1);
-    setDisabled('btn-anterior', paginaAtual === 1);
-    setDisabled('btn-proxima',  paginaAtual === totalPaginas);
-    setDisabled('btn-ultima',   paginaAtual === totalPaginas);
-
-    _gerarNumerosPaginas();
-}
-
-function _gerarNumerosPaginas() {
-    const container = document.getElementById('numeros-paginas');
-    if (!container) return;
-    container.innerHTML = '';
-
-    let paginas;
-    if (totalPaginas <= 7) {
-        paginas = Array.from({ length: totalPaginas }, (_, i) => i + 1);
-    } else if (paginaAtual <= 3) {
-        paginas = [1, 2, 3, 4, '...', totalPaginas];
-    } else if (paginaAtual >= totalPaginas - 2) {
-        paginas = [1, '...', totalPaginas - 3, totalPaginas - 2, totalPaginas - 1, totalPaginas];
-    } else {
-        paginas = [1, '...', paginaAtual - 1, paginaAtual, paginaAtual + 1, '...', totalPaginas];
-    }
-
-    paginas.forEach(num => {
-        if (num === '...') {
-            const span = document.createElement('span');
-            span.className   = 'pagina-reticencias';
-            span.textContent = '...';
-            container.appendChild(span);
-        } else {
-            const btn = document.createElement('button');
-            btn.className   = 'pagina-numero' + (num === paginaAtual ? ' ativa' : '');
-            btn.textContent = num;
-            btn.onclick     = () => irParaPagina(num);
-            container.appendChild(btn);
-        }
-    });
-}
-
-function irParaPagina(numeroPagina) {
-    paginaAtual = numeroPagina;
-    aplicarPaginacao();
-
-    const container = document.querySelector('.noticias-container');
-    if (container) {
-        window.scrollTo({
-            top:      container.getBoundingClientRect().top + window.pageYOffset - 100,
-            behavior: 'smooth',
-        });
-    }
-}
-
-function _vincularBotoesPaginacao() {
-    const el = id => document.getElementById(id);
-    const primeira = el('btn-primeira');
-    const anterior = el('btn-anterior');
-    const proxima  = el('btn-proxima');
-    const ultima   = el('btn-ultima');
-
-    if (primeira) primeira.onclick = () => irParaPagina(1);
-    if (anterior) anterior.onclick = () => irParaPagina(Math.max(1, paginaAtual - 1));
-    if (proxima)  proxima.onclick  = () => irParaPagina(Math.min(totalPaginas, paginaAtual + 1));
-    if (ultima)   ultima.onclick   = () => irParaPagina(totalPaginas);
-}
-
-function inicializarPaginacao() {
-    _vincularBotoesPaginacao();
-    aplicarPaginacao();
-}
-
-document.addEventListener('htmx:afterSwap', () => setTimeout(inicializarPaginacao, 150));
-
-// ============================================================
 // MODAL DE NOTÍCIA
 // ============================================================
 
@@ -299,7 +185,13 @@ function inicializarModal() {
 
     // Vincula clique nos cards
     document.querySelectorAll('.card-noticia').forEach(card => {
-        card.addEventListener('click', () => abrirModal(card));
+        card.addEventListener('click', (e) => {
+            // Previne abrir o modal se clicou nos botões
+            if (e.target.closest('.btn-acao') || e.target.closest('.card-acoes')) {
+                return;
+            }
+            abrirModal(card);
+        });
     });
 
     // Botão X
@@ -318,9 +210,16 @@ document.addEventListener('keydown', e => {
 
 // Roda após cada swap do HTMX — aguarda o card.html ser injetado no #noticia
 document.addEventListener('htmx:afterSwap', e => {
-    if (e.detail.target.id === 'noticia') {
+    if (e.detail.target.id === 'noticia' || 
+        e.detail.target.classList.contains('noticias-container') ||
+        e.detail.target.querySelector('.card-noticia')) {
         setTimeout(inicializarModal, 50);
     }
+});
+
+// Chamar inicializarModal quando o página carregar
+document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(inicializarModal, 100);
 });
 
 // ============================================================
@@ -338,20 +237,12 @@ document.addEventListener('click', e => {
     btn.classList.add('aba-ativa');
 });
 
-function scrollToSecao(id, btn) {
-    const el = document.getElementById(id);
-    if (el) {
-        const offset = 80;
-        const top = el.getBoundingClientRect().top + window.scrollY - offset;
-        window.scrollTo({ top, behavior: 'smooth' });
-    }
-    document.querySelectorAll('.aba-btn').forEach(b => b.classList.remove('aba-ativa'));
-    btn.classList.add('aba-ativa');
-}
 
 // ============================================================
-// PUBLICAR PREVIEW — Live Preview do Card de Notícia
+// PUBLICAR — Preview
 // ============================================================
+
+let categoriaAtiva = null;
 
 function inicializarPublicarPreview() {
     // ========================================
@@ -361,6 +252,7 @@ function inicializarPublicarPreview() {
     const inputConteudo = document.getElementById('input-conteudo');
     const inputAutor = document.getElementById('input-autor');
     const inputImagem = document.getElementById('input-imagem');
+    const btnRemoverImagem = document.getElementById('btnRemoverImagem');
     const categoriaSelecionada = document.getElementById('categoria-selecionada');
     const botoesCategorias = document.querySelectorAll('.categoria-btn');
     const formulario = document.getElementById('form-noticia');
@@ -380,9 +272,6 @@ function inicializarPublicarPreview() {
     const previewImagem = document.getElementById('preview-imagem');
     const previewData = document.getElementById('preview-data');
     const previewCategoriaBadge = document.getElementById('preview-categoria-badge');
-    const previewTag = document.getElementById('preview-tag');
-    const previewImagemContainer = document.getElementById('preview-imagem-container');
-    const fileName = document.getElementById('file-name');
 
     // ========================================
     // INICIALIZAÇÃO
@@ -398,7 +287,7 @@ function inicializarPublicarPreview() {
                 previewTitulo.textContent = this.value;
                 previewTitulo.classList.remove('preview-text');
             } else {
-                previewTitulo.textContent = 'Digite o título aqui...';
+                previewTitulo.textContent = 'Título';
                 previewTitulo.classList.add('preview-text');
             }
         });
@@ -410,7 +299,7 @@ function inicializarPublicarPreview() {
                 previewConteudo.textContent = this.value;
                 previewConteudo.classList.remove('preview-text');
             } else {
-                previewConteudo.textContent = 'Digite o conteúdo da notícia aqui. Será exibido em até 4 linhas na visualização do card.';
+                previewConteudo.textContent = 'Conteúdo da notícia. Será exibido em até 4 linhas na visualização do card.';
                 previewConteudo.classList.add('preview-text');
             }
         });
@@ -432,6 +321,7 @@ function inicializarPublicarPreview() {
             
             if (arquivo) {
                 // Atualizar nome do arquivo exibido
+                const fileName = document.getElementById('file-name');
                 if (fileName) fileName.textContent = arquivo.name;
                 
                 // Criar preview da imagem
@@ -440,24 +330,45 @@ function inicializarPublicarPreview() {
                     if (previewImagem) {
                         previewImagem.src = event.target.result;
                         previewImagem.alt = 'Preview - ' + arquivo.name;
-                        console.log('✓ Preview da imagem atualizado');
                     }
                 };
                 leitor.readAsDataURL(arquivo);
             } else {
+                const fileName = document.getElementById('file-name');
                 if (fileName) fileName.textContent = 'Nenhuma imagem selecionada';
                 resetarImagem();
             }
         });
 
-        // 🔥 IMPORTANTE: Quando clicar no botão (.file-label), clicar no input invisível
+        // Quando clicar no botão, clicar no input invisível
         const fileLabel = document.querySelector('.file-label');
         if (fileLabel) {
             fileLabel.addEventListener('click', function(e) {
                 e.preventDefault();
-                inputImagem.click(); // ← ISTO ABRE O DIÁLOGO!
+                inputImagem.click();
             });
         }
+    }
+
+    // ========================================
+    // BOTÃO DE REMOVER IMAGEM
+    // ========================================
+    if (btnRemoverImagem) {
+        btnRemoverImagem.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Limpar o input de arquivo
+            if (inputImagem) {
+                inputImagem.value = '';
+            }
+            
+            // Atualizar nome do arquivo
+            const fileName = document.getElementById('file-name');
+            if (fileName) fileName.textContent = 'Nenhuma imagem selecionada';
+            
+            // Resetar o preview da imagem
+            resetarImagem();
+        });
     }
 
     // ========================================
@@ -482,7 +393,6 @@ function inicializarPublicarPreview() {
             
             // Atualizar preview
             if (previewCategoriaBadge) previewCategoriaBadge.textContent = categoriaNome;
-            if (previewTag) previewTag.textContent = categoriaNome;
         });
     });
 
@@ -539,12 +449,12 @@ function inicializarPublicarPreview() {
 
     function resetarPreview() {
         if (previewTitulo) {
-            previewTitulo.textContent = 'Digite o título aqui...';
+            previewTitulo.textContent = 'Título';
             previewTitulo.classList.add('preview-text');
         }
         
         if (previewConteudo) {
-            previewConteudo.textContent = 'Digite o conteúdo da notícia aqui. Será exibido em até 4 linhas na visualização do card.';
+            previewConteudo.textContent = 'Conteúdo da notícia. Será exibido em até 4 linhas na visualização do card.';
             previewConteudo.classList.add('preview-text');
         }
         
@@ -553,8 +463,8 @@ function inicializarPublicarPreview() {
         resetarImagem();
         
         if (previewCategoriaBadge) previewCategoriaBadge.textContent = 'Categoria';
-        if (previewTag) previewTag.textContent = 'Categoria';
         
+        const fileName = document.getElementById('file-name');
         if (fileName) fileName.textContent = 'Nenhuma imagem selecionada';
         
         botoesCategorias.forEach(btn => btn.classList.remove('ativo'));
@@ -570,10 +480,9 @@ function inicializarPublicarPreview() {
 // ============================================================
 
 document.addEventListener('DOMContentLoaded', () => {
-    if (document.querySelector('.slider-hero'))   initSlider();
-    if (document.querySelector('.card-noticia'))  inicializarPaginacao();
-    if (document.getElementById('form-noticia'))  inicializarPublicarPreview();
-    highlightCurrentPage();
+    if (document.getElementById('form-noticia')) {
+        inicializarPublicarPreview();
+    }
 });
 
 // Reinicializar publicar preview ao carregar novo conteúdo via HTMX

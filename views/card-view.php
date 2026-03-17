@@ -13,6 +13,15 @@
 <script src="../script/script.js" defer></script>
 
 <div class="noticias-container">
+
+<?php while ( $uma_noticia = $noticias->fetch(PDO::FETCH_ASSOC) ) { 
+    $titulo_noticia = $uma_noticia['titulo_noticia'];
+    $texto_noticia  = $uma_noticia['texto_noticia'];
+    $data_noticia   = date('d/m/Y', strtotime($uma_noticia['data_noticia']));
+    $autor          = $uma_noticia['autor'];
+    $tag_categoria  = $uma_noticia['nome_categoria'];
+    $imagem_noticia = $uma_noticia['imagem_noticia'];
+?>
     <article class="card-noticia"
         data-data="<?=$data_noticia?>"
         data-categoria="<?=$tag_categoria?>">
@@ -42,10 +51,27 @@
                     <?=$autor?>
                 </p>
             </div>
-
             <p class="card-conteudo"><?=$texto_noticia?></p>
+            <div class="card-acoes">
+                <button class="btn-acao btn-editar" aria-label="Editar notícia" title="Editar">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L21 6.5z"/>
+                    </svg>
+                    Editar
+                </button>
+                <button class="btn-acao btn-deletar" aria-label="Deletar notícia" title="Deletar">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="3 6 5 6 21 6"/>
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                        <line x1="10" y1="11" x2="10" y2="17"/>
+                        <line x1="14" y1="11" x2="14" y2="17"/>
+                    </svg>
+                    Deletar
+                </button>
+            </div>
         </div>
     </article>
+<?php }?>
 </div>
 
 <div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-label="Notícia expandida">

@@ -1,11 +1,22 @@
-<?php 
-$titulo_noticia = "Max Verstappen acabou.";
-$data_noticia   = "16/03/2026";
-$autor          = "lewis_hamilton";
-$texto_noticia  = "Verstappen tá um bagre nesse regulamento. kkkkkkkkkkkkk";
-$tag_categoria  = "Formula 1";
+<?php
+//Conexão
+$string_conexao = 'sqlite:banco/blog_racing.db';
+$con = new PDO($string_conexao);
 
-$imagem_noticia     = "img-noticia/max-sid.jpg";
+//Consulta
+$sql_noticia = "
+SELECT 
+    n.titulo_noticia, 
+    n.texto_noticia, 
+    n.imagem_noticia, 
+    n.data_noticia, 
+    u.user AS autor,
+    c.nome_categoria
+    FROM noticias n
+    JOIN usuarios u ON n.usuario_id = u.id_usuario
+    JOIN categorias c ON n.categoria_id = c.id_categoria";
+
+$noticias = $con->query($sql_noticia);
 
 require "views/card-view.php";
 ?>
