@@ -43,7 +43,6 @@ SLIDER HERO
     background-repeat: no-repeat;
 }
 
-/* Overlay escuro sobre a imagem para melhorar legibilidade */
 .slide-background::after {
     content: '';
     position: absolute;
@@ -82,33 +81,30 @@ SLIDER HERO
     animation: slideInUp 0.8s ease-out;
 }
 
-/* Área de colaboradores - SÓ TEXTO */
 .slide .area-colaboradores {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: none !important;
+    background: none;
     padding: 0;
     border-radius: 0;
     max-width: 600px;
     width: 90%;
     box-shadow: none;
     animation: none;
-    margin-top: 2rem; /* Espaçamento acima */
+    margin-top: 2rem;
 }
 
-/* Texto do bloco de colaboradores */
 .slide .area-colaboradores p {
-    color: white !important;
+    color: white;
     font-size: 1.2rem;
     margin-bottom: 1.5rem;
     font-weight: 500;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.6); /* Sombra para legibilidade */
+    text-shadow: 0 2px 4px rgba(0,0,0,0.6);
 }
 
-/* Container dos botões dentro do slider */
 .slide .botoes-slider {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     display: flex;
@@ -117,25 +113,23 @@ SLIDER HERO
     align-items: center;
 }
 
-/* Botões sem fundo */
 .botao-slider {
-    background: transparent !important;
-    border: 2px solid white !important;
-    color: white !important;
-    padding: 0.8rem 1.5rem !important;
-    border-radius: 30px !important;
-    font-size: 1rem !important;
-    transition: all 0.3s ease !important;
+    background: transparent;
+    border: 2px solid white;
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 30px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
     text-decoration: none;
     display: inline-block;
 }
 
 .botao-slider:hover {
-    background: white !important;
-    color: #26011C !important;
+    background: white;
+    color: #26011C;
 }
 
-/* Botões de navegação (setas) */
 .slider-nav {
     position: absolute;
     top: 50%;
@@ -168,7 +162,6 @@ SLIDER HERO
     right: 2rem;
 }
 
-/* Indicadores (bolinhas) */
 .slider-indicators {
     position: absolute;
     bottom: 2rem;
@@ -200,7 +193,6 @@ SLIDER HERO
     border-color: #26011C;
 }
 
-/* Animações */
 @keyframes slideInDown {
     from {
         opacity: 0;
@@ -224,10 +216,8 @@ SLIDER HERO
 }
 
 /* ========================================
-   RESPONSIVIDADE DO SLIDER (Media Queries)
+RESPONSIVIDADE
    ======================================== */
-
-/* Tablets e telas médias */
 @media (max-width: 1024px) {
     .slider-hero {
         min-height: 50vh;
@@ -246,7 +236,6 @@ SLIDER HERO
     }
 }
 
-/* Mobile */
 @media (max-width: 768px) {
     .slider-hero {
         min-height: 45vh;
@@ -274,7 +263,6 @@ SLIDER HERO
     }
 }
 
-/* Mobile pequeno */
 @media (max-width: 480px) {
     .slider-hero {
         min-height: 40vh;

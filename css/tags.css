@@ -1,7 +1,6 @@
 /* ========================================
 TAGS - CATEGORIA
    ======================================== */
-
 .tag {
     display: inline-flex;
     align-items: center;
@@ -23,7 +22,6 @@ TAGS - CATEGORIA
 /* ========================================
 RESPONSIVIDADE
    ======================================== */
-
 @media (max-width: 768px) {
     .tag {
         padding: 0.35rem 0.8rem;

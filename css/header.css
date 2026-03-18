@@ -45,7 +45,7 @@ CABEÇALHO
 }
 
 .nav-link {
-    font-family: TerminalVelocity, sans-serif;
+    font-family: 'Times New Roman', Times, serif;
     font-size: 1.1rem;
     color: #ffffff;
     text-decoration: none;
@@ -83,6 +83,9 @@ CABEÇALHO
     color: #ffffff;
 }
 
+/* ========================================
+RESPONSIVIDADE
+   ======================================== */
 @media (max-width: 768px) {
     #cabecalho {
         flex-direction: column;

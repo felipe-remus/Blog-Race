@@ -1,5 +1,5 @@
 /* ========================================
-   RODAPÉ (FOOTER)
+RODAPÉ (FOOTER)
    ======================================== */
 #rodape {
     background-color: #26011C;
@@ -82,6 +82,10 @@
     transform: scale(1.1);
 }
 
+
+/* ========================================
+RESPONSIVIDADE
+   ======================================== */
 @media (max-width: 768px) {
     #rodape {
         padding: 1.5rem 1.5rem;

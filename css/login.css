@@ -1,5 +1,5 @@
 /* ========================================
-   PÁGINA DE LOGIN / REGISTRO
+PÁGINA DE LOGIN / REGISTRO
    ======================================== */
 .pagina-login {
     display: flex;
@@ -79,7 +79,6 @@
     flex: 1;
 }
 
-/* ABAS DE LOGIN/REGISTRO */
 .abas-login {
     display: flex;
     justify-content: center;
@@ -113,7 +112,6 @@
     background-color: transparent;
 }
 
-/* BOTÕES */
 .login-container .botao-de-login {
     width: 100%;
     padding: 0.9rem;
@@ -172,10 +170,8 @@
 }
 
 /* ========================================
-   RESPONSIVIDADE
+RESPONSIVIDADE
    ======================================== */
-
-/* Tablets */
 @media (max-width: 768px) {
     .pagina-login {
         padding: 1.5rem;
@@ -224,7 +220,6 @@
     }
 }
 
-/* Mobile */
 @media (max-width: 480px) {
     .pagina-login {
         padding: 1rem;
@@ -268,7 +263,6 @@
         border-radius: 6px;
     }
 
-    /* Campos em linha quebram em mobile */
     .campo-linha {
         flex-direction: column;
         gap: 1rem;
@@ -311,7 +305,6 @@
     }
 }
 
-/* Mobile muito pequeno */
 @media (max-width: 360px) {
     .login-container {
         padding: 1.2rem;

@@ -1,5 +1,5 @@
 /* ========================================
-   PAGINAÇÃO
+PAGINAÇÃO
    ======================================== */
 .paginacao-container {
     display: flex;
@@ -9,11 +9,11 @@
     margin: 2rem auto;
     padding: 0 2rem;
     flex-wrap: wrap;
-    width: 100%; /* Adiciona largura total */
+    width: 100%;
 }
 
 .paginacao-oculto {
-    display: none; /* remove o card do fluxo do grid completamente */
+    display: none;
 }
 
 .paginacao-btn {
@@ -101,8 +101,8 @@
     font-size: 0.9rem;
     margin: 1rem auto 2rem auto;
     font-family: Arial, sans-serif;
-    width: 100%; /* Adiciona largura total */
-    display: block; /* Garante que seja block */
+    width: 100%; 
+    display: block;
 }
 
 .info-paginacao span {
@@ -110,12 +110,13 @@
     color: #26011C;
 }
 
-/* CSS para esconder cards paginados */
 .card-noticia.paginacao-oculto {
     display: none !important;
 }
 
-/* Responsividade */
+/* ========================================
+RESPONSIVIDADE
+   ======================================== */
 @media (max-width: 768px) {
     .paginacao-container {
         padding: 0 1rem;

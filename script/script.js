@@ -223,7 +223,35 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ============================================================
-// ABAS DE CATEGORIA — Publicar e História
+// NAVEGAÇÃO ENTRE SEÇÕES - História
+// ============================================================
+
+/**
+ * Função para fazer scroll suave até uma seção e destacar o botão ativo
+ * @param {string} id - ID da seção para scrollar
+ * @param {HTMLElement} btn - Elemento do botão clicado
+ */
+function scrollToSecao(id, btn) {
+    // Remover classe ativa de todos os botões
+    document.querySelectorAll('.abas-sumario button').forEach(b => {
+        b.classList.remove('ativa');
+    });
+    
+    // Adicionar classe ativa ao botão clicado
+    btn.classList.add('ativa');
+    
+    // Fazer scroll suave até a seção
+    const secao = document.getElementById(id);
+    if (secao) {
+        secao.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
+    }
+}
+
+// ============================================================
+// ABAS DE CATEGORIA — Publicar
 // ============================================================
 
 document.addEventListener('click', e => {
