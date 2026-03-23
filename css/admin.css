@@ -445,38 +445,6 @@ PAINEL ADMINISTRATIVO - ADMIN.CSS
     box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
 }
 
-/* TOAST */
-.toast {
-    position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-    background: white;
-    padding: 1rem 1.5rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    display: none;
-    align-items: center;
-    gap: 1rem;
-    z-index: 2000;
-    animation: slideInUp 0.3s ease;
-    max-width: 400px;
-}
-
-.toast.sucesso {
-    border-left: 4px solid #43e97b;
-    display: flex;
-}
-
-.toast.erro {
-    border-left: 4px solid #ff6b6b;
-    display: flex;
-}
-
-.toast.info {
-    border-left: 4px solid #4facfe;
-    display: flex;
-}
-
 @keyframes slideInUp {
     from {
         transform: translateY(20px);
