@@ -28,15 +28,14 @@
     <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.8/dist/htmx.min.js" integrity="sha384-/TgkGk7p307TH7EXJDuUlgG3Ce1UVolAOFopFekQkkXihi5u/6OCvVKyz1W+idaz" crossorigin="anonymous"></script>
 </head>
 <body>
-
-    <!-- Cabeçalho HTML -->
+    <!-- Header -->
     <template
-        hx-get="template/header.html"
-        hx-target="#xcabecalho"
-        hx-trigger="load"
-        >
+        hx-get="view_header.php"
+        hx-target="#header" 
+        hx-swap="innerHTML"
+        hx-trigger="load">
     </template>
-    <div id="xcabecalho"></div>
+    <div id="header"></div>
 
     <!-- Botão "Voltar para a Home" -->
     <div class="voltar-home">
@@ -54,16 +53,16 @@
 
         <!-- Filtros PHP -->
         <template
-            hx-get="filtros.php"
+            hx-get="model_filtros.php"
             hx-target="#filtro" 
             hx-swap="innerHTML"
             hx-trigger="load">
         </template>
         <div id="filtro"></div>
 
-        <!-- Card de Notícia  PHP-->
+        <!-- Card de Notícia -->
         <template
-            hx-get="card.php"
+            hx-get="model_card.php"
             hx-target="#noticia" 
             hx-swap="innerHTML"
             hx-trigger="load">
@@ -72,7 +71,7 @@
 
         <!-- Paginção PHP -->
         <template
-            hx-get="paginacao.php"
+            hx-get="model_paginacao.php"
             hx-target="#paginacao" 
             hx-swap="innerHTML"
             hx-trigger="load">
@@ -80,12 +79,12 @@
         <div id="paginacao"></div>
     </main>
 
-    <!-- Rodapé  HTMl-->
+    <!-- Footer -->
     <template
-        hx-get="template/footer.html"
-        hx-target="#footer"
-        hx-trigger="load"
-        >
+        hx-get="view_footer.php"
+        hx-target="#footer" 
+        hx-swap="innerHTML"
+        hx-trigger="load">
     </template>
     <div id="footer"></div>
 </body>

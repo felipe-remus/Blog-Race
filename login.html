@@ -28,9 +28,9 @@
     <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.8/dist/htmx.min.js" integrity="sha384-/TgkGk7p307TH7EXJDuUlgG3Ce1UVolAOFopFekQkkXihi5u/6OCvVKyz1W+idaz" crossorigin="anonymous"></script>
 </head>
 <body>
-    <!-- Cabeçalho PHP -->
+    <!-- Header -->
     <template
-        hx-get="views/header.php"
+        hx-get="view_header.php"
         hx-target="#header" 
         hx-swap="innerHTML"
         hx-trigger="load">
@@ -51,7 +51,7 @@
     <main>
         <!-- Pagina Login -->
         <template
-            hx-get="views/pag-login-view.php"
+            hx-get="view_pag-login.php"
             hx-target="#login" 
             hx-swap="innerHTML"
             hx-trigger="load">
@@ -59,12 +59,12 @@
         <div id="login"></div>
     </main>
 
-    <!-- Rodapé HTML -->
+    <!-- Footer -->
     <template
-        hx-get="template/footer.html"
-        hx-target="#footer"
-        hx-trigger="load"
-        >
+        hx-get="view_footer.php"
+        hx-target="#footer" 
+        hx-swap="innerHTML"
+        hx-trigger="load">
     </template>
     <div id="footer"></div>
 </body>

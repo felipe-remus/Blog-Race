@@ -1,25 +1,4 @@
-<link rel="stylesheet" href="../css/base.css">
-<link rel="stylesheet" href="../css/filtros.css">
-<link rel="stylesheet" href="../css/footer.css">
-<link rel="stylesheet" href="../css/header.css">
-<link rel="stylesheet" href="../css/historia.css">
-<link rel="stylesheet" href="../css/login.css">
-<link rel="stylesheet" href="../css/noticias.css">
-<link rel="stylesheet" href="../css/paginacao.css">
-<link rel="stylesheet" href="../css/publicar.css">
-<link rel="stylesheet" href="../css/slider.css">
-<link rel="stylesheet" href="../css/tags.css">
-
-<script src="../script/edicao-noticia.js" defer></script>
-<script src="../script/header.js" defer></script>
-<script src="../script/historia.js" defer></script>
-<script src="../script/modal-noticia.js" defer></script>
-<script src="../script/publicar.js" defer></script>
-<script src="../script/slider.js" defer></script>
-<script src="../script/tabs.js" defer></script>
-
 <div class="noticias-container">
-
 <?php while ( $uma_noticia = $noticias->fetch(PDO::FETCH_ASSOC) ) { 
     $titulo_noticia = $uma_noticia['titulo_noticia'];
     $texto_noticia  = $uma_noticia['texto_noticia'];
@@ -65,6 +44,8 @@
                     </svg>
                     Editar
                 </button>
+
+                <!-- Botão Deletar -->
                 <button class="btn-acao btn-deletar" aria-label="Deletar notícia" title="Deletar">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <polyline points="3 6 5 6 21 6"/>
@@ -74,6 +55,7 @@
                     </svg>
                     Deletar
                 </button>
+                
             </div>
         </div>
     </article>

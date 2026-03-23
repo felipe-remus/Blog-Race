@@ -18,5 +18,5 @@ SELECT
 
 $noticias = $con->query($sql_noticia);
 
-require "views/card-view.php";
+require "view_card.php";
 ?>

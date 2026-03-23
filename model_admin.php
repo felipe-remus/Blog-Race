@@ -30,37 +30,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['acao'])) {
         exit;
     }
 
-    // Deletar categoria
-    if ($acao === 'deletar_categoria') {
-        $id = intval($_POST['id_categoria'] ?? 0);
-
-        if ($id <= 0) {
-            echo json_encode(['sucesso' => false, 'mensagem' => 'ID inválido']);
-            exit;
-        }
-
-        try {
-            // Verificar se há notícias nesta categoria
-            $sql_check = "SELECT COUNT(*) as total FROM noticias WHERE categoria_id = ?";
-            $stmt_check = $con->prepare($sql_check);
-            $stmt_check->execute([$id]);
-            $resultado = $stmt_check->fetch(PDO::FETCH_ASSOC);
-
-            if ($resultado['total'] > 0) {
-                echo json_encode(['sucesso' => false, 'mensagem' => 'Não é possível deletar esta categoria. Existem ' . $resultado['total'] . ' notícia(s) vinculada(s)']);
-                exit;
-            }
-
-            $sql = "DELETE FROM categorias WHERE id_categoria = ?";
-            $stmt = $con->prepare($sql);
-            $stmt->execute([$id]);
-            echo json_encode(['sucesso' => true, 'mensagem' => 'Categoria deletada com sucesso']);
-        } catch (PDOException $e) {
-            echo json_encode(['sucesso' => false, 'mensagem' => 'Erro ao deletar categoria']);
-        }
-        exit;
-    }
-
     // ========== USUÁRIOS ==========
 
     // Deletar usuário
@@ -138,5 +107,5 @@ SELECT
     (SELECT COUNT(*) FROM noticias WHERE DATE(data_noticia) = DATE('now')) as noticias_hoje";
 $stats = $con->query($sql_stats)->fetch(PDO::FETCH_ASSOC);
 
-require "views/admin-view.php";
+require "view_admin.php";
 ?>

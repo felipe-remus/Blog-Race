@@ -38,5 +38,5 @@ $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
 $stmt->execute();
 $noticias = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-require "views/paginacao-view.php";
+require "view_paginacao.php";
 ?>
