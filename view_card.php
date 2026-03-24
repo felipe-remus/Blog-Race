@@ -1,3 +1,12 @@
+<?php
+// Inicia sessão para verificar permissões
+session_start();
+
+$usuarioLogado = isset($_SESSION['usuario']);
+$idUsuarioLogado = $usuarioLogado ? $_SESSION['usuario']['id_usuario'] : null;
+$perfilUsuario = $usuarioLogado ? $_SESSION['usuario']['perfil_id'] : null;
+?>
+
 <div class="noticias-container">
 <?php while ( $uma_noticia = $noticias->fetch(PDO::FETCH_ASSOC) ) { 
     $titulo_noticia = $uma_noticia['titulo_noticia'];
@@ -7,6 +16,24 @@
     $tag_categoria  = $uma_noticia['nome_categoria'];
     $imagem_noticia = $uma_noticia['imagem_noticia'];
     $id_noticia = $uma_noticia['id_noticia'];
+    $usuario_id_noticia = $uma_noticia['usuario_id'];
+    
+    // Verificar permissões
+    $podeEditar = false;
+    $podeDeletar = false;
+    
+    if ($usuarioLogado) {
+        // Admin (perfil_id = 1) pode deletar mas não pode editar
+        if ($perfilUsuario == 1) {
+            $podeDeletar = true;
+            $podeEditar = false;
+        }
+        // User comum (perfil_id = 2) só pode editar e deletar seu próprio card
+        else if ($perfilUsuario == 2 && $idUsuarioLogado == $usuario_id_noticia) {
+            $podeEditar = true;
+            $podeDeletar = true;
+        }
+    }
 ?>
     <article class="card-noticia"
         data-data="<?=$data_noticia?>"
@@ -38,26 +65,32 @@
                 </p>
             </div>
             <p class="card-conteudo"><?=$texto_noticia?></p>
-            <div class="card-acoes">
-                <button class="btn-acao btn-editar" aria-label="Editar notícia" title="Editar">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L21 6.5z"/>
-                    </svg>
-                    Editar
-                </button>
+            
+            <?php if ($podeEditar || $podeDeletar): ?>
+                <div class="card-acoes">
+                    <?php if ($podeEditar): ?>
+                        <button class="btn-acao btn-editar" aria-label="Editar notícia" title="Editar">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L21 6.5z"/>
+                            </svg>
+                            Editar
+                        </button>
+                    <?php endif; ?>
 
-                <!-- Botão Deletar -->
-                <a class="btn-acao btn-deletar" aria-label="Deletar notícia" title="Deletar" href="model_apagar-noticia.php?id_noticia=<?=$id_noticia?>">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="3 6 5 6 21 6"/>
-                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
-                        <line x1="10" y1="11" x2="10" y2="17"/>
-                        <line x1="14" y1="11" x2="14" y2="17"/>
-                    </svg>
-                    Deletar
-                </a>
-                
-            </div>
+                    <?php if ($podeDeletar): ?>
+                        <!-- Botão Deletar -->
+                        <a class="btn-acao btn-deletar" aria-label="Deletar notícia" title="Deletar" onclick="window.location.href='model_noticia-apagar.php?id_noticia=<?=$id_noticia?>'">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="3 6 5 6 21 6"/>
+                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                                <line x1="10" y1="11" x2="10" y2="17"/>
+                                <line x1="14" y1="11" x2="14" y2="17"/>
+                            </svg>
+                            Deletar
+                        </a>
+                    <?php endif; ?>
+                </div>
+            <?php endif; ?>
         </div>
     </article>
 <?php }?>

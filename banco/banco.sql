@@ -46,10 +46,13 @@ CREATE TABLE usuarios (
 );
 
 INSERT INTO usuarios (nome, user, email, telefone, senha, perfil_id) VALUES
-('Lewis Hamilton', 'lewis_hamilton', 'lewishamilton44@gmail.com', '(51) 3227-7663', '12345', 2);
+('Sir Lewis Hamilton', 'lewis_hamilton', 'lewishamilton44@gmail.com', '(51) 3227-7663', '$2y$10$Zl4.oULynbeEICakvhu1s.YV7fMXLJiKS2LcJL1fGoZRsAOTZTWGW', 2);
 
 INSERT INTO usuarios (nome, user, email, telefone, senha, perfil_id) VALUES
-('Carlos Mendes Silva', 'carlos.msilva99', 'carlos.msilva.ficticio@emailteste.com', '(21) 97654-3210', 'simulacao123', 2);
+('Carlos Mendes Silva', 'carlos.msilva99', 'carlos.msilva.ficticio@emailteste.com', '(21) 97654-3210', '$2y$10$Zl4.oULynbeEICakvhu1s.YV7fMXLJiKS2LcJL1fGoZRsAOTZTWGW', 2);
+
+INSERT INTO usuarios (nome, user, email, telefone, senha, perfil_id) VALUES
+('Felipe Remus', 'felipe_remus', 'felipeteste@gmail.com', '(21) 97654-3210', '$2y$10$BGrXsXHx2zSuDAqGeTpekeyl5kaQCAV1WaUbMPZ/03iCwqyBAZU7S', 1);
 
 CREATE TABLE noticias (
 	id_noticia INTEGER PRIMARY KEY AUTOINCREMENT,

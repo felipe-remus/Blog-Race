@@ -11,7 +11,8 @@ SELECT
     n.data_noticia, 
     u.user AS autor,
     c.nome_categoria,
-    n.id_noticia
+    n.id_noticia,
+    n.usuario_id
     FROM noticias n
     JOIN usuarios u ON n.usuario_id = u.id_usuario
     JOIN categorias c ON n.categoria_id = c.id_categoria

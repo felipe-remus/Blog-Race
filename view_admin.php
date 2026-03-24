@@ -4,22 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel Administrativo - Blog Racing</title>
-    <link rel="stylesheet" href="../css/base.css">
-    <link rel="stylesheet" href="../css/admin.css">
-    <script src="../script/admin.js" defer></script>
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/filtros.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/historia.css">
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/noticias.css">
+    <link rel="stylesheet" href="css/paginacao.css">
+    <link rel="stylesheet" href="css/publicar.css">
+    <link rel="stylesheet" href="css/slider.css">
+    <link rel="stylesheet" href="css/tags.css">
+    
+    <script src="script/admin.js" defer></script>
+    <script src="script/header.js" defer></script>
+    <script src="script/historia.js" defer></script>
+    <script src="script/modal-noticia.js" defer></script>
+    <script src="script/publicar.js" defer></script>
+    <script src="script/slider.js" defer></script>
 </head>
 <body>
+    <?php
+        require "view_header.php"
+    ?>
+    <!-- BOTÃO VOLTAR -->
+    <div class="voltar-home">
+        <a href="index.html" class="btn-voltar">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/>
+            </svg>
+            Voltar
+        </a>
+    </div>
     <main>
-        <!-- BOTÃO VOLTAR -->
-        <div class="voltar-home">
-            <a href="index.html" class="btn-voltar">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/>
-                </svg>
-                Voltar
-            </a>
-        </div>
-
         <!-- CABEÇALHO DO ADMIN -->
         <div class="admin-header">
             <h1>Painel Administrativo</h1>
@@ -206,6 +224,8 @@
                         </table>
                     </div>
                 </div>
+            </div>
+        </div>
     </main>
 
     <!-- MODAL DE CONFIRMAÇÃO -->
@@ -223,5 +243,9 @@
 
     <!-- TOAST DE NOTIFICAÇÃO -->
     <div class="toast" id="toast"></div>
+
+    <?php
+        require "view_footer.php"
+    ?>
 </body>
 </html>

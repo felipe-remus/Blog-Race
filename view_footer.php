@@ -1,7 +1,7 @@
 <footer id="rodape">
     <div class="footer-container">
         <div class="footer-info">
-            <a href="model_admin.php" class="copyright">© 2026 Felipe Remus</a>
+            <p class="copyright">© 2026 Felipe Remus</p>
             <p class="footer-subtitle">Projeto desenvolvido em curso no Senac</p>
         </div>
 
