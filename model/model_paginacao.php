@@ -1,6 +1,6 @@
 <?php
 // Conexão com o banco
-$con = new PDO("sqlite:banco/blog_racing.db");
+$con = new PDO("sqlite:../banco/blog_racing.db");
 $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 // Configurações de paginação
@@ -38,5 +38,5 @@ $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
 $stmt->execute();
 $noticias = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-require "view_paginacao.php";
+require "../view/view_paginacao.php";
 ?>

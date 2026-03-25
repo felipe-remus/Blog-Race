@@ -215,6 +215,130 @@ NOTIFICAÇÕES DE ERRO / SUCESSO
     display: block;
 }
 
+.perfil-usuario {
+    padding: 30px 20px;
+    animation: slideIn 0.3s ease-in-out;
+}
+
+.perfil-usuario h2 {
+    font-size: 28px;
+    color: var(--cor-titulo, #1a1a1a);
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.bem-vindo {
+    text-align: center;
+    color: var(--cor-texto-secundario, #666);
+    margin-bottom: 30px;
+    font-size: 16px;
+}
+
+/* Fieldset para agrupar campos de senha */
+.fieldset-senha {
+    border: 1px solid var(--cor-borda, #ddd);
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+    background-color: var(--cor-fundo-secundario, #f9f9f9);
+}
+
+.fieldset-senha legend {
+    padding: 0 10px;
+    font-weight: 600;
+    color: var(--cor-titulo, #1a1a1a);
+    font-size: 14px;
+}
+
+.info-senha {
+    font-size: 13px;
+    color: var(--cor-texto-secundario, #999);
+    font-style: italic;
+    margin-bottom: 15px;
+    margin-top: -10px;
+}
+
+/* Grupo de botões */
+.grupo-botoes {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+.botao-logout {
+    padding: 12px 30px;
+    background-color: var(--cor-perigo, #e74c3c);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-align: center;
+}
+
+.botao-logout:hover {
+    background-color: var(--cor-perigo-hover, #c0392b);
+    transform: translateY(-2px);
+}
+
+.botao-logout:active {
+    transform: translateY(0);
+}
+
+/* Animação de entrada */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ========================================
+BOTÃO MOSTRAR SENHA
+======================================== */
+.campo-senha {
+    position: relative; /* Necessário para posicionar o botão dentro */
+}
+
+.campo-senha input {
+    padding-right: 45px; /* Espaço para o texto não ficar atrás do botão */
+}
+
+.btn-mostrar-senha {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+.btn-mostrar-senha svg {
+    width: 20px;
+    height: 20px;
+    fill: #26011C;
+    transition: fill 0.3s ease;
+}
+
+.btn-mostrar-senha:focus {
+    outline: none;
+}
+
 /* ========================================
 RESPONSIVIDADE
    ======================================== */
@@ -269,6 +393,28 @@ RESPONSIVIDADE
 
     .botao-social img {
         width: 1.2rem;
+    }
+
+    .perfil-usuario {
+        padding: 20px 15px;
+    }
+
+    .perfil-usuario h2 {
+        font-size: 24px;
+    }
+
+    .grupo-botoes {
+        flex-direction: column;
+    }
+
+    .botao-de-login,
+    .botao-logout {
+        width: 100%;
+    }
+
+    .fieldset-senha {
+        padding: 15px;
+        margin: 15px 0;
     }
 }
 

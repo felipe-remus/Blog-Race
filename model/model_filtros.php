@@ -1,4 +1,4 @@
 <?php
 require "model_categoria.php";
-require "view_publicar.php";
+require "../view/view_filtros.php";
 ?>

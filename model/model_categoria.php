@@ -1,6 +1,6 @@
 <?php
 //Conexão 
-$con = new PDO("sqlite:banco/blog_racing.db");
+$con = new PDO("sqlite:../banco/blog_racing.db");
 
 //Consulta
 $sql_categorias = "SELECT sigla_categoria, nome_categoria FROM categorias";

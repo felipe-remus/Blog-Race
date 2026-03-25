@@ -3,12 +3,12 @@
 session_start();
 
 // Conectar ao banco
-$pdo = new PDO("sqlite:banco/blog_racing.db");
+$pdo = new PDO("sqlite:../banco/blog_racing.db");
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 // Verificar se usuário está logado
 if (!isset($_SESSION['usuario'])) {
-    header('Location: login.html');
+    header('Location: ../login.html');
     exit;
 }
 
@@ -18,7 +18,7 @@ $perfilUsuario = $usuarioLogado['perfil_id'];
 
 // Verificar se ID da notícia foi fornecido
 if (!isset($_GET['id_noticia']) || empty($_GET['id_noticia'])) {
-    header('Location: noticias.html');
+    header('Location: ../noticias.html');
     exit;
 }
 
@@ -31,7 +31,7 @@ try {
     $noticia = $stmt->fetch(PDO::FETCH_ASSOC);
     
     if (!$noticia) {
-        header('Location: noticias.html');
+        header('Location: ../noticias.html');
         exit;
     }
     
@@ -51,7 +51,7 @@ try {
     
     if (!$pode_deletar) {
         // Usuário não tem permissão para deletar
-        header('Location: noticias.html');
+        header('Location: ../noticias.html');
         exit;
     }
     
@@ -60,11 +60,11 @@ try {
     $stmt_delete->execute([$id_noticia]);
     
     // Redirecionar com sucesso
-    header('Location: noticias.html?sucesso=deletado');
+    header('Location: ../noticias.html?sucesso=deletado');
     exit;
     
 } catch (PDOException $e) {
-    header('Location: noticias.html');
+    header('Location: ../noticias.html');
     exit;
 }
 ?>

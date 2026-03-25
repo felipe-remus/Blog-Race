@@ -3,7 +3,7 @@
 session_start();
 
 // Conectar ao banco
-$pdo = new PDO("sqlite:banco/blog_racing.db");
+$pdo = new PDO("sqlite:../banco/blog_racing.db");
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 // Verificar se é requisição AJAX
@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     try {
         // Buscar usuário por email ou username
-        $sql = "SELECT id_usuario, nome, user, email, senha, perfil_id 
+        $sql = "SELECT id_usuario, nome, user, email, telefone, senha, perfil_id 
                 FROM usuarios 
                 WHERE email = ? OR user = ?";
         
@@ -51,6 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'nome' => $usuario['nome'],
             'user' => $usuario['user'],
             'email' => $usuario['email'],
+            'telefone' => $usuario['telefone'],
             'perfil_id' => $usuario['perfil_id']
         ];
         

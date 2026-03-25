@@ -1,6 +1,6 @@
 <?php
 //Conexão
-$con = new PDO("sqlite:banco/blog_racing.db");
+$con = new PDO("sqlite:../banco/blog_racing.db");
 
 //Consulta
 $sql_noticia = "
@@ -20,5 +20,5 @@ SELECT
 
 $noticias = $con->query($sql_noticia);
 
-require "view_card.php";
+require "../view/view_card.php";
 ?>

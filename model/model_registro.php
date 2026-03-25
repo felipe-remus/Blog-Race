@@ -1,6 +1,6 @@
 <?php
 //Conectar
-$pdo = new PDO("sqlite:banco/blog_racing.db");
+$pdo = new PDO("sqlite:../banco/blog_racing.db");
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 // Verificar se é requisição AJAX

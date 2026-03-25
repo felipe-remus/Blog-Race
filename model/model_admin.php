@@ -1,6 +1,6 @@
 <?php
 // Conexão
-$con = new PDO("sqlite:banco/blog_racing.db");
+$con = new PDO("sqlite:../banco/blog_racing.db");
 
 // PROCESSAR REQUISIÇÕES AJAX
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['acao'])) {
@@ -107,5 +107,5 @@ SELECT
     (SELECT COUNT(*) FROM noticias WHERE DATE(data_noticia) = DATE('now')) as noticias_hoje";
 $stats = $con->query($sql_stats)->fetch(PDO::FETCH_ASSOC);
 
-require "view_admin.php";
+require "../view/view_admin.php";
 ?>

@@ -28,7 +28,7 @@
 <body>
     <!-- Header -->
     <template
-        hx-get="view_header.php"
+        hx-get="view/view_header.php"
         hx-target="#header" 
         hx-swap="innerHTML"
         hx-trigger="load">
@@ -51,7 +51,7 @@
 
         <!-- Filtros PHP -->
         <template
-            hx-get="model_filtros.php"
+            hx-get="model/model_filtros.php"
             hx-target="#filtro" 
             hx-swap="innerHTML"
             hx-trigger="load">
@@ -60,7 +60,7 @@
 
         <!-- Card de Notícia -->
         <template
-            hx-get="model_card.php"
+            hx-get="model/model_card.php"
             hx-target="#noticia" 
             hx-swap="innerHTML"
             hx-trigger="load">
@@ -69,7 +69,7 @@
 
         <!-- Paginção PHP -->
         <template
-            hx-get="model_paginacao.php"
+            hx-get="model/model_paginacao.php"
             hx-target="#paginacao" 
             hx-swap="innerHTML"
             hx-trigger="load">
@@ -79,7 +79,7 @@
 
     <!-- Footer -->
     <template
-        hx-get="view_footer.php"
+        hx-get="view/view_footer.php"
         hx-target="#footer" 
         hx-swap="innerHTML"
         hx-trigger="load">

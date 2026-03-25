@@ -14,19 +14,16 @@ $usuarioLogado = isset($_SESSION['usuario']);
             <div class="slide-content">
                 <h1>Últimas Noticias do Motorsport</h1>
                 <div class="botoes-slider">
-                    <a href="noticias.html" class="botao-slider">Explorar Notícias</a>
+                    <a href="../noticias.html" class="botao-slider">Explorar Notícias</a>
                 </div>
                 <div class="area-colaboradores">
                     <p>Deseja contribuir com nosso conteúdo?</p>
                     <div class="botoes-slider">
-                        <?php if (!$usuarioLogado): ?>
-                            <!-- Mostra Login apenas se NÃO estiver logado -->
-                            <a href="login.html" class="botao-slider">Login/Criar Conta</a>
-                        <?php endif; ?>
+                        <a href="../login.html" class="botao-slider">Login/Criar Conta</a>
 
                         <?php if ($usuarioLogado): ?>
                             <!-- Mostra Publicar apenas se ESTIVER logado -->
-                            <a href="escrever-noticia.html" class="botao-slider">Publique seu Artigo</a>
+                            <a href="../escrever-noticia.html" class="botao-slider">Publique seu Artigo</a>
                         <?php endif; ?>
                     </div>
                 </div>
@@ -38,19 +35,16 @@ $usuarioLogado = isset($_SESSION['usuario']);
             <div class="slide-content">
                 <h1>Modalidades em Destaque</h1>
                 <div class="botoes-slider">
-                    <a href="historia.html" class="botao-slider">Descubra a História das Modalidades</a>
+                    <a href="../historia.html" class="botao-slider">Descubra a História das Modalidades</a>
                 </div>
                 <div class="area-colaboradores">
                     <p>Junte-se à nossa equipe de colaboradores</p>
                     <div class="botoes-slider">
-                        <?php if (!$usuarioLogado): ?>
-                            <!-- Mostra Login apenas se NÃO estiver logado -->
-                            <a href="login.html" class="botao-slider">Login/Criar Conta</a>
-                        <?php endif; ?>
+                        <a href="../login.html" class="botao-slider">Login/Criar Conta</a>
 
                         <?php if ($usuarioLogado): ?>
                             <!-- Mostra Publicar apenas se ESTIVER logado -->
-                            <a href="escrever-noticia.html" class="botao-slider">Publique sua Análise</a>
+                            <a href="../escrever-noticia.html" class="botao-slider">Publique sua Análise</a>
                         <?php endif; ?>
                     </div>
                 </div>
@@ -62,19 +56,16 @@ $usuarioLogado = isset($_SESSION['usuario']);
             <div class="slide-content">
                 <h1>Ayrton Senna: O Legado de um Ícone</h1>
                 <div class="botoes-slider">
-                    <a href="senna.html" class="botao-slider">Descubra a Trajetória de Senna</a>
+                    <a href="../senna.html" class="botao-slider">Descubra a Trajetória de Senna</a>
                 </div>
                 <div class="area-colaboradores">
                     <p>Compartilhe sua memória sobre Senna</p>
                     <div class="botoes-slider">
-                        <?php if (!$usuarioLogado): ?>
-                            <!-- Mostra Login apenas se NÃO estiver logado -->
-                            <a href="login.html" class="botao-slider">Login/Criar Conta</a>
-                        <?php endif; ?>
+                        <a href="../login.html" class="botao-slider">Login/Criar Conta</a>
 
                         <?php if ($usuarioLogado): ?>
                             <!-- Mostra Publicar apenas se ESTIVER logado -->
-                            <a href="escrever-noticia.html" class="botao-slider">Publique sua Homenagem</a>
+                            <a href="../escrever-noticia.html" class="botao-slider">Publique sua Homenagem</a>
                         <?php endif; ?>
                     </div>
                 </div>
