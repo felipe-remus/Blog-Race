@@ -237,12 +237,6 @@ BOTÔES DE AÇÃO
     stroke-width: 2.5;
 }
 
-.btn-deletar:hover {
-    border-color: #dc2626;
-    color: #dc2626;
-    background: rgba(220, 38, 38, 0.04);
-}
-
 /* ========================================
 TAGS
    ======================================== */

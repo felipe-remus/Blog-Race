@@ -7,14 +7,13 @@ $idUsuarioLogado = $usuarioLogado ? $_SESSION['usuario']['id_usuario'] : null;
 $perfilUsuario = $usuarioLogado ? $_SESSION['usuario']['perfil_id'] : null;
 ?>
 
-<!-- ✨ CORREÇÃO: Adicionado id="noticias-container" para JavaScript encontrar -->
 <div id="noticias-container" class="noticias-container">
 <?php while ( $uma_noticia = $noticias->fetch(PDO::FETCH_ASSOC) ) { 
     $titulo_noticia = $uma_noticia['titulo_noticia'];
-    $texto_noticia  = $uma_noticia['texto_noticia'];
-    $data_noticia   = date('d/m/Y', strtotime($uma_noticia['data_noticia']));
-    $autor          = $uma_noticia['autor'];
-    $tag_categoria  = $uma_noticia['nome_categoria'];
+    $texto_noticia = $uma_noticia['texto_noticia'];
+    $data_noticia = date('d/m/Y', strtotime($uma_noticia['data_noticia']));
+    $autor = $uma_noticia['autor'];
+    $tag_categoria = $uma_noticia['nome_categoria'];
     $imagem_noticia = $uma_noticia['imagem_noticia'];
     $id_noticia = $uma_noticia['id_noticia'];
     $usuario_id_noticia = $uma_noticia['usuario_id'];
@@ -71,20 +70,23 @@ $perfilUsuario = $usuarioLogado ? $_SESSION['usuario']['perfil_id'] : null;
             <?php if ($podeEditar || $podeDeletar): ?>
                 <div class="card-acoes">
                     <?php if ($podeEditar): ?>
-                        <button class="btn-acao btn-editar" aria-label="Editar notícia" title="Editar">
+                        <a class="btn-acao" 
+                            aria-label="Editar notícia" 
+                            title="Editar"
+                            onclick="window.location.href='../model/model_noticia-editar.php?id_noticia=<?=$id_noticia?>';">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L21 6.5z"/>
                             </svg>
                             Editar
-                        </button>
+                        </a>
                     <?php endif; ?>
 
                     <?php if ($podeDeletar): ?>
                         <!-- Botão Deletar -->
-                        <a class="btn-acao btn-deletar"
-                        aria-label="Deletar notícia" 
-                        title="Deletar" 
-                        onclick="if(confirm('Tem certeza que deseja deletar esta notícia?')) { window.location.href='../model/model_noticia-apagar.php?id_noticia=<?=$id_noticia?>'; }">
+                        <a class="btn-acao"
+                            aria-label="Deletar notícia" 
+                            title="Deletar" 
+                            onclick="window.location.href='../model/model_noticia-apagar.php?id_noticia=<?=$id_noticia?>';">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <polyline points="3 6 5 6 21 6"/>
                                 <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>

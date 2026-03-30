@@ -41,7 +41,8 @@
                 <div class="form-campo">
                     <label for="input-conteudo">Conteúdo da Notícia *</label>
                     <textarea 
-                        id="input-conteudo" 
+                        id="input-conteudo"
+                        rows="15" 
                         placeholder="Digite o conteúdo completo da notícia"
                         required></textarea>
                 </div>
@@ -60,39 +61,11 @@
                 <div class="form-campo">
                     <label>Categoria *</label>
                     <div class="categoria-tabs">
-                        <button type="button" class="categoria-btn" data-categoria="f1">
-                            <?= $categorias["f1"] ?? "F1" ?>
-                        </button>
-                        <button type="button" class="categoria-btn" data-categoria="f2">
-                            <?= $categorias["f2"] ?? "F2" ?>
-                        </button>
-                        <button type="button" class="categoria-btn" data-categoria="f3">
-                            <?= $categorias["f3"] ?? "F3" ?>
-                        </button>
-                        <button type="button" class="categoria-btn" data-categoria="f4">
-                            <?= $categorias["f4"] ?? "F4" ?>
-                        </button>
-                        <button type="button" class="categoria-btn" data-categoria="f1academy">
-                            <?= $categorias["f1academy"] ?? "F1 Academy" ?>
-                        </button>
-                        <button type="button" class="categoria-btn" data-categoria="fe">
-                            <?= $categorias["fe"] ?? "FE" ?>
-                        </button>
-                        <button type="button" class="categoria-btn" data-categoria="indy">
-                            <?= $categorias["indy"] ?? "Indy" ?>
-                        </button>
-                        <button type="button" class="categoria-btn" data-categoria="wec">
-                            <?= $categorias["wec"] ?? "WEC" ?>
-                        </button>
-                        <button type="button" class="categoria-btn" data-categoria="wrc">
-                            <?= $categorias["wrc"] ?? "WRC" ?>
-                        </button>
-                        <button type="button" class="categoria-btn" data-categoria="nascar">
-                            <?= $categorias["nascar"] ?? "NASCAR" ?>
-                        </button>
-                        <button type="button" class="categoria-btn" data-categoria="moto">
-                            <?= $categorias["moto"] ?? "Moto" ?>
-                        </button>
+                        <?php foreach ($categorias as $chave => $valor): ?>
+                            <button type="button" class="categoria-btn" data-categoria="<?= $chave ?>">
+                                <?= $valor ?>
+                            </button>
+                        <?php endforeach; ?>
                     </div>
                     <input type="hidden" id="categoria-selecionada" name="categoria">
                 </div>
