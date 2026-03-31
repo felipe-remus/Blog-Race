@@ -1,3 +1,10 @@
+<?php
+// Inicia sessão para verificar se usuário está logado
+session_start();
+$usuarioLogado = isset($_SESSION['usuario']);
+$nomeUsuario = $usuarioLogado ? $_SESSION['usuario']['user'] : '';
+?>
+
 <div class="publicar-container">
     <div class="publicar-wrapper">
         <!-- PAINEL DE CONTROLES -->
@@ -54,7 +61,8 @@
                         type="text" 
                         id="input-autor" 
                         placeholder="Seu nome de usuário"
-                        value="<?= $_SESSION['usuario'] ?? 'anonimo' ?>">
+                        readonly
+                        value="<?php echo htmlspecialchars($nomeUsuario); ?>">
                 </div>
 
                 <!-- Categoria -->
@@ -104,7 +112,7 @@
                                     <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
                                     <circle cx="12" cy="7" r="4"/>
                                 </svg>
-                                <span id="preview-autor">usuário</span>
+                                <span id="preview-autor"><?php echo htmlspecialchars($nomeUsuario); ?></span>
                             </p>
                         </div>
                         <p class="card-conteudo" id="preview-conteudo">Conteúdo da notícia. Será exibido em até 4 linhas na visualização do card.</p>

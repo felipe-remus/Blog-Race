@@ -1,16 +1,15 @@
 // ============================================================
-// PUBLICAR - PREVIEW EM TEMPO REAL (CORRIGIDO)
+// PUBLICAR - PREVIEW EM TEMPO REAL 
 // ============================================================
 
 function inicializarPublicarPreview() {
     // ========================================
-    // ELEMENTOS DO FORMULÁRIO (IDs CORRETOS)
+    // ELEMENTOS DO FORMULÁRIO 
     // ========================================
     const formulario            = document.getElementById('form-noticia');
-    const inputTitulo           = document.getElementById('input-titulo');      // ✅ CORRIGIDO
-    const inputConteudo         = document.getElementById('input-conteudo');    // ✅ CORRIGIDO
-    const inputAutor            = document.getElementById('input-autor');       // ✅ CORRIGIDO
-    const inputImagem           = document.getElementById('input-imagem');      // ✅ CORRIGIDO
+    const inputTitulo           = document.getElementById('input-titulo');      
+    const inputConteudo         = document.getElementById('input-conteudo');    
+    const inputImagem           = document.getElementById('input-imagem');      
     const botoesCategorias      = document.querySelectorAll('.categoria-btn');
     const categoriaSelecionada  = document.getElementById('categoria-selecionada');
     const btnRemoverImagem      = document.getElementById('btnRemoverImagem');
@@ -22,7 +21,6 @@ function inicializarPublicarPreview() {
     // ========================================
     const previewTitulo         = document.getElementById('preview-titulo');
     const previewConteudo       = document.getElementById('preview-conteudo');
-    const previewAutor          = document.getElementById('preview-autor');
     const previewImagem         = document.getElementById('preview-imagem');
     const previewData           = document.getElementById('preview-data');
     const previewCategoriaBadge = document.getElementById('preview-categoria-badge');
@@ -60,13 +58,6 @@ function inicializarPublicarPreview() {
                 previewConteudo.textContent = 'Conteúdo da notícia. Será exibido em até 4 linhas na visualização do card.';
                 previewConteudo.classList.add('preview-text');
             }
-        });
-    }
-
-    if (inputAutor) {
-        inputAutor.addEventListener('input', function() {
-            const autorTexto = this.value.trim() || 'usuário';
-            previewAutor.textContent = autorTexto;
         });
     }
 
@@ -195,25 +186,6 @@ function inicializarPublicarPreview() {
             formData.append('autor', inputAutor.value);
             formData.append('categoria', categoriaAtiva);
             formData.append('imagem', inputImagem.files[0]);
-
-            // Enviar para o servidor (quando backend estiver pronto)
-            // fetch('publicar.php', {
-            //     method: 'POST',
-            //     body: formData
-            // })...
-
-            // Por enquanto, simular envio bem-sucedido
-            console.log('Notícia para publicar:', {
-                titulo: inputTitulo.value,
-                conteudo: inputConteudo.value,
-                autor: inputAutor.value,
-                categoria: categoriaAtiva,
-                imagem: inputImagem.files[0].name
-            });
-
-            mostrarNotificacao('Notícia publicada com sucesso!', 'sucesso');
-            this.reset();
-            resetarPreview();
         });
     }
 
@@ -247,10 +219,6 @@ function inicializarPublicarPreview() {
         if (previewConteudo) {
             previewConteudo.textContent = 'Conteúdo da notícia. Será exibido em até 4 linhas na visualização do card.';
             previewConteudo.classList.add('preview-text');
-        }
-        
-        if (previewAutor) {
-            previewAutor.textContent = 'usuário';
         }
         
         resetarImagem();
