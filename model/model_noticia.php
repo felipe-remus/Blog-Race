@@ -1,20 +1,27 @@
 <?php
+// model_noticia.php é chamado via HTMX (requisição separada),
+// então precisa iniciar a sessão aqui também.
+// A proteção session_status evita erro caso já esteja ativa.
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 // Conexão
 $con = new PDO("sqlite:../banco/blog_racing.db");
 $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 // Recebe os parâmetros de filtro via GET
-$busca       = trim($_GET['busca-texto']         ?? '');
-$categoria   = trim($_GET['filtro-categoria']    ?? '');
-$data_inicio = trim($_GET['filtro-data-inicio']  ?? '');
-$data_fim    = trim($_GET['filtro-data-fim']     ?? '');
+$busca = trim($_GET['busca-texto']        ?? '');
+$categoria = trim($_GET['filtro-categoria']   ?? '');
+$data_inicio = trim($_GET['filtro-data-inicio'] ?? '');
+$data_fim = trim($_GET['filtro-data-fim']    ?? '');
 
 // Configurações de paginação
-$por_pagina   = 20;
+$por_pagina = 20;
 $pagina_atual = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
-$offset       = ($pagina_atual - 1) * $por_pagina;
+$offset = ($pagina_atual - 1) * $por_pagina;
 
-// --- WHERE compartilhado entre contagem e busca ---
+// WHERE compartilhado entre contagem e busca
 $where  = " WHERE 1=1";
 $params = [];
 
@@ -38,11 +45,11 @@ if ($data_fim !== '') {
     $params[':data_fim'] = $data_fim;
 }
 
-// --- Contagem total (respeitando filtros) ---
+// Contagem total (respeitando filtros)
 $sql_contagem = "
     SELECT COUNT(*) as total
     FROM noticias n
-    JOIN usuarios u  ON n.usuario_id  = u.id_usuario
+    JOIN usuarios u   ON n.usuario_id   = u.id_usuario
     JOIN categorias c ON n.categoria_id = c.id_categoria"
     . $where;
 
@@ -58,7 +65,7 @@ $offset       = ($pagina_atual - 1) * $por_pagina;
 $inicio = $total_noticias > 0 ? $offset + 1 : 0;
 $fim    = min($offset + $por_pagina, $total_noticias);
 
-// --- Busca paginada (respeitando filtros) ---
+// Busca paginada (respeitando filtros)
 $sql_noticia = "
     SELECT
         n.titulo_noticia,
@@ -70,7 +77,7 @@ $sql_noticia = "
         n.id_noticia,
         n.usuario_id
     FROM noticias n
-    JOIN usuarios u  ON n.usuario_id  = u.id_usuario
+    JOIN usuarios u   ON n.usuario_id   = u.id_usuario
     JOIN categorias c ON n.categoria_id = c.id_categoria"
     . $where
     . " ORDER BY n.data_noticia DESC
@@ -78,7 +85,6 @@ $sql_noticia = "
 
 $stmt = $con->prepare($sql_noticia);
 
-// Bind dos filtros
 foreach ($params as $key => $value) {
     $stmt->bindValue($key, $value);
 }

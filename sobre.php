@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -16,7 +19,7 @@
     <link rel="stylesheet" href="css/publicar.css">
     <link rel="stylesheet" href="css/slider.css">
     <link rel="stylesheet" href="css/tags.css">
-    
+
     <script src="script/header.js" defer></script>
     <script src="script/historia.js" defer></script>
     <script src="script/login.js" defer></script>
@@ -27,82 +30,60 @@
     <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.8/dist/htmx.min.js" integrity="sha384-/TgkGk7p307TH7EXJDuUlgG3Ce1UVolAOFopFekQkkXihi5u/6OCvVKyz1W+idaz" crossorigin="anonymous"></script>
 </head>
 <body>
-    <!-- Header -->
-    <template
-        hx-get="view/view_header.php"
-        hx-target="#header" 
-        hx-swap="innerHTML"
-        hx-trigger="load">
-    </template>
-    <div id="header"></div>
 
-    <!-- Botão "Voltar para a Home" -->
-    <div class="voltar-home">
-        <a href="index.html" class="btn-voltar">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="19" y1="12" x2="5" y2="12"></line>
-                <polyline points="12 19 5 12 12 5"></polyline>
-            </svg>
-            <span>Voltar para a Home</span>
-        </a>
+    <div id="header">
+        <?php require "view/view_header.php"; ?>
     </div>
 
     <main>
+        <div class="voltar-home">
+            <a href="index.php" class="btn-voltar">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+                <span>Voltar para a Home</span>
+            </a>
+        </div>
+
         <div class="historia-container">
-            <h1 class="historia-titulo-principal">Sobre o Projeto</h1>
+            <h1 class="titulo-principal">Sobre o Projeto</h1>
             <p class="historia-subtitulo">Conheça o criador e a história por trás deste site</p>
 
-            <!-- Seção Quem Sou -->
             <section class="historia-secao">
                 <h2>Quem sou eu</h2>
-
                 <p>Olá! Me chamo <strong>Felipe Remus</strong>, sou estudante do curso de T.I do <strong>Senac</strong> e apaixonado por tecnologia e automobilismo. Este projeto nasceu da vontade de unir dois mundos: a programação e o universo das corridas.</p>
-
                 <p>Estou em formação na área de desenvolvimento, aprendendo na prática como construir interfaces modernas, responsivas e funcionais. Cada detalhe deste site representa um aprendizado real, desde a estrutura HTML até o estilo visual e os scripts de interatividade.</p>
-
                 <div class="destaque">
                     <p><strong>Formação:</strong> Curso de T.I no Senac, com foco em aplicações a projetos reais e autorais.</p>
                 </div>
             </section>
 
-            <!-- Seção Sobre o Projeto -->
             <section class="historia-secao">
                 <h2>Sobre o Projeto</h2>
-
-                <p>Este site é um portal de notícias e conteúdo dedicado ao mundo das corridas. O objetivo é reunir informações sobre as principais categorias do esporte a motor, como Fórmula 1, Fórmula E, IndyCar, WEC, WRC, Nascar e MotoGP trazendo notícias, histórico das categorias e conteúdo relevante para os fãs.</p>
-
+                <p>Este site é um portal de notícias e conteúdo dedicado ao mundo das corridas. O objetivo é reunir informações sobre as principais categorias do esporte a motor, como Fórmula 1, Fórmula E, IndyCar, WEC, WRC, Nascar e MotoGP, trazendo notícias, histórico das categorias e conteúdo relevante para os fãs.</p>
                 <p>O projeto foi desenvolvido inteiramente do zero, com foco em boas práticas de desenvolvimento web, organização de código e experiência do usuário. Entre os recursos implementados estão sistema de filtros, paginação dinâmica, slider de destaques, sistema de tags e um layout responsivo adaptado para diferentes tamanhos de tela.</p>
-
                 <div class="destaque">
-                    <p><strong>Tecnologias utilizadas:</strong> HTML, CSS, PHP, JavaScript e HTMX para carregamento dinâmico de componentes como o cabeçalho e o rodapé.</p>
+                    <p><strong>Tecnologias utilizadas:</strong> HTML, CSS, PHP, JavaScript e HTMX para carregamento dinâmico de componentes.</p>
                 </div>
             </section>
 
-            <!-- Seção Contato -->
             <section class="historia-secao">
                 <h2>Entre em contato</h2>
-
                 <p>Fico feliz em receber feedbacks, sugestões ou simplesmente trocar uma ideia sobre tecnologia e automobilismo. Você pode me encontrar nas redes sociais abaixo:</p>
-
                 <ul>
                     <li><strong>Instagram:</strong> <a href="https://instagram.com/felipe_remus" target="_blank" rel="noopener">@felipe_remus</a></li>
                     <li><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/felipe-remus" target="_blank" rel="noopener">Felipe Remus</a></li>
                     <li><strong>GitHub:</strong> <a href="https://github.com/felipe-remus" target="_blank" rel="noopener">felipe-remus</a></li>
                 </ul>
-
                 <p>Obrigado por visitar o site e acompanhar este projeto. Espero que o conteúdo seja útil e agradável para todos os apaixonados por automobilismo!</p>
             </section>
-
         </div>
     </main>
 
-    <!-- Footer -->
-    <template
-        hx-get="view/view_footer.php"
-        hx-target="#footer" 
-        hx-swap="innerHTML"
-        hx-trigger="load">
-    </template>
-    <div id="footer"></div>
+    <div id="footer">
+        <?php require "view/view_footer.php"; ?>
+    </div>
+
 </body>
 </html>

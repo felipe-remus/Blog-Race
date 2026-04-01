@@ -2,12 +2,13 @@
 SLIDER HERO 
    ======================================== */
 
-.slider-hero {
+   .slider-hero {
     position: relative;
     width: 100%;
     height: 50rem;
     overflow: hidden;
     margin-bottom: 2rem;
+    margin-top: 0;
 }
 
 .slider-container {
@@ -41,6 +42,17 @@ SLIDER HERO
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+}
+
+.slide-background::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 25%;
+    background: linear-gradient(to bottom, #ffffff 0%, rgba(255, 255, 255, 0) 10%);
+    z-index: 1;
 }
 
 .slide-background::after {

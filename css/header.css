@@ -2,19 +2,14 @@
 CABEÇALHO 
 ======================================== */
 #cabecalho {
-    background-color: #26011C;
+    background: linear-gradient(to bottom, #26011C 80%, #ffffff 100%);
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 1rem 2rem;
-    border-bottom: 3px solid #e10600;
     flex-wrap: wrap;
     gap: 1.5rem;
-    transition: background-color 0.4s ease, padding 0.4s ease, box-shadow 0.4s ease;
-}
-
-#cabecalho:hover {
-    box-shadow: 0 4px 12px rgba(225, 6, 0, 0.2);
+    transition: all 0.4s ease;
 }
 
 #logo-cabecalho {

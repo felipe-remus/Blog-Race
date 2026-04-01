@@ -14,7 +14,7 @@ function init() {
                 if (resposta.sucesso) {
                     mostrarToast(resposta.mensagem, 'sucesso');
                     document.getElementById('form-login').reset();
-                    setTimeout(() => { window.location.href = '../index.html'; }, 1000);
+                    setTimeout(() => { window.location.href = '../index.php'; }, 1000);
                 } else {
                     mostrarToast(resposta.mensagem, 'erro');
                 }
@@ -44,7 +44,7 @@ function init() {
                 if (resposta.sucesso) {
                     mostrarToast(resposta.mensagem, 'sucesso');
                     document.getElementById('form-registro').reset();
-                    setTimeout(() => { window.location.href = '../login.html'; }, 1000);
+                    setTimeout(() => { window.location.href = '../login.php'; }, 1000);
                 } else {
                     mostrarToast(resposta.mensagem, 'erro');
                 }
@@ -73,9 +73,9 @@ function init() {
                 if (resposta.sucesso) {
                     mostrarToast(resposta.mensagem, 'sucesso');
                     if (resposta.mudar_senha) {
-                        setTimeout(() => { window.location.href = '../login.html'; }, 1500);
+                        setTimeout(() => { window.location.href = '../login.php'; }, 1500);
                     } else {
-                        setTimeout(() => { window.location.href = '../index.html'; }, 1500);
+                        setTimeout(() => { window.location.href = '../index.php'; }, 1500);
                     }
                 } else {
                     mostrarToast(resposta.mensagem, 'erro');

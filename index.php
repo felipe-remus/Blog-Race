@@ -1,3 +1,7 @@
+<?php
+// Sessão iniciada UMA VEZ aqui — não precisa mais em nenhuma view
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -27,42 +31,30 @@
     <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.8/dist/htmx.min.js" integrity="sha384-/TgkGk7p307TH7EXJDuUlgG3Ce1UVolAOFopFekQkkXihi5u/6OCvVKyz1W+idaz" crossorigin="anonymous"></script>
 </head>
 <body>
-    <!-- Header -->
-    <template
-        hx-get="view/view_header.php"
-        hx-target="#header" 
-        hx-swap="innerHTML"
-        hx-trigger="load">
-    </template>
-    <div id="header"></div>
+    <!-- Header: include direto, sem requisição HTTP extra -->
+    <div id="header">
+        <?php require "view/view_header.php"; ?>
+    </div>
 
-    <!-- Slider Hero -->
-    <template
-        hx-get="view/view_slider.php"
-        hx-target="#slider"
-        hx-trigger="load"
-        >
-    </template>
-    <div id="slider"></div>
+    <!-- Slider Hero: include direto, sem requisição HTTP extra -->
+    <div id="slider">
+        <?php require "view/view_slider.php"; ?>
+    </div>
 
     <main>
-        <!-- Card de Notícia -->
+        <!-- Notícias: HTMX mantido pois responde a filtros e paginação dinâmica -->
         <template
-            hx-get="model/model_card.php"
-            hx-target="#noticia" 
+            hx-get="model/model_noticia.php"
+            hx-target="#noticia"
             hx-swap="innerHTML"
             hx-trigger="load">
         </template>
         <div id="noticia"></div>
     </main>
-    
-    <!-- Footer -->
-    <template
-        hx-get="view/view_footer.php"
-        hx-target="#footer" 
-        hx-swap="innerHTML"
-        hx-trigger="load">
-    </template>
-    <div id="footer"></div>
+
+    <!-- Footer: include direto, sem requisição HTTP extra -->
+    <div id="footer">
+        <?php require "view/view_footer.php"; ?>
+    </div>
 </body>
 </html>

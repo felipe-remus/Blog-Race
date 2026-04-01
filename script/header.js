@@ -3,7 +3,7 @@
 // ============================================================
 function highlightCurrentPage() {
     requestAnimationFrame(() => {
-        let currentPage = window.location.pathname.split('/').pop() || 'index.html';      
+        let currentPage = window.location.pathname.split('/').pop() || 'index.php';      
         // Normalizar: remover query strings e hashes
         currentPage = currentPage.split('?')[0].split('#')[0];
 

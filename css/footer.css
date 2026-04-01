@@ -2,8 +2,7 @@
 RODAPÉ (FOOTER)
    ======================================== */
 #rodape {
-    background-color: #26011C;
-    border-top: 3px solid #e10600;
+    background: linear-gradient(to top, #26011C 80%, #ffffff 100%);
     margin-top: auto;
     padding: 2rem 3rem;
     color: #ffffff;

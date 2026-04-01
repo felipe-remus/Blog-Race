@@ -6,7 +6,7 @@ $pdo = new PDO("sqlite:../banco/blog_racing.db");
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 if (!isset($_GET['id_noticia']) || empty($_GET['id_noticia'])) {
-    header('Location: ../noticias.html');
+    header('Location: ../noticias.php');
     exit;
 }
 
@@ -34,7 +34,7 @@ $stmt->execute();
 $uma_noticia = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$uma_noticia) {
-    header('Location: ../noticias.html');
+    header('Location: ../noticias.php');
     exit;
 }
 
@@ -81,11 +81,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bindValue(':id_noticia', $id_noticia);
         $stmt->execute();
 
-        header('Location: ../noticias.html');
+        header('Location: ../noticias.php');
         exit;
 
     } catch (PDOException $e) {
-        header('Location: ../noticias.html');
+        header('Location: ../noticias.php');
         exit;
     }
 }

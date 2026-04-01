@@ -2,20 +2,10 @@
 PÁGINA DE HISTÓRIA - ESTILOS GERAIS
    ======================================== */
 
-   .historia-container {
+.historia-container {
     max-width: 900px;
     margin: 0 auto;
     padding: 2rem;
-}
-
-.historia-titulo-principal {
-    text-align: center;
-    font-size: 2.5rem;
-    color: #26011C;
-    margin-bottom: 1rem;
-    font-weight: 700;
-    line-height: 1.3;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .historia-subtitulo {

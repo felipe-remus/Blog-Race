@@ -14,7 +14,6 @@ function inicializarModal() {
     const modalCard = document.getElementById('modalCard');
     const btnFechar = document.getElementById('modalFechar');
 
-    // Elementos ainda não existem no DOM (HTMX ainda não carregou o card.html)
     if (!overlay || !modalCard || !btnFechar) return;
 
     function abrirModal(card) {
@@ -57,7 +56,6 @@ document.addEventListener('keydown', e => {
     if (e.key === 'Escape') fecharModal();
 });
 
-// Roda após cada swap do HTMX — aguarda o card.html ser injetado no #noticia
 document.addEventListener('htmx:afterSwap', e => {
     if (e.detail.target.id === 'noticia' || 
         e.detail.target.classList.contains('noticias-container') ||
