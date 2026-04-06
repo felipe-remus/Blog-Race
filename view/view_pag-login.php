@@ -75,9 +75,41 @@ $abaAtiva = ($_GET['aba'] ?? 'login') === 'registro' ? 'registro' : 'login';
 
                     <div class="grupo-botoes">
                         <button type="submit" class="botao-de-login">Salvar Alterações</button>
-                        <a href="actinos/logout.php" class="botao-logout">Sair da Conta</a>
+                        <button type="button" class="botao-deletar-conta" onclick="abrirModalDeletarConta()">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="3 6 5 6 21 6"/>
+                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                                <line x1="10" y1="11" x2="10" y2="17"/>
+                                <line x1="14" y1="11" x2="14" y2="17"/>
+                            </svg>
+                            Deletar Minha Conta
+                        </button>
                     </div>
                 </form>
+
+                <!-- MODAL CONFIRMAR DELETAR CONTA -->
+                <div class="modal-confirmacao" id="modalDeletarConta" style="display:none;">
+                    <div class="modal-conteudo">
+                        <button class="modal-fechar" type="button" onclick="fecharModalDeletarConta()">&times;</button>
+                        <h3>Deletar Conta</h3>
+                        <p>Tem certeza que deseja deletar sua conta? <strong>Esta ação é irreversível.</strong></p>
+                        
+                        <!--<input type="hidden" name="acao" value="deletar_conta">-->
+                        <div class="modal-botoes">
+                            <button class="btn-modal btn-cancelar" onclick="fecharModalDeletarConta()">Cancelar</button>
+                            <a href="actions/usuario-apagar.php?id_usuario=<?=$_SESSION['usuario']['id_usuario']?>" class="btn-modal btn-confirmar-deletar">Sim, deletar</a>
+                        </div>
+                    
+                    </div>
+                </div>
+
+                <script>
+                    function abrirModalDeletarConta()  { document.getElementById('modalDeletarConta').style.display = 'flex'; }
+                    function fecharModalDeletarConta() { document.getElementById('modalDeletarConta').style.display = 'none'; }
+                    document.getElementById('modalDeletarConta').addEventListener('click', function(e) {
+                        if (e.target === this) fecharModalDeletarConta();
+                    });
+                </script>
             </div>
 
         <?php else: ?>

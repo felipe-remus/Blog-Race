@@ -528,3 +528,50 @@ PAINEL ADMINISTRATIVO - ADMIN.CSS
         height: 16px;
     }
 }
+/* FILTRO DE USUÁRIOS */
+.filtro-usuario {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 1.25rem;
+    background: #f7f7f7;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 0.6rem 1rem;
+    max-width: 320px;
+    transition: border-color 0.2s;
+}
+
+.filtro-usuario:focus-within {
+    border-color: #26011C;
+    background: #fff;
+}
+
+.filtro-usuario svg {
+    color: #999;
+    flex-shrink: 0;
+}
+
+.filtro-usuario input {
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 0.95rem;
+    width: 100%;
+    color: #333;
+}
+
+/* BOTÃO DELETAR DESABILITADO (conta própria) */
+.btn-deletar-desabilitado {
+    opacity: 0.35;
+    cursor: not-allowed !important;
+    border-color: #ccc !important;
+    color: #ccc !important;
+}
+
+.btn-deletar-desabilitado:hover {
+    background: none !important;
+    border-color: #ccc !important;
+    color: #ccc !important;
+    transform: none !important;
+}

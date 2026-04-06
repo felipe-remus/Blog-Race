@@ -267,30 +267,6 @@ NOTIFICAÇÕES DE ERRO / SUCESSO
     flex-wrap: wrap;
 }
 
-.botao-logout {
-    padding: 12px 30px;
-    background-color: var(--cor-perigo, #e74c3c);
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    text-decoration: none;
-    display: inline-block;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    text-align: center;
-}
-
-.botao-logout:hover {
-    background-color: var(--cor-perigo-hover, #c0392b);
-    transform: translateY(-2px);
-}
-
-.botao-logout:active {
-    transform: translateY(0);
-}
-
 /* Animação de entrada */
 @keyframes slideIn {
     from {
@@ -407,8 +383,7 @@ RESPONSIVIDADE
         flex-direction: column;
     }
 
-    .botao-de-login,
-    .botao-logout {
+    .botao-de-login {
         width: 100%;
     }
 
@@ -545,4 +520,131 @@ RESPONSIVIDADE
         padding: 0.55rem 0.8rem;
         font-size: 0.8rem;
     }
+}
+/* ========================================
+BOTÃO DELETAR CONTA
+   ======================================== */
+.botao-deletar-conta {
+    padding: 12px 30px;
+    background-color: transparent;
+    color: #c0392b;
+    border: 2px solid #c0392b;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    font-family: Arial, sans-serif;
+}
+
+.botao-deletar-conta:hover {
+    background-color: #c0392b;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(192, 57, 43, 0.3);
+}
+
+.botao-deletar-conta:active {
+    transform: translateY(0);
+}
+
+/* ========================================
+MODAL DELETAR CONTA
+   ======================================== */
+.modal-confirmacao {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.modal-conteudo {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    position: relative;
+    animation: slideIn 0.25s ease;
+}
+
+.modal-conteudo h3 {
+    margin-top: 0;
+    margin-bottom: 0.75rem;
+    color: #26011C;
+    font-size: 1.25rem;
+}
+
+.modal-conteudo p {
+    color: #555;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+}
+
+.modal-fechar {
+    position: absolute;
+    top: 1rem; right: 1rem;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #999;
+    transition: color 0.2s;
+    line-height: 1;
+}
+
+.modal-fechar:hover { color: #333; }
+
+.modal-botoes {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+}
+
+.btn-modal {
+    padding: 0.65rem 1.4rem;
+    border-radius: 7px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    font-family: Arial, sans-serif;
+    transition: all 0.2s ease;
+}
+
+.btn-cancelar {
+    background: #f0f0f0;
+    color: #333;
+}
+
+.btn-cancelar:hover { background: #e0e0e0; }
+
+.btn-confirmar-deletar {
+    background: linear-gradient(135deg, #c0392b 0%, #a93226 100%);
+    color: white;
+}
+
+.btn-confirmar-deletar:hover {
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+    box-shadow: 0 4px 12px rgba(192, 57, 43, 0.35);
+    transform: translateY(-1px);
+}
+
+@media (max-width: 480px) {
+    .botao-deletar-conta {
+        width: 100%;
+        justify-content: center;
+        font-size: 0.95rem;
+        padding: 10px 20px;
+    }
+
+    .modal-botoes { flex-direction: column; }
+    .btn-modal { width: 100%; text-align: center; }
 }

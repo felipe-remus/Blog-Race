@@ -4,7 +4,7 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 // Conexão
-$pdo = new PDO("sqlite:../banco/blog_racing.db");
+$pdo = new PDO("sqlite:" . __DIR__ . "/../banco/blog_racing.db");
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {

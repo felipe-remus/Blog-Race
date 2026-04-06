@@ -8,25 +8,26 @@ if (!isset($_SESSION['usuario'])) {
     exit;
 }
 
-if (!isset($_GET['id_noticia']) || empty($_GET['id_noticia'])) {
+if (!isset($_GET['id_usuario']) || empty($_GET['id_usuario'])) {
     header('Location: ../404.php');
     exit;
 }
 
-// __DIR__ garante o caminho absoluto ao arquivo, independente de onde ele é incluído
+// Conexão
 $pdo = new PDO("sqlite:" . __DIR__ . "/../banco/blog_racing.db");
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-$id_noticia = $_GET['id_noticia'];
+$id_usuario = $_GET['id_usuario'];
 
 try {
-    $stmt = $pdo->prepare("DELETE FROM noticias WHERE id_noticia = ?");
-    $stmt->execute([$id_noticia]);
+    $stmt = $pdo->prepare("DELETE FROM usuarios WHERE id_usuario = ?");
+    $stmt->execute([$id_usuario]);
 
+    session_destroy();
     header('Location: ../index.php');
     exit;
 
 } catch (PDOException $e) {
-    header('Location: ../noticias.php');
+    header('Location: ../login.php');
     exit;
 }

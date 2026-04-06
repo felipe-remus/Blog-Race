@@ -10,7 +10,7 @@ $pdo = new PDO("sqlite:" . __DIR__ . "/../banco/blog_racing.db");
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 if (!isset($_GET['id_noticia']) || empty($_GET['id_noticia'])) {
-    header('Location: ../noticias.php');
+    header('Location: 404.php');
     exit;
 }
 

@@ -7,10 +7,10 @@ function inicializarPublicarPreview() {
     // ELEMENTOS DO FORMULÁRIO (IDs CORRETOS)
     // ========================================
     const formulario            = document.getElementById('form-noticia');
-    const inputTitulo           = document.getElementById('input-titulo');      // ✅ CORRIGIDO
-    const inputConteudo         = document.getElementById('input-conteudo');    // ✅ CORRIGIDO
-    const inputAutor            = document.getElementById('input-autor');       // ✅ CORRIGIDO
-    const inputImagem           = document.getElementById('input-imagem');      // ✅ CORRIGIDO
+    const inputTitulo           = document.getElementById('input-titulo');     
+    const inputConteudo         = document.getElementById('input-conteudo');   
+    const inputAutor            = document.getElementById('input-autor');      
+    const inputImagem           = document.getElementById('input-imagem');     
     const botoesCategorias      = document.querySelectorAll('.categoria-btn');
     const categoriaSelecionada  = document.getElementById('categoria-selecionada');
     const btnRemoverImagem      = document.getElementById('btnRemoverImagem');

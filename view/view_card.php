@@ -21,14 +21,20 @@ $perfilUsuario      = $usuarioLogado ? $_SESSION['usuario']['perfil_id'] : null;
 
     $podeEditar  = false;
     $podeDeletar = false;
-
+    
     if ($usuarioLogado) {
-        if ($perfilUsuario == 1) {
-            $podeDeletar = true;
-            $podeEditar  = false;
-        } elseif ($perfilUsuario == 2 && $idUsuarioLogado == $usuario_id_noticia) {
-            $podeEditar  = true;
-            $podeDeletar = true;
+        $ehAutor = ($idUsuarioLogado == $usuario_id_noticia);
+    
+        if ($perfilUsuario == 1) { // Admin
+            $podeDeletar = true; // Admin sempre pode deletar
+            if ($ehAutor) {
+                $podeEditar = true; // Admin só pode editar se for o autor
+            }
+        } elseif ($perfilUsuario == 2) { // Usuário comum
+            if ($ehAutor) {
+                $podeEditar  = true;
+                $podeDeletar = true;
+            }
         }
     }
 ?>
@@ -70,7 +76,7 @@ $perfilUsuario      = $usuarioLogado ? $_SESSION['usuario']['perfil_id'] : null;
                         <a class="btn-acao"
                             aria-label="Editar notícia"
                             title="Editar"
-                            href="actions/noticia-editar.php?id_noticia=<?= $id_noticia ?>">
+                            href="editar-noticia.php?id_noticia=<?= $id_noticia ?>">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L21 6.5z"/>
                             </svg>

@@ -65,8 +65,10 @@ async function handleFormSubmit(e) {
         // Sucesso: mostra toast e redireciona
         mostrarToast(flash.mensagem, 'sucesso');
         setTimeout(() => {
-            if (acao === 'login' || acao === 'registro') {
+            if (acao === 'login') {
                 window.location.href = 'index.php';
+            } else if (acao === 'registro') {
+                window.location.href = 'login.php';
             } else if (acao === 'editar') {
                 window.location.href = 'index.php';
             } else {

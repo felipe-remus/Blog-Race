@@ -4,7 +4,7 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 // Conexão
-$con = new PDO("sqlite:../banco/blog_racing.db");
+$con = new PDO("sqlite:" . __DIR__ . "/../banco/blog_racing.db");
 $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 // Recebe os parâmetros de filtro via GET
