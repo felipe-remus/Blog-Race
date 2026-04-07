@@ -71,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // 2) Monta o nome da imagem: {id}-{nome_original}
         $nome_original = basename($_FILES['img']['name']);
         $novo_nome     = $id_noticia . '-' . $nome_original;
-        $destino       = __DIR__ . '/../public/img-noticia/' . $novo_nome;
+        $destino       = __DIR__ . '/../public_html/img-noticia/' . $novo_nome;
         move_uploaded_file($_FILES['img']['tmp_name'], $destino);
 
         $img = 'img-noticia/' . $novo_nome;
