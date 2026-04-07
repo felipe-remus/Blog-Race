@@ -53,24 +53,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $texto  = $_POST['texto'];
 
         if (isset($_FILES['img']) && $_FILES['img']['error'] === UPLOAD_ERR_OK) {
+            // Apaga a imagem antiga da pasta, se existir
+            $img_antiga     = $_POST['img_atual'];
+            $caminho_antiga = __DIR__ . '/../public_html/' . $img_antiga;
+
+            if (!empty($img_antiga) && file_exists($caminho_antiga)) {
+                unlink($caminho_antiga);
+            }
+
+            // Salva a nova imagem com a mesma lógica do publicar
             $nome_original = basename($_FILES['img']['name']);
             $novo_nome     = $id_noticia . '-' . $nome_original;
-            $destino       = __DIR__ . '/../img-noticia/' . $novo_nome;
+            $destino       = __DIR__ . '/../public_html/img-noticia/' . $novo_nome;
             move_uploaded_file($_FILES['img']['tmp_name'], $destino);
-            $img = '../img-noticia/' . $novo_nome;
+            $img = 'img-noticia/' . $novo_nome;
         } else {
             $img = $_POST['img_atual'];
         }
 
-        $sql_editar = "
+        $stmt = $pdo->prepare("
             UPDATE noticias
             SET titulo_noticia = :titulo,
                 imagem_noticia = :img,
                 texto_noticia  = :texto
             WHERE id_noticia   = :id_noticia
-        ";
-
-        $stmt = $pdo->prepare($sql_editar);
+        ");
         $stmt->bindValue(':titulo',     $titulo);
         $stmt->bindValue(':img',        $img);
         $stmt->bindValue(':texto',      $texto);
