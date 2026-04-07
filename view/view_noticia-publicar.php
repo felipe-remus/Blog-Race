@@ -17,7 +17,7 @@ $nomeUsuario   = $usuarioLogado ? $_SESSION['usuario']['user'] : '';
         <div class="publicar-controls">
             <h1>Publicar Nova Notícia</h1>
 
-            <!-- action aponta para o entry point em public/actions/ -->
+            <!-- action aponta para o entry point em public_html/actions/ -->
             <form id="form-noticia"
                 method="POST"
                 enctype="multipart/form-data"

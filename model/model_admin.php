@@ -105,7 +105,7 @@ $stats = $pdo->query("
         (SELECT COUNT(*) FROM noticias)                                          AS total_noticias,
         (SELECT COUNT(*) FROM noticias WHERE DATE(data_noticia) = DATE('now'))   AS noticias_hoje")->fetch(PDO::FETCH_ASSOC);
 
-// Lê e limpa o flash de sessão (igual ao padrão view_noticia-publicar.php)
+// Lê e limpa o flash de sessão
 $flash = $_SESSION['flash'] ?? null;
 unset($_SESSION['flash']);
 

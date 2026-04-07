@@ -20,6 +20,6 @@
             </a>
         </div>
 
-        <a href="../sobre.php" class="footer-link">Sobre</a>
+        <a href="sobre.php" class="footer-link">Sobre</a>
     </div>
 </footer>

@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $acao = $_POST['acao'] ?? '';
 
     // Cada case inclui a model correspondente (caminho relativo ao arquivo PHP,
-    // não à URL — por isso "../model/" funciona estando em public/).
+    // não à URL — por isso "../model/" funciona estando em public_html/).
     match ($acao) {
         'login'   => require '../model/model_login.php',
         'registro' => require '../model/model_registro.php',

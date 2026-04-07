@@ -7,7 +7,7 @@ if (
     header('Location: ../404.php'); 
     exit;
 }
-// public/actions/get_flash.php
+// public_html/actions/get_flash.php
 // Endpoint dedicado: lê e limpa o flash da sessão, retorna JSON.
 // Chamado pelo JS após fetch de formulários (publicar, login, etc.)
 
