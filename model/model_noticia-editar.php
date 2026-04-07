@@ -5,7 +5,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 require __DIR__ . "/model_categoria.php";
 
-// __DIR__ garante o caminho absoluto ao arquivo, independente de onde ele é incluído
+// Conexão
 $pdo = new PDO("sqlite:" . __DIR__ . "/../banco/blog_racing.db");
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -16,7 +16,7 @@ if (!isset($_GET['id_noticia']) || empty($_GET['id_noticia'])) {
 
 $id_noticia = $_GET['id_noticia'];
 
-$sql_mostrar = "
+$stmt = $pdo->prepare("
     SELECT
         n.titulo_noticia,
         n.texto_noticia,
@@ -30,9 +30,7 @@ $sql_mostrar = "
     JOIN usuarios u ON n.usuario_id = u.id_usuario
     JOIN categorias c ON n.categoria_id = c.id_categoria
     WHERE n.id_noticia = :id_noticia
-";
-
-$stmt = $pdo->prepare($sql_mostrar);
+");
 $stmt->bindValue(':id_noticia', $id_noticia);
 $stmt->execute();
 $uma_noticia = $stmt->fetch(PDO::FETCH_ASSOC);

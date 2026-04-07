@@ -42,15 +42,12 @@ if ($data_fim !== '') {
     $params[':data_fim'] = $data_fim;
 }
 
-// Contagem total (respeitando filtros)
-$sql_contagem = "
+$stmt_count = $con->prepare("
     SELECT COUNT(*) as total
     FROM noticias n
     JOIN usuarios u   ON n.usuario_id   = u.id_usuario
     JOIN categorias c ON n.categoria_id = c.id_categoria"
-    . $where;
-
-$stmt_count = $con->prepare($sql_contagem);
+    . $where);
 $stmt_count->execute($params);
 $total_noticias = (int) $stmt_count->fetch(PDO::FETCH_ASSOC)['total'];
 $total_paginas = $total_noticias > 0 ? ceil($total_noticias / $por_pagina) : 1;
@@ -62,8 +59,7 @@ $offset = ($pagina_atual - 1) * $por_pagina;
 $inicio = $total_noticias > 0 ? $offset + 1 : 0;
 $fim = min($offset + $por_pagina, $total_noticias);
 
-// Busca paginada (respeitando filtros)
-$sql_noticia = "
+$stmt = $con->prepare("
     SELECT
         n.titulo_noticia,
         n.texto_noticia,
@@ -78,9 +74,7 @@ $sql_noticia = "
     JOIN categorias c ON n.categoria_id = c.id_categoria"
     . $where
     . " ORDER BY n.data_noticia DESC
-        LIMIT :limit OFFSET :offset";
-
-$stmt = $con->prepare($sql_noticia);
+        LIMIT :limit OFFSET :offset");
 
 foreach ($params as $key => $value) {
     $stmt->bindValue($key, $value);

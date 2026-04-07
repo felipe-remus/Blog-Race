@@ -1,4 +1,12 @@
 <?php
+// get_flash.php
+if (
+    !isset($_SERVER['HTTP_X_REQUESTED_WITH']) ||
+    strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) !== 'xmlhttprequest'
+) {
+    header('Location: ../404.php'); 
+    exit;
+}
 // public/actions/get_flash.php
 // Endpoint dedicado: lê e limpa o flash da sessão, retorna JSON.
 // Chamado pelo JS após fetch de formulários (publicar, login, etc.)

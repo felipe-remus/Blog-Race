@@ -197,7 +197,9 @@ async function handlePublicarSubmit(e) {
         });
 
         // Lê o flash que o PHP gravou na sessão
-        const flashRes = await fetch('includes/get_flash.php');
+        const flashRes = await fetch('includes/get_flash.php', {
+            headers: { 'X-Requested-With': 'XMLHttpRequest' }
+        });
         const flash = await flashRes.json();
 
         if (!flash) return;

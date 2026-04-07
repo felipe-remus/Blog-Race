@@ -5,7 +5,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// __DIR__ garante o caminho absoluto ao arquivo, independente de onde ele é incluído
+// Conexão
 $pdo = new PDO("sqlite:" . __DIR__ . "/../banco/blog_racing.db");
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -78,11 +78,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // ============================================================
 
 // Categorias
-$sql_categorias = "SELECT * FROM categorias ORDER BY id_categoria";
-$categorias = $pdo->query($sql_categorias)->fetchAll(PDO::FETCH_ASSOC);
+$categorias = $pdo->query("SELECT * FROM categorias ORDER BY id_categoria")->fetchAll(PDO::FETCH_ASSOC);
 
 // Usuários com perfil
-$sql_usuarios = "
+$usuarios = $pdo->query("
     SELECT
         u.id_usuario,
         u.nome,
@@ -93,21 +92,18 @@ $sql_usuarios = "
         p.nome_perfil
     FROM usuarios u
     JOIN perfis p ON u.perfil_id = p.id_perfil
-    ORDER BY u.nome";
-$usuarios = $pdo->query($sql_usuarios)->fetchAll(PDO::FETCH_ASSOC);
+    ORDER BY u.nome")->fetchAll(PDO::FETCH_ASSOC);
 
 // Perfis disponíveis (para o <select>)
-$sql_perfis = "SELECT * FROM perfis ORDER BY nome_perfil";
-$perfis = $pdo->query($sql_perfis)->fetchAll(PDO::FETCH_ASSOC);
+$perfis = $pdo->query("SELECT * FROM perfis ORDER BY nome_perfil")->fetchAll(PDO::FETCH_ASSOC);
 
 // Estatísticas
-$sql_stats = "
+$stats = $pdo->query("
     SELECT
         (SELECT COUNT(*) FROM usuarios)                                          AS total_usuarios,
         (SELECT COUNT(*) FROM categorias)                                        AS total_categorias,
         (SELECT COUNT(*) FROM noticias)                                          AS total_noticias,
-        (SELECT COUNT(*) FROM noticias WHERE DATE(data_noticia) = DATE('now'))   AS noticias_hoje";
-$stats = $pdo->query($sql_stats)->fetch(PDO::FETCH_ASSOC);
+        (SELECT COUNT(*) FROM noticias WHERE DATE(data_noticia) = DATE('now'))   AS noticias_hoje")->fetch(PDO::FETCH_ASSOC);
 
 // Lê e limpa o flash de sessão (igual ao padrão view_noticia-publicar.php)
 $flash = $_SESSION['flash'] ?? null;
