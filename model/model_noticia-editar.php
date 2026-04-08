@@ -36,7 +36,7 @@ $stmt->execute();
 $uma_noticia = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$uma_noticia) {
-    header('Location: ../noticias.php');
+    header('Location: noticias.php');
     exit;
 }
 
@@ -84,11 +84,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bindValue(':id_noticia', $id_noticia);
         $stmt->execute();
 
-        header('Location: ../noticias.php');
+        header('Location: noticias.php');
         exit;
 
     } catch (PDOException $e) {
-        header('Location: ../noticias.php');
+        header('Location: noticias.php');
         exit;
     }
 }

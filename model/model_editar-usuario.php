@@ -6,12 +6,12 @@ if (session_status() === PHP_SESSION_NONE) {
 // Usuário deve estar logado
 if (!isset($_SESSION['usuario'])) {
     $_SESSION['flash'] = ['tipo' => 'erro', 'mensagem' => 'Faça login para acessar esta página'];
-    header('Location: ../login.php');
+    header('Location: login.php');
     exit;
 }
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header('Location: ../login.php');
+    header('Location: login.php');
     exit;
 }
 

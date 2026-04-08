@@ -44,12 +44,16 @@ session_start();
     <main>
         <!-- Notícias: HTMX mantido pois responde a filtros e paginação dinâmica -->
         <template
-            hx-get="/proxy.php?p=model_noticia"
+            hx-get="/proxy.php?p=model_noticia&modo=home"
             hx-target="#noticia"
             hx-swap="innerHTML"
             hx-trigger="load">
         </template>
         <div id="noticia"></div>
+
+        <div class="ver-todas-container">
+            <a href="noticias.php" class="btn-ver-todas">Ver todas as notícias →</a>
+        </div>
     </main>
 
     <!-- Footer: include direto, sem requisição HTTP extra -->

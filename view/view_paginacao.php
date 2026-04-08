@@ -1,10 +1,9 @@
-<!-- Container de paginação -->
-<div class="paginacao-container" id="paginacao">
+<div class="paginacao-container"
+    id="paginacao"
+    data-pagina-atual="<?= $pagina_atual ?>"
+    data-total-paginas="<?= $total_paginas ?>">
 
-    <!-- Botão Primeira -->
-    <button class="paginacao-btn"
-            id="btn-primeira"
-            title="Primeira página"
+    <button class="paginacao-btn" id="btn-primeira" title="Primeira página"
             <?= $pagina_atual === 1 ? 'disabled' : '' ?>>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <polyline points="11 17 6 12 11 7"></polyline>
@@ -12,35 +11,25 @@
         </svg>
     </button>
 
-    <!-- Botão Anterior -->
-    <button class="paginacao-btn"
-            id="btn-anterior"
-            title="Página anterior"
+    <button class="paginacao-btn" id="btn-anterior" title="Página anterior"
             <?= $pagina_atual === 1 ? 'disabled' : '' ?>>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <polyline points="15 18 9 12 15 6"></polyline>
         </svg>
     </button>
 
-    <!-- Número da página atual / total -->
     <span class="paginacao-info-pagina">
         <?= $pagina_atual ?> / <?= $total_paginas ?>
     </span>
 
-    <!-- Botão Próxima -->
-    <button class="paginacao-btn"
-            id="btn-proxima"
-            title="Próxima página"
+    <button class="paginacao-btn" id="btn-proxima" title="Próxima página"
             <?= $pagina_atual === $total_paginas ? 'disabled' : '' ?>>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <polyline points="9 18 15 12 9 6"></polyline>
         </svg>
     </button>
 
-    <!-- Botão Última -->
-    <button class="paginacao-btn"
-            id="btn-ultima"
-            title="Última página"
+    <button class="paginacao-btn" id="btn-ultima" title="Última página"
             <?= $pagina_atual === $total_paginas ? 'disabled' : '' ?>>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <polyline points="13 17 18 12 13 7"></polyline>
@@ -49,7 +38,6 @@
     </button>
 </div>
 
-<!-- Info: "Mostrando X-Y de Z notícias" -->
 <div class="info-paginacao" id="info-paginacao">
     Mostrando
     <span id="info-inicio"><?= $inicio ?></span>-<span id="info-fim"><?= $fim ?></span>

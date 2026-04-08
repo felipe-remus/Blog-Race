@@ -36,15 +36,10 @@ session_start();
     </div>
 
     <main>
-        <div class="voltar-home">
-            <a href="index.php" class="btn-voltar">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="19" y1="12" x2="5" y2="12"></line>
-                    <polyline points="12 19 5 12 12 5"></polyline>
-                </svg>
-                <span>Voltar para a Home</span>
-            </a>
+        <div id="btn" style= "position: sticky; top: 0; z-index: 100;">
+            <?php require '../view/view_btn-base.php'?>
         </div>
+
         <div class="historia-container">
             <h1 class="titulo-principal">História das Categorias de Automobilismo</h1>
             <p class="historia-subtitulo">Conheça a trajetória das principais competições de corrida do mundo</p>

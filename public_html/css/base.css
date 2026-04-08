@@ -29,8 +29,22 @@ main {
 /* ========================================
 BOTÃO VOLTAR
    ======================================== */
+.btn-base{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
 .voltar-home {
-    text-align: left;
+    text-align: start;
+    margin-bottom: 1rem;
+    padding-left: 0.5rem;
+    padding: 1rem;
+    width: 50%;
+}
+
+.voltar-topo {
+    text-align: end;
     margin-bottom: 1rem;
     padding-left: 0.5rem;
     padding: 1rem;
@@ -51,6 +65,7 @@ BOTÃO VOLTAR
     border: 2px solid #26011C;
     transition: all 0.3s ease;
     box-shadow: 0 2px 8px rgba(38, 1, 28, 0.15);
+    cursor: pointer;
 }
 
 .btn-voltar:hover {
@@ -66,6 +81,34 @@ BOTÃO VOLTAR
 
 .btn-voltar:hover svg {
     transform: translateX(-4px);
+}
+
+/* ========================================
+Botão do Index
+======================================== */
+
+.ver-todas-container {
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.btn-ver-todas {
+    display: inline-block;
+    padding: 0.9rem 2rem;
+    background: linear-gradient(135deg, #26011C 0%, #1a0113 100%);
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 50px;
+    border: 2px solid #26011C;
+    transition: all 0.3s ease;
+}
+
+.btn-ver-todas:hover {
+    background: linear-gradient(135deg, #e10600 0%, #c10500 100%);
+    border-color: #e10600;
+    box-shadow: 0 4px 12px rgba(225, 6, 0, 0.3);
 }
 
 /* ========================================
@@ -121,7 +164,7 @@ RESPONSIVIDADE
         margin: 1.5rem auto;
     }
 
-    .voltar-topo {
+    .voltar-topo, .voltar-home {
         padding: 0.8rem;
         margin-bottom: 0.8rem;
     }
@@ -139,7 +182,7 @@ RESPONSIVIDADE
         margin: 1rem auto;
     }
 
-    .voltar-topo {
+    .voltar-topo, .voltar-home {
         padding: 0.6rem;
         margin-bottom: 0.6rem;
     }
@@ -172,7 +215,7 @@ RESPONSIVIDADE
         margin: 0.8rem auto;
     }
 
-    .voltar-topo {
+    .voltar-topo, .voltar-home {
         padding: 0.5rem;
     }
 

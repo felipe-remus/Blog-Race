@@ -13,10 +13,18 @@ $categoria = trim($_GET['filtro-categoria']   ?? '');
 $data_inicio = trim($_GET['filtro-data-inicio'] ?? '');
 $data_fim = trim($_GET['filtro-data-fim']    ?? '');
 
-// Configurações de paginação
-$por_pagina = 20;
-$pagina_atual = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
-$offset = ($pagina_atual - 1) * $por_pagina;
+$modo_home = isset($_GET['modo']) && $_GET['modo'] === 'home';
+
+if ($modo_home) {
+    $por_pagina = 6;
+    $pagina_atual = 1;
+    $offset = 0;
+} else {
+    // Configurações de paginação
+    $por_pagina = 20;
+    $pagina_atual = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
+    $offset = ($pagina_atual - 1) * $por_pagina;
+}
 
 // WHERE compartilhado entre contagem e busca
 $where  = " WHERE 1=1";
@@ -86,5 +94,8 @@ $stmt->execute();
 $noticias = $stmt;
 
 require "../view/view_card.php";
-require "../view/view_paginacao.php";
+
+if (!$modo_home) {
+    require "../view/view_paginacao.php";
+}
 ?>
