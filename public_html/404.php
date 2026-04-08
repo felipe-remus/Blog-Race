@@ -10,8 +10,6 @@ http_response_code(404);
     <title>404 — Página Não Encontrada</title>
 
     <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/footer.css">
-    <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/not-found.css">
 
     <script src="script/header.js" defer></script>

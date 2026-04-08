@@ -1,10 +1,9 @@
 <main>
     <!-- CABEÇALHO DO ADMIN -->
-    <div class="admin-header">
-        <h1>Painel Administrativo</h1>
-        <p class="admin-subtitle">Gerenciamento de categorias e usuários</p>
+    <div class="titulo-principal">
+        <h1>Gerenciamento de categorias e usuários</h1>
     </div>
-
+    
     <!-- ESTATÍSTICAS -->
     <div class="admin-stats">
         <div class="stat-card">

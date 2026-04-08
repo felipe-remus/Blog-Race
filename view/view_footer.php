@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="css/footer.css">
+
 <footer id="rodape">
     <div class="footer-container">
         <div class="footer-info">

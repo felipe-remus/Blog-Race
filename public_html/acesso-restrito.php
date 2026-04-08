@@ -41,10 +41,10 @@ if (!empty($destino_da_sessao)) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $eh_login ? '401 — Acesso Restrito' : '403 — Sem Permissão' ?></title>
+
     <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/footer.css">
-    <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/acesso-restrito.css">
+
     <script src="script/header.js" defer></script>
 </head>
 <body>

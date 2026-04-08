@@ -14,6 +14,8 @@ $logout_token = bin2hex(random_bytes(16));
 $_SESSION['logout_token'] = $logout_token;
 ?>
 
+<link rel="stylesheet" href="css/header.css">
+
 <header id="cabecalho">
     <div id="logo-cabecalho">
         <img src="../img/Marca-F1.svg" alt="Logo F1">

@@ -72,7 +72,7 @@ function startAutoSlide() {
     stopAutoSlide();
     
     // Tempo de mudança das fotos em ms (10000 = 10 segundos)
-    autoSlideInterval = setInterval(() => changeSlide(1), 10000); 
+    autoSlideInterval = setInterval(() => changeSlide(1), 7000); 
 }
 
 function stopAutoSlide() {
@@ -100,12 +100,7 @@ document.addEventListener('visibilitychange', () => {
     document.hidden ? stopAutoSlide() : startAutoSlide();
 });
 
-// Reinicializar após HTMX swap
-document.addEventListener('htmx:afterSwap', e => {
-    if (
-        e.detail.target.querySelector('.slider-hero') ||
-        e.detail.target.classList.contains('slider-hero')
-    ) {
-        setTimeout(initSlider, 150);
-    }
-});
+// ============================================================
+// INICIALIZAÇÃO AUTOMÁTICA NO CARREGAMENTO DA PÁGINA
+// ============================================================
+document.addEventListener('DOMContentLoaded', initSlider);

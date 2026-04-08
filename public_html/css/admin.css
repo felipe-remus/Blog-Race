@@ -1,31 +1,6 @@
 /* ========================================
 PAINEL ADMINISTRATIVO - ADMIN.CSS
 ======================================== */
-
-/* CABEÇALHO */
-.admin-header {
-    background: linear-gradient(135deg, #26011C 0%, #1a0113 100%);
-    color: white;
-    padding: 2rem;
-    border-radius: 12px;
-    margin-bottom: 2rem;
-    box-shadow: 0 4px 15px rgba(38, 1, 28, 0.2);
-}
-
-.admin-header h1 {
-    margin: 0;
-    font-size: 2rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-}
-
-.admin-subtitle {
-    margin: 0;
-    font-size: 1rem;
-    opacity: 0.9;
-    font-weight: 300;
-}
-
 /* ESTATÍSTICAS */
 .admin-stats {
     display: grid;
@@ -402,14 +377,6 @@ PAINEL ADMINISTRATIVO - ADMIN.CSS
 
 /* RESPONSIVIDADE */
 @media (max-width: 768px) {
-    .admin-header {
-        padding: 1.5rem;
-    }
-
-    .admin-header h1 {
-        font-size: 1.5rem;
-    }
-
     .admin-stats {
         grid-template-columns: repeat(2, 1fr);
         gap: 1rem;
@@ -448,19 +415,6 @@ PAINEL ADMINISTRATIVO - ADMIN.CSS
 }
 
 @media (max-width: 480px) {
-    .admin-header {
-        padding: 1rem;
-        margin-bottom: 1.5rem;
-    }
-
-    .admin-header h1 {
-        font-size: 1.25rem;
-    }
-
-    .admin-subtitle {
-        font-size: 0.9rem;
-    }
-
     .admin-stats {
         grid-template-columns: 1fr;
         gap: 0.75rem;

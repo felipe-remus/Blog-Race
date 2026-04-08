@@ -23,10 +23,10 @@ $usuarioLogado = isset($_SESSION['usuario']);
                     <p>Deseja contribuir com nosso conteúdo?</p>
                     <div class="botoes-slider">
                         <?php if ($usuarioLogado): ?>
-                            <a href="../login.php" class="botao-slider">Mudar seus Dados</a>
-                            <a href="../escrever-noticia.php" class="botao-slider">Publique seu Artigo</a>
+                            <a href="login.php" class="botao-slider">Mudar seus Dados</a>
+                            <a href="escrever-noticia.php" class="botao-slider">Publique seu Artigo</a>
                         <?php else: ?>
-                            <a href="../login.php" class="botao-slider">Login/Criar Conta</a>
+                            <a href="login.php" class="botao-slider">Login/Criar Conta</a>
                         <?php endif; ?>
                     </div>
                 </div>
@@ -44,10 +44,10 @@ $usuarioLogado = isset($_SESSION['usuario']);
                     <p>Junte-se à nossa equipe de colaboradores</p>
                     <div class="botoes-slider">
                         <?php if ($usuarioLogado): ?>
-                            <a href="../login.php" class="botao-slider">Mudar seus Dados</a>
-                            <a href="../escrever-noticia.php" class="botao-slider">Publique sua Análise</a>
+                            <a href="login.php" class="botao-slider">Mudar seus Dados</a>
+                            <a href="escrever-noticia.php" class="botao-slider">Publique sua Análise</a>
                         <?php else: ?>
-                            <a href="../login.php" class="botao-slider">Login/Criar Conta</a>
+                            <a href="login.php" class="botao-slider">Login/Criar Conta</a>
                         <?php endif; ?>
                     </div>
                 </div>
@@ -59,16 +59,16 @@ $usuarioLogado = isset($_SESSION['usuario']);
             <div class="slide-content">
                 <h1>Ayrton Senna: O Legado de um Ícone</h1>
                 <div class="botoes-slider">
-                    <a href="../senna.php" class="botao-slider">Descubra a Trajetória de Senna</a>
+                    <a href="senna.php" class="botao-slider">Descubra a Trajetória de Senna</a>
                 </div>
                 <div class="area-colaboradores">
                     <p>Compartilhe sua memória sobre Senna</p>
                     <div class="botoes-slider">
                         <?php if ($usuarioLogado): ?>
-                            <a href="../login.php" class="botao-slider">Mudar seus Dados</a>
-                            <a href="../escrever-noticia.php" class="botao-slider">Publique sua Homenagem</a>
+                            <a href="login.php" class="botao-slider">Mudar seus Dados</a>
+                            <a href="escrever-noticia.php" class="botao-slider">Publique sua Homenagem</a>
                         <?php else: ?>
-                            <a href="../login.php" class="botao-slider">Login/Criar Conta</a>
+                            <a href="login.php" class="botao-slider">Login/Criar Conta</a>
                         <?php endif; ?>
                     </div>
                 </div>
