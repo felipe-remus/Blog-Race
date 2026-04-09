@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 require_once "includes/auth.php";
 requer_admin();
 ?>
@@ -14,7 +16,6 @@ requer_admin();
     <link rel="stylesheet" href="css/base.css">
 
     <script src="script/admin.js" defer></script>
-    <script src="script/header.js" defer></script>
 </head>
 <body>
 
@@ -23,7 +24,7 @@ requer_admin();
     </div>
 
     <main>
-        <div id="btn" style= "position: sticky; top: 0; z-index: 100;">
+        <div class="btn-base">
             <?php require '../view/view_btn-base.php'?>
         </div>
 

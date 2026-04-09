@@ -1,7 +1,5 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+session_start();
 
 // Dispatcher — intercepta POST antes de renderizar a página
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -32,7 +30,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/login.css">
     
-    <script src="script/header.js" defer></script>
     <script src="script/login.js" defer></script>
 
     <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.8/dist/htmx.min.js" integrity="sha384-/TgkGk7p307TH7EXJDuUlgG3Ce1UVolAOFopFekQkkXihi5u/6OCvVKyz1W+idaz" crossorigin="anonymous"></script>
@@ -44,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 
     <main>
-        <div id="btn" style= "position: sticky; top: 0; z-index: 100;">
+        <div class="btn-base">
             <?php require '../view/view_btn-base.php'?>
         </div>
 

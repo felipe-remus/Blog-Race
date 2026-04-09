@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 require_once "includes/auth.php";
 requer_login();
 
@@ -32,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 
     <main>
-        <div id="btn" style= "position: sticky; top: 0; z-index: 100;">
+        <div class="btn-base">
             <?php require '../view/view_btn-base.php'?>
         </div>
 

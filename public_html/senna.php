@@ -22,7 +22,7 @@ session_start();
     </div>
 
     <main>
-        <div id="btn" style= "position: sticky; top: 0; z-index: 100;">
+        <div class="btn-base">
             <?php require '../view/view_btn-base.php'?>
         </div>
 

@@ -11,7 +11,6 @@ session_start();
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/historia.css">
 
-    <script src="script/header.js" defer></script>
     <script src="script/historia.js" defer></script>
 
     <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.8/dist/htmx.min.js" integrity="sha384-/TgkGk7p307TH7EXJDuUlgG3Ce1UVolAOFopFekQkkXihi5u/6OCvVKyz1W+idaz" crossorigin="anonymous"></script>
@@ -23,7 +22,7 @@ session_start();
     </div>
 
     <main>
-        <div id="btn" style= "position: sticky; top: 0; z-index: 100;">
+        <div class="btn-base">
             <?php require '../view/view_btn-base.php'?>
         </div>
 

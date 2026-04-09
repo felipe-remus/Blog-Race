@@ -1,5 +1,4 @@
 <?php
-// Sessão iniciada UMA VEZ aqui — não precisa mais em nenhuma view
 session_start();
 ?>
 <!DOCTYPE html>
@@ -12,10 +11,6 @@ session_start();
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/noticias.css">
     <link rel="stylesheet" href="css/slider.css">
-    
-    <script src="script/header.js" defer></script>
-    <script src="script/modal-noticia.js" defer></script>
-    <script src="script/slider.js" defer></script>
 
     <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.8/dist/htmx.min.js" integrity="sha384-/TgkGk7p307TH7EXJDuUlgG3Ce1UVolAOFopFekQkkXihi5u/6OCvVKyz1W+idaz" crossorigin="anonymous"></script>
 </head>

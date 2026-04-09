@@ -12,7 +12,6 @@ http_response_code(404);
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/not-found.css">
 
-    <script src="script/header.js" defer></script>
     <script src="script/not-found.js" defer></script>
 </head>
 <body>

@@ -1,8 +1,4 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-
 $usuarioLogado = isset($_SESSION['usuario']);
 
 // Lê e limpa o flash de sessão

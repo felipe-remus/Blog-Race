@@ -1,10 +1,4 @@
 <?php
-// Sessão já iniciada na página pai (index.php, noticias.php etc.)
-// A proteção abaixo garante funcionamento em qualquer contexto:
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-
 $usuarioLogado = isset($_SESSION['usuario']);
 $nomeUsuario   = $usuarioLogado ? $_SESSION['usuario']['nome'] : '';
 $perfilUsuario = $usuarioLogado ? $_SESSION['usuario']['perfil_id'] : null;
@@ -36,3 +30,31 @@ $_SESSION['logout_token'] = $logout_token;
         <?php endif; ?>
     </nav>
 </header>
+
+<script>
+    function highlightCurrentPage() {
+        requestAnimationFrame(() => {
+            let currentPage = window.location.pathname.split('/').pop() || 'index.php';      
+            // Normalizar: remover query strings e hashes
+            currentPage = currentPage.split('?')[0].split('#')[0];
+
+            document.querySelectorAll('#menu-principal .nav-link').forEach(link => {
+                const linkPage = link.getAttribute('data-page') || 
+                                (link.getAttribute('href') || '').split('/').pop();
+                
+                link.classList.toggle('active', linkPage === currentPage);
+            });
+        });
+    }  
+
+    // HTMX - mais flexível
+    document.body.addEventListener('htmx:afterSwap', () => {
+        highlightCurrentPage();
+    });
+
+    // Inicializar
+    document.addEventListener('DOMContentLoaded', highlightCurrentPage);  
+
+    // Também no load (caso HTMX já tenha carregado)
+    window.addEventListener('load', highlightCurrentPage);
+</script>

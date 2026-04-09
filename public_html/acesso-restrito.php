@@ -45,7 +45,6 @@ if (!empty($destino_da_sessao)) {
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/acesso-restrito.css">
 
-    <script src="script/header.js" defer></script>
 </head>
 <body>
     <div id="header">

@@ -3,12 +3,6 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-if (!isset($_SESSION['usuario'])) {
-    $_SESSION['flash'] = ['tipo' => 'erro', 'mensagem' => 'Faça login para publicar notícias'];
-    header('Location: login.php');
-    exit;
-}
-
 require __DIR__ . "/model_categoria.php";
 
 // Conexão

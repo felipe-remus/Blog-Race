@@ -1,8 +1,4 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-
 // Lê e limpa o flash de sessão
 $flash = $_SESSION['flash'] ?? null;
 unset($_SESSION['flash']);
@@ -50,8 +46,7 @@ $nomeUsuario   = $usuarioLogado ? $_SESSION['usuario']['user'] : '';
                             type="file"
                             id="input-imagem"
                             name="img"
-                            accept="image/*"
-                            required>
+                            accept="image/*">
                         <span class="file-label">Escolher imagem</span>
                         <span class="file-name" id="file-name">Nenhuma imagem selecionada</span>
                     </div>
