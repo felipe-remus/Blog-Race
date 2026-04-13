@@ -16,7 +16,7 @@ $data_fim = trim($_GET['filtro-data-fim']    ?? '');
 $modo_home = isset($_GET['modo']) && $_GET['modo'] === 'home';
 
 if ($modo_home) {
-    $por_pagina = 6;
+    $por_pagina = 10;
     $pagina_atual = 1;
     $offset = 0;
 } else {
