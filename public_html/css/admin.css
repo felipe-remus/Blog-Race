@@ -1,6 +1,14 @@
 /* ========================================
 PAINEL ADMINISTRATIVO - ADMIN.CSS
 ======================================== */
+.admin-container{
+        display: grid;
+        gap: 2rem;                           /* gap narrow tipo jornal */
+        margin: 2.5rem auto;
+        padding: 0 2rem;
+        max-width: 1380px;
+        align-items: start;
+}
 /* ESTATÍSTICAS */
 .admin-stats {
     display: grid;
@@ -126,7 +134,7 @@ PAINEL ADMINISTRATIVO - ADMIN.CSS
 }
 
 /* CONTAINER */
-.admin-container {
+.admin-tabela {
     display: flex;
     flex-direction: column;
     gap: 2rem;

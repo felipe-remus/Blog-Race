@@ -1,4 +1,4 @@
-<main>
+<div class="admin-container">
     <!-- CABEÇALHO DO ADMIN -->
     <div class="titulo-principal">
         <h1>Gerenciamento de categorias e usuários</h1>
@@ -71,6 +71,7 @@
             </svg>
             Categorias
         </button>
+
         <button class="tab-btn" data-tab="usuarios">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
@@ -80,11 +81,20 @@
             </svg>
             Usuários
         </button>
+        <button class="tab-btn" data-tab="criar-usuario">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                <circle cx="8.5" cy="7" r="4"/>
+                <line x1="20" y1="8" x2="20" y2="14"/>
+                <line x1="23" y1="11" x2="17" y2="11"/>
+            </svg>
+            Criar Usuário
+        </button>
     </div>
 
     <!-- ========== ABA CATEGORIAS ========== -->
     <div class="tab-content active" id="tab-categorias">
-        <div class="admin-container">
+        <div class="admin-tabela">
             <div class="admin-table-section">
                 <h2>Categorias</h2>
                 <div class="table-responsive">
@@ -111,7 +121,7 @@
 
     <!-- ========== ABA USUÁRIOS ========== -->
     <div class="tab-content" id="tab-usuarios">
-        <div class="admin-container">
+        <div class="admin-tabela">
             <div class="admin-table-section">
                 <h2>Usuários do Sistema</h2>
 
@@ -128,7 +138,7 @@
                 </div>
 
                 <div class="table-responsive">
-                    <table class="admin-table usuarios-table">
+                    <table class="admin-table">
                         <thead>
                             <tr>
                                 <th>Nome</th>
@@ -147,15 +157,17 @@
                                     <td><?= htmlspecialchars($user['email']) ?></td>
                                     <td><?= htmlspecialchars($user['telefone'] ?? '-') ?></td>
                                     <td>
-                                        <!-- Formulário inline para troca de perfil (POST nativo, sem JSON) -->
+                                        <!-- FIX: onchange="this.form.submit()" removido.
+                                            form.submit() nativo não dispara o evento 'submit',
+                                            impossibilitando a interceptação pelo JS.
+                                            O admin.js agora escuta 'change' diretamente no select. -->
                                         <form method="POST" action="admin.php" class="form-perfil">
                                             <input type="hidden" name="acao" value="atualizar_perfil">
                                             <input type="hidden" name="id_usuario" value="<?= $user['id_usuario'] ?>">
                                             <select
                                                 name="perfil_id"
                                                 class="select-perfil"
-                                                data-perfil-atual="<?= $user['id_perfil'] ?>"
-                                                onchange="this.form.submit()">
+                                                data-perfil-atual="<?= $user['id_perfil'] ?>">
                                                 <?php foreach ($perfis as $perfil): ?>
                                                     <option
                                                         value="<?= $perfil['id_perfil'] ?>"
@@ -168,7 +180,7 @@
                                     </td>
                                     <td>
                                         <?php $e_voce = ($user['id_usuario'] == $_SESSION['usuario']['id_usuario']); ?>
-                                        <!-- Formulário inline para deletar usuário (POST nativo, sem JSON) -->
+                                        <!-- Formulário inline para deletar usuário -->
                                         <form method="POST" action="admin.php"
                                             class="<?= $e_voce ? '' : 'form-deletar' ?>"
                                             data-nome="<?= htmlspecialchars($user['nome']) ?>">
@@ -196,7 +208,66 @@
             </div>
         </div>
     </div>
-</main>
+
+    <!-- ========== CRIAR USUÁRIOS ========== -->
+    <div class="tab-content" id="tab-criar-usuario">
+        <div class="admin-tabela">
+            <div class="admin-table-section">
+                <h2>Criar Usuário</h2>
+
+                <form id="form-registro"
+                    class="formulario-ativo"
+                    method="POST"
+                    action="login.php">
+
+                    <input type="hidden" name="acao" value="registro">
+
+                    <div class="campo">
+                        <label for="nome-registro">Nome</label>
+                        <input name="nome_registro" type="text" id="nome-registro" required>
+                    </div>
+
+                    <div class="campo">
+                        <label for="usuario-registro">Nome de Usuário</label>
+                        <input name="user_registro" type="text" id="usuario-registro" required>
+                    </div>
+
+                    <div class="campo">
+                        <label for="email-registro">Email</label>
+                        <input name="email_registro" type="email" id="email-registro" required>
+                    </div>
+
+                    <div class="campo-linha">
+                        <div class="subcampo">
+                            <label for="telefone-registro">Telefone</label>
+                            <input name="fone_registro" type="tel" id="telefone-registro" placeholder="(00) 00000-0000">
+                        </div>
+                    </div>
+
+                    <div class="campo campo-senha">
+                        <label for="senha-registro">Senha</label>
+                        <input type="password" id="senha-registro" name="senha_registro" required>
+                        <button type="button" class="btn-mostrar-senha" onclick="toggleSenha(this)">
+                            <svg class="icone-olho-aberto" viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+                            <svg class="icone-olho-fechado" viewBox="0 0 24 24" style="display:none"><path d="M11.83 9L15 12.17V12c0-1.66-1.34-3-3-3h-.17zm-4.27.55L6.39 8.38C4.65 9.65 3.29 11.27 2.5 13.25c1.73 4.39 6 7.5 11 7.5 2.07 0 4.04-.51 5.77-1.41l-1.56-1.56C16.65 18.45 15.38 19 14 19c-3.87 0-7-3.13-7-7 0-.68.1-1.33.28-1.95zM12 6c3.79 0 7.17 2.13 8.82 5.5C20.97 11.17 21.19 10.83 21.5 10.5c-1.73-4.39-6-7.5-11-7.5-2.07 0-4.04.51-5.77 1.41L6.29 5.96C8.03 5.06 10 4.55 12 4.55zM1.27 4.21l1.41 1.41L4.22 7.17C3.07 8.55 2.19 10.22 1.5 12c1.73 4.39 6 7.5 11 7.5 1.55 0 3.03-.3 4.38-.84l4.5 4.5 1.41-1.41L1.27 4.21z"/></svg>
+                        </button>
+                    </div>
+
+                    <div class="campo campo-senha">
+                        <label for="confirmar-senha">Confirmar Senha</label>
+                        <input type="password" id="confirmar-senha" name="confirmar_senha_registro" required>
+                        <button type="button" class="btn-mostrar-senha" onclick="toggleSenha(this)">
+                            <svg class="icone-olho-aberto" viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+                            <svg class="icone-olho-fechado" viewBox="0 0 24 24" style="display:none"><path d="M11.83 9L15 12.17V12c0-1.66-1.34-3-3-3h-.17zm-4.27.55L6.39 8.38C4.65 9.65 3.29 11.27 2.5 13.25c1.73 4.39 6 7.5 11 7.5 2.07 0 4.04-.51 5.77-1.41l-1.56-1.56C16.65 18.45 15.38 19 14 19c-3.87 0-7-3.13-7-7 0-.68.1-1.33.28-1.95zM12 6c3.79 0 7.17 2.13 8.82 5.5C20.97 11.17 21.19 10.83 21.5 10.5c-1.73-4.39-6-7.5-11-7.5-2.07 0-4.04.51-5.77 1.41L6.29 5.96C8.03 5.06 10 4.55 12 4.55zM1.27 4.21l1.41 1.41L4.22 7.17C3.07 8.55 2.19 10.22 1.5 12c1.73 4.39 6 7.5 11 7.5 1.55 0 3.03-.3 4.38-.84l4.5 4.5 1.41-1.41L1.27 4.21z"/></svg>
+                        </button>
+                    </div>
+
+                    <button type="submit" class="botao-de-login">Criar Conta</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- MODAL DE CONFIRMAÇÃO (deletar usuário) -->
 <div class="modal-confirmacao" id="modalConfirmacao" style="display: none;">

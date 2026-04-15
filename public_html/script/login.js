@@ -11,17 +11,6 @@ function init() {
         mostrarToast(flashData.dataset.mensagem, flashData.dataset.tipo);
     }
 
-    // ALTERNAR ABAS (Login / Registro)
-    document.querySelectorAll('.aba').forEach(aba => {
-        aba.addEventListener('click', function () {
-            const abaAlvo = this.dataset.aba;
-            document.querySelectorAll('.aba').forEach(a => a.classList.remove('ativa'));
-            document.querySelectorAll('.formulario').forEach(f => f.classList.remove('ativo'));
-            this.classList.add('ativa');
-            document.getElementById('form-' + abaAlvo)?.classList.add('ativo');
-        });
-    });
-
     // Intercepta submits via fetch
     ['form-login', 'form-registro', 'form-editar-perfil'].forEach(id => {
         const form = document.getElementById(id);

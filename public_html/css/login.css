@@ -1,7 +1,7 @@
 /* ========================================
 PÁGINA DE LOGIN / REGISTRO
    ======================================== */
-   .pagina-login {
+.pagina-login {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -133,15 +133,16 @@ NOTIFICAÇÕES DE ERRO / SUCESSO
     border-bottom: 2px solid #e0e0e0;
 }
 
-.abas-login .aba {
+.aba {
     flex: 1;
-    background-color: transparent;
     padding: 0.8rem 1.5rem;
     border: none;
     border-bottom: 3px solid transparent;
     font-size: 1.1rem;
     font-weight: 600;
-    color: #666;
+    color: #26011C;
+    border-bottom-color: #e10600;
+    background-color: transparent;
     cursor: pointer;
     transition: all 0.3s ease;
     font-family: Arial, sans-serif;
@@ -152,13 +153,7 @@ NOTIFICAÇÕES DE ERRO / SUCESSO
     background-color: #f8f8f8;
 }
 
-.abas-login .aba.ativa {
-    color: #26011C;
-    border-bottom-color: #e10600;
-    background-color: transparent;
-}
-
-.login-container .botao-de-login {
+.botao-de-login {
     width: 100%;
     padding: 0.9rem;
     background: linear-gradient(135deg, #26011C 0%, #1a0113 100%);
@@ -173,17 +168,17 @@ NOTIFICAÇÕES DE ERRO / SUCESSO
     margin-top: 0.5rem;
 }
 
-.login-container .botao-de-login:hover {
+.botao-de-login:hover {
     background: linear-gradient(135deg, #e10600 0%, #c10500 100%);
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(225, 6, 0, 0.3);
 }
 
-.login-container .botao-de-login:active {
+.botao-de-login:active {
     transform: translateY(0);
 }
 
-.login-container .botao-de-login:focus-visible {
+.botao-de-login:focus-visible {
     outline: 2px solid #e10600;
     outline-offset: 2px;
 }
@@ -351,7 +346,7 @@ RESPONSIVIDADE
         font-size: 0.95rem;
     }
 
-    .login-container .botao-de-login {
+    .botao-de-login {
         padding: 0.8rem;
         font-size: 1rem;
     }
@@ -441,7 +436,7 @@ RESPONSIVIDADE
         gap: 1rem;
     }
 
-    .login-container .botao-de-login {
+    .botao-de-login {
         padding: 0.75rem;
         font-size: 0.95rem;
         border-radius: 6px;
@@ -505,7 +500,7 @@ RESPONSIVIDADE
         font-size: 0.85rem;
     }
 
-    .login-container .botao-de-login {
+    .botao-de-login {
         padding: 0.7rem;
         font-size: 0.9rem;
     }

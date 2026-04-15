@@ -28,12 +28,15 @@ main {
 
 /* ========================================
 BOTÃO VOLTAR
-   ======================================== */
-.btn-base{
+======================================== */
+.btn-base {
     width: 100%;
     display: flex;
     justify-content: space-between;
-    position: sticky; top: 0; z-index: 100;
+    position: sticky; 
+    top: 0; 
+    z-index: 100;
+    pointer-events: none; /* ✅ Container NÃO intercepta cliques */
 }
 
 .voltar-home {
@@ -41,7 +44,7 @@ BOTÃO VOLTAR
     margin-bottom: 1rem;
     padding-left: 0.5rem;
     padding: 1rem;
-    width: 50%;
+    pointer-events: auto; /* ✅ Botão SIM intercepta cliques */
 }
 
 .voltar-topo {
@@ -51,10 +54,12 @@ BOTÃO VOLTAR
     padding: 1rem;
     opacity: 0;
     visibility: hidden;
-    transform: translateY(15px); /* desce um pouco para o efeito de entrada */
+    transform: translateY(15px);
     transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
-    pointer-events: none; /* evita cliques acidentais quando invisível */
+    pointer-events: auto; /* ✅ Botão SIM intercepta cliques */
 }
+
+/* ... resto do CSS permanece igual ... */
 
 .voltar-topo.visivel {
     opacity: 1;

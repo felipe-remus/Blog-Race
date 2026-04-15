@@ -5,7 +5,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // ========== FLASH DE SESSÃO ==========
-    // Lê o flash que o PHP gravou na sessão e exibe o toast (igual ao publicar.js)
+    // Lê o flash gravado pelo PHP na sessão e exibe o toast (igual ao login.js)
     const flashData = document.getElementById('flash-data');
     if (flashData) {
         mostrarToast(flashData.dataset.mensagem, flashData.dataset.tipo);
@@ -27,25 +27,65 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // ========== CONFIRMAÇÃO DE DELETAR USUÁRIO ==========
-    // Intercepta o submit do form de deletar para exibir modal antes de enviar
-    document.addEventListener('submit', (e) => {
-        const form = e.target;
+    // ========== MÁSCARA DE TELEFONE ==========
+    document.querySelectorAll('input[type="tel"]').forEach(input => aplicarMascaraTelefone(input));
 
-        if (form.classList.contains('form-deletar')) {
+    // ========== FORM DELETAR — submit → modal → fetch + flash ==========
+    // FIX: seletor corrigido de form[data-deletar] → .form-deletar
+    document.querySelectorAll('.form-deletar').forEach(form => {
+        form.addEventListener('submit', (e) => {
             e.preventDefault();
             const nome = form.dataset.nome;
 
             confirmarAcao(
                 'Deletar Usuário',
                 `Tem certeza que deseja deletar o usuário "${nome}"? Esta ação é irreversível.`,
-                () => form.submit()
+                async () => {
+                    try {
+                        await fetch('admin.php', {
+                            method: 'POST',
+                            body: new FormData(form),
+                            redirect: 'manual'
+                        });
+                        await exibirFlash(() => location.reload());
+                    } catch (err) {
+                        mostrarToast('Erro de conexão.', 'erro');
+                    }
+                }
             );
-        }
+        });
     });
 
+    // ========== FORM PERFIL — change no select → fetch + flash ==========
+    // FIX: form.submit() nativo não dispara o evento 'submit', então interceptamos
+    //      o 'change' diretamente no <select> e removemos o onchange inline do HTML.
+    // FIX: seletor corrigido de form[data-perfil] → .form-perfil
+    document.querySelectorAll('.form-perfil select').forEach(select => {
+        select.addEventListener('change', async () => {
+            const form = select.closest('form');
+            try {
+                await fetch('admin.php', {
+                    method: 'POST',
+                    body: new FormData(form),
+                    redirect: 'manual'
+                });
+                await exibirFlash(() => location.reload());
+            } catch (err) {
+                mostrarToast('Erro de conexão.', 'erro');
+            }
+        });
+    });
+
+    // ========== FORM REGISTRO (CRIAR USUÁRIO) — submit → fetch + flash ==========
+    // FIX: no admin o view é incluído diretamente (sem HTMX), então o htmx:afterSwap
+    //      do login.js nunca dispara — o form ficava submetendo nativamente.
+    const formRegistro = document.getElementById('form-registro');
+    if (formRegistro) {
+        formRegistro.addEventListener('submit', handleFormRegistro);
+    }
+
     // ========== MODAL ==========
-    const modal      = document.getElementById('modalConfirmacao');
+    const modal       = document.getElementById('modalConfirmacao');
     const btnCancelar = modal.querySelector('.btn-cancelar');
     const btnFechar   = modal.querySelector('.modal-fechar');
 
@@ -56,6 +96,68 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.target === modal) fecharModal();
     });
 });
+
+// ========================================
+// HANDLER — form-registro (criar usuário)
+// Espelha o handleFormSubmit do login.js
+// ========================================
+async function handleFormRegistro(e) {
+    e.preventDefault();
+    const form = e.target;
+
+    try {
+        await fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            redirect: 'manual'
+        });
+
+        const flashRes = await fetch('includes/get_flash.php', {
+            headers: { 'X-Requested-With': 'XMLHttpRequest' }
+        });
+        const flash = await flashRes.json();
+
+        if (!flash) return; // sem flash: não faz nada (igual ao login.js)
+
+        if (flash.tipo === 'erro') {
+            mostrarToast(flash.mensagem, 'erro');
+            return; // erro: apenas toast, sem recarregar
+        }
+
+        // Sucesso: toast + reload
+        mostrarToast(flash.mensagem, 'sucesso');
+        setTimeout(() => location.reload(), 800);
+
+    } catch (err) {
+        mostrarToast('Erro de conexão. Tente novamente.', 'erro');
+    }
+}
+
+// ========================================
+// HELPER — lê flash da sessão e age conforme o tipo
+// FIX: flash nulo → return silencioso (igual ao login.js)
+//      Antes: exibia 'Ação realizada!' e recarregava mesmo sem flash.
+// ========================================
+async function exibirFlash(onSucesso) {
+    try {
+        const flashRes = await fetch('includes/get_flash.php', {
+            headers: { 'X-Requested-With': 'XMLHttpRequest' }
+        });
+        const flash = await flashRes.json();
+
+        if (!flash) return; // sem flash: não faz nada
+
+        mostrarToast(flash.mensagem, flash.tipo);
+
+        if (flash.tipo !== 'erro') {
+            setTimeout(onSucesso, 800); // sucesso: executa callback após toast
+        }
+        // erro: apenas toast, sem callback (sem reload)
+
+    } catch {
+        location.reload(); // fallback se não conseguir ler o flash
+    }
+}
 
 // ========================================
 // FUNÇÕES - MODAL
