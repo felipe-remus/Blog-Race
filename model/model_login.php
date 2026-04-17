@@ -34,9 +34,11 @@ try {
     $stmt = $pdo->prepare(
         "SELECT id_usuario, nome, user, email, telefone, senha, perfil_id
             FROM usuarios
-            WHERE email = ? OR user = ?"
+            WHERE email = :email_user OR user = :user"
     );
-    $stmt->execute([$email_user, $email_user]);
+    $stmt->bindValue(':email_user', $email_user);
+    $stmt->bindValue(':user', $email_user);
+    $stmt->execute();
     $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if (!$usuario || !password_verify($senha, $usuario['senha'])) {

@@ -622,6 +622,7 @@ MODAL DELETAR CONTA
 .btn-cancelar:hover { background: #e0e0e0; }
 
 .btn-confirmar-deletar {
+    text-decoration: none;
     background: linear-gradient(135deg, #c0392b 0%, #a93226 100%);
     color: white;
 }

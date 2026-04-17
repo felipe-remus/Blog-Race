@@ -61,7 +61,7 @@ if ($tem_senha_temporaria) {
 }
 
 // Verificar alteração de senha
-$alterar_senha = !empty($senha_atual) || !empty($senha_nova) || !empty($confirmar_senha_nova);
+$alterar_senha = !empty($senha_nova);
 $senha_hash    = null;
 
 if ($alterar_senha) {
@@ -72,8 +72,9 @@ if ($alterar_senha) {
     }
 
     // Verifica senha atual no banco
-    $stmt_user = $pdo->prepare("SELECT senha FROM usuarios WHERE id_usuario = ?");
-    $stmt_user->execute([$id_usuario]);
+    $stmt_user = $pdo->prepare("SELECT senha FROM usuarios WHERE id_usuario = :id_usuario");
+    $stmt_user->bindValue(':id_usuario', $id_usuario, PDO::PARAM_INT);
+    $stmt_user->execute();
     $usuario_atual = $stmt_user->fetch(PDO::FETCH_ASSOC);
 
     if (!$usuario_atual || !password_verify($senha_atual, $usuario_atual['senha'])) {
@@ -108,9 +109,12 @@ try {
     // Verifica duplicidade (excluindo o próprio usuário)
     $stmt_check = $pdo->prepare(
         "SELECT id_usuario FROM usuarios
-            WHERE (user = ? OR email = ?) AND id_usuario != ?"
+            WHERE (user = :user OR email = :email) AND id_usuario != :id_usuario"
     );
-    $stmt_check->execute([$user, $email, $id_usuario]);
+    $stmt_check->bindValue(':user', $user);
+    $stmt_check->bindValue(':email', $email);
+    $stmt_check->bindValue(':id_usuario', $id_usuario, PDO::PARAM_INT);
+    $stmt_check->execute();
 
     if ($stmt_check->fetch()) {
         $_SESSION['flash'] = ['tipo' => 'erro', 'mensagem' => 'Usuário ou email já cadastrado por outro usuário'];
@@ -120,23 +124,34 @@ try {
 
     // Atualiza no banco
     if ($alterar_senha) {
-        // Senha trocada → senha_temporaria vira 0
+        // Senha trocada 
         $stmt = $pdo->prepare(
             "UPDATE usuarios
-                SET nome = ?, user = ?, email = ?, telefone = ?, senha = ?
-                WHERE id_usuario = ?"
+                SET nome = :nome, user = :user, email = :email, telefone = :telefone, senha = :senha
+                WHERE id_usuario = :id_usuario"
         );
-        $stmt->execute([$nome, $user, $email, $telefone, $senha_hash, $id_usuario]);
+        $stmt->bindValue(':nome', $nome);
+        $stmt->bindValue(':user', $user);
+        $stmt->bindValue(':email', $email);
+        $stmt->bindValue(':telefone', $telefone);
+        $stmt->bindValue(':senha', $senha_hash);
+        $stmt->bindValue(':id_usuario', $id_usuario, PDO::PARAM_INT);
+        $stmt->execute();
     } else {
         $stmt = $pdo->prepare(
-            "UPDATE usuarios SET nome = ?, user = ?, email = ?, telefone = ?
-                WHERE id_usuario = ?"
+            "UPDATE usuarios SET nome = :nome, user = :user, email = :email, telefone = :telefone
+                WHERE id_usuario = :id_usuario"
         );
-        $stmt->execute([$nome, $user, $email, $telefone, $id_usuario]);
+        $stmt->bindValue(':nome', $nome);
+        $stmt->bindValue(':user', $user);
+        $stmt->bindValue(':email', $email);
+        $stmt->bindValue(':telefone', $telefone);
+        $stmt->bindValue(':id_usuario', $id_usuario, PDO::PARAM_INT);
+        $stmt->execute();
     }
 
     if ($alterar_senha) {
-        // Destrói sessão atual e abre nova para guardar o flash
+        // Destrói sessão e redireciona para login
         session_destroy();
         session_start();
         $_SESSION['flash'] = [
@@ -145,17 +160,17 @@ try {
         ];
         header('Location: login.php');
         exit;
+    } else {
+        // Atualiza sessão com novos dados (sem alterar senha)
+        $_SESSION['usuario']['nome']     = $nome;
+        $_SESSION['usuario']['user']     = $user;
+        $_SESSION['usuario']['email']    = $email;
+        $_SESSION['usuario']['telefone'] = $telefone;
+
+        $_SESSION['flash'] = ['tipo' => 'sucesso', 'mensagem' => 'Perfil atualizado com sucesso!'];
+        header('Location: index.php');
+        exit;
     }
-
-    // Atualiza sessão com novos dados (sem alterar senha)
-    $_SESSION['usuario']['nome']     = $nome;
-    $_SESSION['usuario']['user']     = $user;
-    $_SESSION['usuario']['email']    = $email;
-    $_SESSION['usuario']['telefone'] = $telefone;
-
-    $_SESSION['flash'] = ['tipo' => 'sucesso', 'mensagem' => 'Perfil atualizado com sucesso!'];
-    header('Location: index.php');
-    exit;
 
 } catch (PDOException $e) {
     $_SESSION['flash'] = ['tipo' => 'erro', 'mensagem' => $e->getMessage()];

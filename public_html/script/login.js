@@ -58,10 +58,8 @@ async function handleFormSubmit(e) {
         setTimeout(() => {
             if (acao === 'login') {
                 window.location.href = 'index.php';
-            } else if (acao === 'registro') {
-                window.location.href = 'login.php';
             } else if (acao === 'editar') {
-                window.location.href = 'index.php';
+                window.location.href = 'login.php';
             } else {
                 window.location.reload();
             }

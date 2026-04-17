@@ -33,8 +33,10 @@ if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
 
 try {
     // Verifica duplicidade
-    $stmt_check = $pdo->prepare("SELECT id_usuario FROM usuarios WHERE user = ? OR email = ?");
-    $stmt_check->execute([$user, $email]);
+    $stmt_check = $pdo->prepare("SELECT id_usuario FROM usuarios WHERE user = :user OR email = :email");
+    $stmt_check->bindValue(':user', $user);
+    $stmt_check->bindValue(':email', $email);
+    $stmt_check->execute();
     if ($stmt_check->fetch()) {
         $_SESSION['flash'] = ['tipo' => 'erro', 'mensagem' => 'Usuário ou email já cadastrado'];
         header('Location: admin.php');

@@ -20,8 +20,9 @@ $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $id_noticia = $_GET['id_noticia'];
 
 try {
-    $stmt = $pdo->prepare("DELETE FROM noticias WHERE id_noticia = ?");
-    $stmt->execute([$id_noticia]);
+    $stmt = $pdo->prepare("DELETE FROM noticias WHERE id_noticia = :id_noticia");
+    $stmt->bindValue(':id_noticia', $id_noticia, PDO::PARAM_INT);
+    $stmt->execute();
 
     header('Location: ../index.php');
     exit;

@@ -20,8 +20,9 @@ $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $id_usuario = $_GET['id_usuario'];
 
 try {
-    $stmt = $pdo->prepare("DELETE FROM usuarios WHERE id_usuario = ?");
-    $stmt->execute([$id_usuario]);
+    $stmt = $pdo->prepare("DELETE FROM usuarios WHERE id_usuario = :id_usuario");
+    $stmt->bindValue(':id_usuario', $id_usuario, PDO::PARAM_INT);
+    $stmt->execute();
 
     session_destroy();
     header('Location: ../index.php');

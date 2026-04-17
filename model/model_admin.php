@@ -34,8 +34,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         try {
-            $stmt = $pdo->prepare("DELETE FROM usuarios WHERE id_usuario = ?");
-            $stmt->execute([$id]);
+            $stmt = $pdo->prepare("DELETE FROM usuarios WHERE id_usuario = :id");
+            $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
             $_SESSION['flash'] = ['tipo' => 'sucesso', 'mensagem' => 'Usuário deletado com sucesso'];
         } catch (PDOException $e) {
             $_SESSION['flash'] = ['tipo' => 'erro', 'mensagem' => 'Erro ao deletar usuário'];
@@ -57,8 +58,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         try {
-            $stmt = $pdo->prepare("UPDATE usuarios SET perfil_id = ? WHERE id_usuario = ?");
-            $stmt->execute([$perfil_id, $id]);
+            $stmt = $pdo->prepare("UPDATE usuarios SET perfil_id = :perfil_id WHERE id_usuario = :id");
+            $stmt->bindValue(':perfil_id', $perfil_id, PDO::PARAM_INT);
+            $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
             $_SESSION['flash'] = ['tipo' => 'sucesso', 'mensagem' => 'Perfil atualizado com sucesso'];
         } catch (PDOException $e) {
             $_SESSION['flash'] = ['tipo' => 'erro', 'mensagem' => 'Erro ao atualizar perfil'];
@@ -90,9 +93,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $senha_hash   = password_hash($senha_padrao, PASSWORD_DEFAULT);
 
             $stmt = $pdo->prepare(
-                "UPDATE usuarios SET senha = ? WHERE id_usuario = ?"
+                "UPDATE usuarios SET senha = :senha WHERE id_usuario = :id"
             );
-            $stmt->execute([$senha_hash, $id]);
+            $stmt->bindValue(':senha', $senha_hash);
+            $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
 
             $_SESSION['flash'] = [
                 'tipo'     => 'sucesso',
