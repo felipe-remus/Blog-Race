@@ -1,4 +1,6 @@
 <?php
+// model/model_editar-usuario.php
+
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -19,14 +21,16 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 $pdo = new PDO("sqlite:" . __DIR__ . "/../banco/blog_racing.db");
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-$id_usuario          = $_SESSION['usuario']['id_usuario'];
-$nome                = trim($_POST['nome']                 ?? '');
-$user                = trim($_POST['user']                 ?? '');
-$email               = trim($_POST['email']                ?? '');
-$telefone            = trim($_POST['telefone']             ?? '');
-$senha_atual         =      $_POST['senha_atual']          ?? '';
-$senha_nova          =      $_POST['senha_nova']           ?? '';
-$confirmar_senha_nova =     $_POST['confirmar_senha_nova'] ?? '';
+$id_usuario           = $_SESSION['usuario']['id_usuario'];
+$nome                 = trim($_POST['nome']                 ?? '');
+$user                 = trim($_POST['user']                 ?? '');
+$email                = trim($_POST['email']                ?? '');
+$telefone             = trim($_POST['telefone']             ?? '');
+$senha_atual          =      $_POST['senha_atual']          ?? '';
+$senha_nova           =      $_POST['senha_nova']           ?? '';
+$confirmar_senha_nova =      $_POST['confirmar_senha_nova'] ?? '';
+
+$tem_senha_temporaria = !empty($_SESSION['must_change_password']);
 
 // Validações básicas
 if (empty($nome)) {
@@ -45,6 +49,15 @@ if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
     $_SESSION['flash'] = ['tipo' => 'erro', 'mensagem' => 'Email inválido'];
     header('Location: login.php');
     exit;
+}
+
+// Se o usuário tem senha temporária, a troca de senha é OBRIGATÓRIA
+if ($tem_senha_temporaria) {
+    if (empty($senha_atual) || empty($senha_nova) || empty($confirmar_senha_nova)) {
+        $_SESSION['flash'] = ['tipo' => 'aviso', 'mensagem' => 'Você deve definir uma nova senha antes de continuar.'];
+        header('Location: login.php');
+        exit;
+    }
 }
 
 // Verificar alteração de senha
@@ -84,6 +97,13 @@ if ($alterar_senha) {
     $senha_hash = password_hash($senha_nova, PASSWORD_DEFAULT);
 }
 
+// Se deve trocar a senha, impede salvar sem trocar
+if ($tem_senha_temporaria && !$alterar_senha) {
+    $_SESSION['flash'] = ['tipo' => 'aviso', 'mensagem' => 'Defina uma nova senha antes de continuar.'];
+    header('Location: login.php');
+    exit;
+}
+
 try {
     // Verifica duplicidade (excluindo o próprio usuário)
     $stmt_check = $pdo->prepare(
@@ -100,8 +120,10 @@ try {
 
     // Atualiza no banco
     if ($alterar_senha) {
+        // Senha trocada → senha_temporaria vira 0
         $stmt = $pdo->prepare(
-            "UPDATE usuarios SET nome = ?, user = ?, email = ?, telefone = ?, senha = ?
+            "UPDATE usuarios
+                SET nome = ?, user = ?, email = ?, telefone = ?, senha = ?
                 WHERE id_usuario = ?"
         );
         $stmt->execute([$nome, $user, $email, $telefone, $senha_hash, $id_usuario]);
@@ -114,18 +136,18 @@ try {
     }
 
     if ($alterar_senha) {
-        // Destrói sessão atual e abre uma nova para guardar o flash
+        // Destrói sessão atual e abre nova para guardar o flash
         session_destroy();
         session_start();
         $_SESSION['flash'] = [
             'tipo'     => 'sucesso',
-            'mensagem' => 'Perfil atualizado! Faça login novamente com sua nova senha.',
+            'mensagem' => 'Senha alterada! Faça login com sua nova senha.',
         ];
         header('Location: login.php');
         exit;
     }
 
-    // Atualiza sessão com novos dados
+    // Atualiza sessão com novos dados (sem alterar senha)
     $_SESSION['usuario']['nome']     = $nome;
     $_SESSION['usuario']['user']     = $user;
     $_SESSION['usuario']['email']    = $email;
@@ -136,7 +158,7 @@ try {
     exit;
 
 } catch (PDOException $e) {
-    $_SESSION['flash'] = ['tipo' => 'erro', 'mensagem' => 'Erro ao atualizar perfil. Tente novamente.'];
+    $_SESSION['flash'] = ['tipo' => 'erro', 'mensagem' => $e->getMessage()];
     header('Location: login.php');
     exit;
 }

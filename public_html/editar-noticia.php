@@ -1,5 +1,7 @@
 <?php
 session_start();
+
+require_once "includes/guard-senha.php";
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">

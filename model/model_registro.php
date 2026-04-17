@@ -7,12 +7,10 @@ if (session_status() === PHP_SESSION_NONE) {
 $pdo = new PDO("sqlite:" . __DIR__ . "/../banco/blog_racing.db");
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-$nome            = trim($_POST['nome_registro']            ?? '');
-$user            = trim($_POST['user_registro']            ?? '');
-$email           = trim($_POST['email_registro']           ?? '');
-$telefone        = trim($_POST['fone_registro']            ?? '');
-$senha           =      $_POST['senha_registro']           ?? '';
-$confirmar_senha =      $_POST['confirmar_senha_registro'] ?? '';
+$nome     = trim($_POST['nome_registro']  ?? '');
+$user     = trim($_POST['user_registro']  ?? '');
+$email    = trim($_POST['email_registro'] ?? '');
+$telefone = trim($_POST['fone_registro']  ?? '');
 
 // Validações
 if (empty($nome)) {
@@ -33,18 +31,6 @@ if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
     exit;
 }
 
-if (strlen($senha) < 6) {
-    $_SESSION['flash'] = ['tipo' => 'erro', 'mensagem' => 'Senha deve ter no mínimo 6 caracteres'];
-    header('Location: admin.php');
-    exit;
-}
-
-if ($senha !== $confirmar_senha) {
-    $_SESSION['flash'] = ['tipo' => 'erro', 'mensagem' => 'As senhas não coincidem'];
-    header('Location: admin.php');
-    exit;
-}
-
 try {
     // Verifica duplicidade
     $stmt_check = $pdo->prepare("SELECT id_usuario FROM usuarios WHERE user = ? OR email = ?");
@@ -55,20 +41,29 @@ try {
         exit;
     }
 
-    $senha_hash = password_hash($senha, PASSWORD_DEFAULT);
+    $senha_padrao = 'RacingBlog123';
+    $senha_hash   = password_hash($senha_padrao, PASSWORD_DEFAULT);
 
     $stmt = $pdo->prepare(
         "INSERT INTO usuarios (nome, user, email, telefone, senha, perfil_id)
-        VALUES (?, ?, ?, ?, ?, 2)"
+            VALUES (:nome, :user, :email, :telefone, :senha, 2)"
     );
-    $stmt->execute([$nome, $user, $email, $telefone, $senha_hash]);
+    $stmt->bindValue(':nome', $nome);
+    $stmt->bindValue(':user', $user);
+    $stmt->bindValue(':email', $email);
+    $stmt->bindValue(':telefone', $telefone);
+    $stmt->bindValue(':senha', $senha_hash);
+    $stmt->execute();
 
-    $_SESSION['flash'] = ['tipo' => 'sucesso', 'mensagem' => 'Conta criada com sucesso!'];
+    $_SESSION['flash'] = [
+        'tipo'     => 'sucesso',
+        'mensagem' => "Conta criada!",
+    ];
     header('Location: admin.php');
     exit;
 
 } catch (PDOException $e) {
-    $_SESSION['flash'] = ['tipo' => 'erro', 'mensagem' => 'Erro ao criar conta. Tente novamente.'];
+    $_SESSION['flash'] = ['tipo' => 'erro', 'mensagem' => $e->getMessage()];
     header('Location: admin.php');
     exit;
 }

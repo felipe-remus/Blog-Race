@@ -3,6 +3,8 @@ session_start();
 
 require_once "includes/auth.php";
 requer_admin();
+
+require_once "includes/guard-senha.php";
 ?>
 
 <!DOCTYPE html>

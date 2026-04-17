@@ -1,7 +1,8 @@
 <?php
 session_start();
 
-$usuarioLogado = isset($_SESSION['usuario']);
+$usuarioLogado       = isset($_SESSION['usuario']);
+$deve_trocar_senha   = !empty($_SESSION['must_change_password']);
 
 // Lê e limpa o flash de sessão
 $flash = $_SESSION['flash'] ?? null;
@@ -11,7 +12,47 @@ unset($_SESSION['flash']);
 <main class="pagina-login">
     <div class="login-container">
 
-        <?php if ($usuarioLogado): ?>
+        <?php if ($deve_trocar_senha): ?>
+            <!-- MODO RESTRITO: só troca de senha -->
+            <div class="perfil-usuario">
+                <h2>Defina sua Senha</h2>
+                <p class="bem-vindo aviso-senha-padrao">
+                        Sua senha é a padrão do sistema.<br>
+                    <strong>Defina uma senha pessoal para continuar.</strong>
+                </p>
+
+                <form id="form-trocar-senha"
+                    class="formulario ativo"
+                    method="POST"
+                    action="login.php">
+
+                    <input type="hidden" name="acao"  value="editar">
+                    <!-- Campos obrigatórios pelo model, preenchidos silenciosamente -->
+                    <input type="hidden" name="nome"  value="<?= htmlspecialchars($_SESSION['usuario']['nome'])  ?>">
+                    <input type="hidden" name="user"  value="<?= htmlspecialchars($_SESSION['usuario']['user'])  ?>">
+                    <input type="hidden" name="email" value="<?= htmlspecialchars($_SESSION['usuario']['email']) ?>">
+                    <input type="hidden" name="telefone" value="<?= htmlspecialchars($_SESSION['usuario']['telefone'] ?? '') ?>">
+
+                    <div class="campo">
+                        <label for="senha-atual">Senha Atual (padrão do sistema)</label>
+                        <input type="password" id="senha-atual" name="senha_atual" required>
+                    </div>
+
+                    <div class="campo">
+                        <label for="senha-nova">Nova Senha</label>
+                        <input type="password" id="senha-nova" name="senha_nova" required minlength="6">
+                    </div>
+
+                    <div class="campo">
+                        <label for="confirmar-senha-nova">Confirmar Nova Senha</label>
+                        <input type="password" id="confirmar-senha-nova" name="confirmar_senha_nova" required>
+                    </div>
+
+                    <button type="submit" class="botao-de-login">Definir Senha</button>
+                </form>
+            </div>
+
+        <?php elseif ($usuarioLogado): ?>
             <div class="perfil-usuario">
                 <h2>Alterar Meu Perfil</h2>
                 <p class="bem-vindo">Bem-vindo, <strong><?= htmlspecialchars($_SESSION['usuario']['nome']) ?></strong>!</p>

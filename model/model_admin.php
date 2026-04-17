@@ -68,6 +68,44 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
+    // ---------- REDEFINIR SENHA ----------
+    if ($acao === 'redefinir_senha') {
+        $id = intval($_POST['id_usuario'] ?? 0);
+
+        if ($id <= 0) {
+            $_SESSION['flash'] = ['tipo' => 'erro', 'mensagem' => 'ID de usuário inválido'];
+            header('Location: admin.php');
+            exit;
+        }
+
+        // Admin não pode redefinir a própria senha por aqui (usa o perfil)
+        if ($id === (int) $_SESSION['usuario']['id_usuario']) {
+            $_SESSION['flash'] = ['tipo' => 'erro', 'mensagem' => 'Use a página de perfil para alterar sua própria senha'];
+            header('Location: admin.php');
+            exit;
+        }
+
+        try {
+            $senha_padrao = 'RacingBlog123';
+            $senha_hash   = password_hash($senha_padrao, PASSWORD_DEFAULT);
+
+            $stmt = $pdo->prepare(
+                "UPDATE usuarios SET senha = ? WHERE id_usuario = ?"
+            );
+            $stmt->execute([$senha_hash, $id]);
+
+            $_SESSION['flash'] = [
+                'tipo'     => 'sucesso',
+                'mensagem' => "Senha redefinida para a padrão. O usuário deverá alterá-la no próximo acesso.",
+            ];
+        } catch (PDOException $e) {
+            $_SESSION['flash'] = ['tipo' => 'erro', 'mensagem' => 'Erro ao redefinir senha'];
+        }
+
+        header('Location: admin.php');
+        exit;
+    }
+
     // Ação desconhecida
     header('Location: admin.php');
     exit;

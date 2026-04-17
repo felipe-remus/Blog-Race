@@ -1,4 +1,6 @@
 <?php
+// model/model_login.php
+
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -13,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 $email_user = trim($_POST['email_login'] ?? '');
-$senha      = $_POST['senha_login']  ?? '';
+$senha      = $_POST['senha_login']      ?? '';
 
 // Validações
 if (empty($email_user)) {
@@ -52,6 +54,17 @@ try {
         'telefone'   => $usuario['telefone'],
         'perfil_id'  => $usuario['perfil_id'],
     ];
+
+    // Se a senha ainda é a padrão do sistema, força a troca antes de qualquer coisa
+    if (password_verify('RacingBlog123', $usuario['senha'])) {
+        $_SESSION['must_change_password'] = true;
+        $_SESSION['flash'] = [
+            'tipo'     => 'aviso',
+            'mensagem' => 'Bem-vindo! Por segurança, defina uma nova senha para continuar.',
+        ];
+        header('Location: perfil.php');
+        exit;
+    }
 
     $_SESSION['flash'] = ['tipo' => 'sucesso', 'mensagem' => 'Login realizado com sucesso!'];
     header('Location: index.php');

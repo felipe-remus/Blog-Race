@@ -4,6 +4,8 @@ session_start();
 require_once "includes/auth.php";
 requer_login();
 
+require_once "includes/guard-senha.php";
+
 // Dispatcher — intercepta POST antes de renderizar a página
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     require '../model/model_noticia-publicar.php';
