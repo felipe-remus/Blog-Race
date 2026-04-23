@@ -141,18 +141,18 @@ session_start();
 
             <section id="motogp" class="historia-secao">
                 <h2>MotoGP</h2>
-                <p>O MotoGP é o mais alto nível do motociclismo de velocidade no mundo, reunindo as motos mais rápidas e tecnologicamente avançadas já construídas para competição. Com raízes que remontam ao Campeonato Mundial de Motociclismo criado pela FIM em 1949, a categoria assumiu sua identidade atual em 2002.</p>
+                <p>O MotoGP é o mais alto nível do motociclismo de velocidade no mundo, reunindo as motos mais rápidas e tecnologicamente avançadas já construídas para competição. Com raízes que remontam ao Campeonato Mundial de Motociclismo criado pela FIM em 1949, a categoria assumiu sua identidade atual em 2002, substituindo a antiga classe 500cc.</p>
                 <p>As motos da classe principal são protótipos fabricados exclusivamente para a competição, com motores de até 1000cc, capazes de superar os 350 km/h nas retas mais longas.</p>
                 <div class="destaque">
                     <p><strong>O Circuito de Mugello e o GP da Itália:</strong> Uma das provas mais aguardadas do calendário, disputada no coração da Toscana italiana, onde dezenas de milhares de tifosi transformam cada corrida em um espetáculo único.</p>
                 </div>
-                <h3>A Estrutura do Campeonato</h3>
+                <h3>Categorias de Base do MotoGP</h3>
+                <p>O caminho até o MotoGP é estruturado como uma escada de formação, onde pilotos desenvolvem progressivamente suas habilidades técnicas e físicas em categorias padronizadas pela FIM. Estas classes são fundamentais para preparar jovens talentos para os desafios da classe rainha.</p>
                 <ul>
-                    <li><strong>MotoGP:</strong> A classe rainha, com protótipos de 1000cc e participação de Honda, Yamaha, Ducati, Aprilia e KTM.</li>
-                    <li><strong>Moto2:</strong> Categoria intermediária com motos de 765cc, principal porta de entrada para o MotoGP.</li>
-                    <li><strong>Moto3:</strong> Categoria de base com motos de 250cc, voltada para jovens pilotos em início de carreira.</li>
+                    <li><strong>Moto3:</strong> Porta de entrada oficial do Mundial, onde pilotos geralmente entre 13 e 18 anos dão os primeiros passos no automobilismo internacional. Utiliza motos monocilíndricas de 250cc e quatro tempos, com um regulamento que prioriza a equalização mecânica e o contato próximo em pista, desenvolvendo a capacidade de ultrapassagem, tração e leitura de grid.</li>
+                    <li><strong>Moto2:</strong> Categoria intermediária e principal vitrine para o MotoGP. Equipada com motores Triumph de 765cc e três cilindros, a Moto2 foca no desenvolvimento de habilidades de pilotagem, gerenciamento de pneus e estratégia de corrida. A ausência de aerodinâmicas complexas força os pilotos a se apoiarem mais na técnica pura e na adaptação de chassis, servindo como teste definitivo antes da transição para a classe principal.</li>
                 </ul>
-                <p>O calendário do MotoGP percorre mais de quinze países por temporada, levando as corridas para circuitos na Europa, Ásia, Américas e Oceania.</p>
+                <p>A progressão do Moto3 para o Moto2, e posteriormente para o MotoGP, segue uma lógica técnica semelhante à da Fórmula 1. Muitas das lendas atuais do Mundial consolidaram suas carreiras dominando essas categorias de base, utilizando-as como trampolim essencial para os protótipos da classe rainha.</p>
             </section>
         </div>
     </main>

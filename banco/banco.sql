@@ -24,6 +24,8 @@ INSERT INTO categorias (nome_categoria, sigla_categoria) VALUES ('World Enduranc
 INSERT INTO categorias (nome_categoria, sigla_categoria) VALUES ('World Rally Championship','wrc');
 INSERT INTO categorias (nome_categoria, sigla_categoria) VALUES ('Nascar','nascar');
 INSERT INTO categorias (nome_categoria, sigla_categoria) VALUES ('MotoGP','moto');
+INSERT INTO categorias (nome_categoria, sigla_categoria) VALUES ('Moto2','moto2');
+INSERT INTO categorias (nome_categoria, sigla_categoria) VALUES ('Moto3','moto3');
 
 CREATE TABLE perfis (
 	id_perfil INTEGER PRIMARY KEY AUTOINCREMENT,
