@@ -77,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt_img->execute();
 
         $_SESSION['flash'] = ['tipo' => 'sucesso', 'mensagem' => 'Notícia publicada com sucesso!'];
-        header('Location: index.php');
+        header('Location: minhas-noticias.php');
         exit;
 
     } catch (PDOException $e) {

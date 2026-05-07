@@ -62,7 +62,7 @@ try {
         $_SESSION['must_change_password'] = true;
         $_SESSION['flash'] = [
             'tipo'     => 'aviso',
-            'mensagem' => 'Bem-vindo! Por segurança, defina uma nova senha para continuar.',
+            'mensagem' => 'Por segurança, defina uma nova senha.',
         ];
         header('Location: perfil.php');
         exit;

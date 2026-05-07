@@ -212,7 +212,7 @@ async function handlePublicarSubmit(e) {
         // Sucesso: mostra toast e redireciona
         mostrarToastPublicar(flash.mensagem, 'sucesso');
         setTimeout(() => {
-            window.location.href = 'index.php';
+            window.location.href = 'minhas-noticias.php';
         }, 800);
 
     } catch (err) {

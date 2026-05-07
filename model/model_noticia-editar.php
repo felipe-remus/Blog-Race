@@ -84,11 +84,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bindValue(':id_noticia', $id_noticia);
         $stmt->execute();
 
-        header('Location: noticias.php');
+        header('Location: minhas-noticias.php');
         exit;
 
     } catch (PDOException $e) {
-        header('Location: noticias.php');
+        header('Location: minhas-noticias.php');
         exit;
     }
 }

@@ -24,6 +24,7 @@ $_SESSION['logout_token'] = $logout_token;
                 <a href="admin.php" class="nav-link admin-link">Painel Admin</a>
             <?php endif; ?>
             <span class="nav-link">Olá, <?php echo htmlspecialchars($nomeUsuario); ?></span>
+            <a href="minhas-noticias.php" class="nav-link" data-page="minhas-noticias.php">Minhas Notícias</a>
             <a href="actions/logout.php?token=<?= $logout_token ?>" class="nav-link logout-btn">Sair</a>
         <?php else: ?>
             <a href="login.php" class="nav-link" data-page="login.php">Login</a>
