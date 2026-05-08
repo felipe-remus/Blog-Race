@@ -1,6 +1,5 @@
 <?php
-// __DIR__ garante o caminho absoluto ao arquivo, independente de onde ele é incluído
-$pdo = new PDO("sqlite:" . __DIR__ . "/../banco/blog_racing.db");
+require "model_conexao.php";
 
 $rs = $pdo->query("SELECT sigla_categoria, nome_categoria FROM categorias");
 

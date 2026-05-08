@@ -3,9 +3,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Conexão
-$con = new PDO("sqlite:" . __DIR__ . "/../banco/blog_racing.db");
-$con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+require "model_conexao.php";
 
 // Recebe os parâmetros de filtro via GET
 $busca = trim($_GET['busca-texto']        ?? '');
@@ -50,7 +48,7 @@ if ($data_fim !== '') {
     $params[':data_fim'] = $data_fim;
 }
 
-$stmt_count = $con->prepare("
+$stmt_count = $pdo->prepare("
     SELECT COUNT(*) as total
     FROM noticias n
     JOIN usuarios u   ON n.usuario_id   = u.id_usuario
@@ -67,7 +65,7 @@ $offset = ($pagina_atual - 1) * $por_pagina;
 $inicio = $total_noticias > 0 ? $offset + 1 : 0;
 $fim = min($offset + $por_pagina, $total_noticias);
 
-$stmt = $con->prepare("
+$stmt = $pdo->prepare("
     SELECT
         n.titulo_noticia,
         n.texto_noticia,

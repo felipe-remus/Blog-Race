@@ -12,9 +12,7 @@ if (!isset($_SESSION['usuario'])) {
 
 $idUsuarioLogado = (int) $_SESSION['usuario']['id_usuario'];
 
-// Conexão
-$con = new PDO("sqlite:" . __DIR__ . "/../banco/blog_racing.db");
-$con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+require "model_conexao.php";
 
 // Recebe os parâmetros de filtro via GET
 $busca       = trim($_GET['busca-texto']         ?? '');
@@ -52,7 +50,7 @@ if ($data_fim !== '') {
 }
 
 // Contagem total para paginação
-$stmt_count = $con->prepare("
+$stmt_count = $pdo->prepare("
     SELECT COUNT(*) as total
     FROM noticias n
     JOIN usuarios u   ON n.usuario_id   = u.id_usuario
@@ -70,7 +68,7 @@ $inicio = $total_noticias > 0 ? $offset + 1 : 0;
 $fim    = min($offset + $por_pagina, $total_noticias);
 
 // Busca as notícias
-$stmt = $con->prepare("
+$stmt = $pdo->prepare("
     SELECT
         n.titulo_noticia,
         n.texto_noticia,

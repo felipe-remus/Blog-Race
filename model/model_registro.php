@@ -3,9 +3,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Conexão
-$pdo = new PDO("sqlite:" . __DIR__ . "/../banco/blog_racing.db");
-$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+require "model_conexao.php";
 
 $nome     = trim($_POST['nome_registro']  ?? '');
 $user     = trim($_POST['user_registro']  ?? '');

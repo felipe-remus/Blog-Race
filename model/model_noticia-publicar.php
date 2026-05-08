@@ -5,9 +5,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 require __DIR__ . "/model_categoria.php";
 
-// Conexão
-$pdo = new PDO("sqlite:" . __DIR__ . "/../banco/blog_racing.db");
-$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+require "model_conexao.php";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 

@@ -13,9 +13,7 @@ if (!isset($_GET['id_noticia']) || empty($_GET['id_noticia'])) {
     exit;
 }
 
-// Conexão
-$pdo = new PDO("sqlite:" . __DIR__ . "/../banco/blog_racing.db");
-$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+require "model_conexao.php";
 
 $id_noticia    = $_GET['id_noticia'];
 $perfilUsuario = (int) $_SESSION['usuario']['perfil_id'];
