@@ -10,6 +10,7 @@ session_start();
 
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/historia.css">
+    <link rel="stylesheet" href="css/slider.css">
 
     <script src="script/historia.js" defer></script>
 
