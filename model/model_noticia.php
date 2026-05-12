@@ -94,6 +94,8 @@ $noticias = $stmt;
 require "../view/view_card.php";
 
 if (!$modo_home) {
+    $paginacao_endpoint = 'model_noticia';
+    $paginacao_target   = '#noticia';
     require "../view/view_paginacao.php";
 }
 ?>

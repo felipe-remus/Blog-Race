@@ -1,7 +1,9 @@
 <div class="paginacao-container"
     id="paginacao"
     data-pagina-atual="<?= $pagina_atual ?>"
-    data-total-paginas="<?= $total_paginas ?>">
+    data-total-paginas="<?= $total_paginas ?>"
+    data-endpoint="<?= htmlspecialchars($paginacao_endpoint ?? 'model_noticia') ?>"
+    data-target="<?= htmlspecialchars($paginacao_target   ?? '#noticia') ?>">
 
     <button class="paginacao-btn" id="btn-primeira" title="Primeira página"
             <?= $pagina_atual === 1 ? 'disabled' : '' ?>>
@@ -50,46 +52,46 @@
         const container = document.getElementById('paginacao');
         if (!container) return;
 
-        const paginaAtual   = parseInt(container.dataset.paginaAtual);
-        const totalPaginas  = parseInt(container.dataset.totalPaginas);
+        const paginaAtual  = parseInt(container.dataset.paginaAtual);
+        const totalPaginas = parseInt(container.dataset.totalPaginas);
+        const endpoint     = container.dataset.endpoint;
+        const target       = container.dataset.target;
 
         const btnPrimeira = document.getElementById('btn-primeira');
         const btnAnterior = document.getElementById('btn-anterior');
         const btnProxima  = document.getElementById('btn-proxima');
         const btnUltima   = document.getElementById('btn-ultima');
 
-        if (btnPrimeira) btnPrimeira.addEventListener('click', () => irParaPagina(1));
-        if (btnAnterior) btnAnterior.addEventListener('click', () => irParaPagina(paginaAtual - 1));
-        if (btnProxima)  btnProxima.addEventListener('click',  () => irParaPagina(paginaAtual + 1));
-        if (btnUltima)   btnUltima.addEventListener('click',   () => irParaPagina(totalPaginas));
+        if (btnPrimeira) btnPrimeira.addEventListener('click', () => irParaPagina(1,               endpoint, target));
+        if (btnAnterior) btnAnterior.addEventListener('click', () => irParaPagina(paginaAtual - 1, endpoint, target));
+        if (btnProxima)  btnProxima.addEventListener('click',  () => irParaPagina(paginaAtual + 1, endpoint, target));
+        if (btnUltima)   btnUltima.addEventListener('click',   () => irParaPagina(totalPaginas,    endpoint, target));
     }
 
-    function irParaPagina(pagina) {
-        // Coleta os filtros ativos no momento
-        const busca       = document.getElementById('busca-texto')?.value        ?? '';
-        const categoria   = document.getElementById('filtro-categoria')?.value   ?? '';
-        const dataInicio  = document.getElementById('filtro-data-inicio')?.value ?? '';
-        const dataFim     = document.getElementById('filtro-data-fim')?.value    ?? '';
+    function irParaPagina(pagina, endpoint, target) {
+        const busca      = document.getElementById('busca-texto')?.value        ?? '';
+        const categoria  = document.getElementById('filtro-categoria')?.value   ?? '';
+        const dataInicio = document.getElementById('filtro-data-inicio')?.value ?? '';
+        const dataFim    = document.getElementById('filtro-data-fim')?.value    ?? '';
 
-        // Monta a query string com página + filtros
         const params = new URLSearchParams({
-            page: pagina,
-            'busca-texto':         busca,
-            'filtro-categoria':    categoria,
-            'filtro-data-inicio':  dataInicio,
-            'filtro-data-fim':     dataFim,
+            page:                 pagina,
+            'busca-texto':        busca,
+            'filtro-categoria':   categoria,
+            'filtro-data-inicio': dataInicio,
+            'filtro-data-fim':    dataFim,
         });
 
-        // Dispara HTMX apontando para o mesmo endpoint do carregamento inicial
-        htmx.ajax('GET', `/proxy.php?p=model_noticia&${params.toString()}`, {
-            target: '#noticia',
+        htmx.ajax('GET', `/proxy.php?p=${endpoint}&${params.toString()}`, {
+            target: target,
             swap:   'innerHTML'
         });
     }
 
-    // ─── Gatilho: roda sempre que #noticia for reinjetado pelo HTMX ───
+    inicializarPaginacao(); // ← roda no carregamento direto (minhas-noticias)
+
     document.addEventListener('htmx:afterSwap', function (e) {
-        if (e.target.id === 'noticia') {
+        if (e.target.id === 'noticia' || e.target.id === 'minhas-noticias') {
             inicializarPaginacao();
         }
     });

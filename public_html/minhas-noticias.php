@@ -48,11 +48,11 @@ if (!isset($_SESSION['usuario'])) {
         <!-- Notícias do usuário logado -->
         <template
             hx-get="/proxy.php?p=model_minhas-noticias"
-            hx-target="#noticia"
+            hx-target="#minhas-noticias-wrap"
             hx-swap="innerHTML"
             hx-trigger="load">
         </template>
-        <div id="noticia"></div>
+        <div id="minhas-noticias-wrap"></div>
     </main>
 
     <!-- Footer -->

@@ -94,5 +94,11 @@ $stmt->bindValue(':offset', $offset,     PDO::PARAM_INT);
 $stmt->execute();
 $noticias = $stmt;
 
+// troque os dois requires do final por isso:
+$paginacao_endpoint = 'model_minhas-noticias';
+$paginacao_target   = '#minhas-noticias-wrap';
+
+echo '<div id="minhas-noticias-wrap">';
 require __DIR__ . "/../view/view_minhas-noticias.php";
 require __DIR__ . "/../view/view_paginacao.php";
+echo '</div>';
