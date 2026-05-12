@@ -138,76 +138,85 @@ INSERT INTO noticias (titulo_noticia, texto_noticia, imagem_noticia, data_notici
 (	'Toyota Gazoo Racing revela nova versão do Yaris Rally1 para terra', 
 	'A equipe japonesa apresentou atualizações focadas na absorção de impacto e na tração em superfícies soltas. O novo diferencial central e ajustes na suspensão traseira prometem melhorar a resposta em trechos lamacentos. O chefe de equipe destacou que o desenvolvimento foi guiado por dados coletados nas etapas europeias da temporada passada.', 
 	'img-noticia/12-wrc-yaris.jpg', 
-	'2026-04-20', 9, 1);
+	'2026-04-17', 9, 1);
 
 INSERT INTO noticias (titulo_noticia, texto_noticia, imagem_noticia, data_noticia, categoria_id, usuario_id) VALUES
 (	'Introdução de carro elétrico híbrido ganha força nas pistas ovais',
 	'A série está testando um protótipo que combina motor V8 tradicional com unidade elétrica para ultrapassagens e frenagens. O objetivo é manter a essência do stock car enquanto reduz emissões e amplia o leque de estratégias de corrida. As equipes demonstraram interesse, mas destacam a necessidade de ajustes na regulamentação de peso e balanceamento.', 
 	'img-noticia/13-nascar-hybrid.png', 
-	'2026-04-25', 10, 2);
+	'2026-04-20', 10, 2);
 
 INSERT INTO noticias (titulo_noticia, texto_noticia, imagem_noticia, data_noticia, categoria_id, usuario_id) VALUES
 (	'Ducati mantém hegemonia, mas Yamaha mostra evolução com novo motor', 
 	'A fabricante italiana continua dominante nas retas, porém a japonesa surpreendeu com ganhos de torque em saídas de curva, reduzindo a diferença para menos de 0.3s por volta. A nova carenagem melhorou a proteção aerodinâmica, permitindo que o piloto se mantenha mais estável em frenagens tardias. A temporada promete disputas mais equilibradas.', 
 	'img-noticia/14-motogp-tech.png', 
-	'2026-05-01', 11, 1);
+	'2026-04-25', 11, 1);
 
 INSERT INTO noticias (titulo_noticia, texto_noticia, imagem_noticia, data_noticia, categoria_id, usuario_id) VALUES
 (	'Regra de motor único garante equilíbrio técnico entre equipes',
 	'A padronização do propulsor permitiu que a diferença de desempenho fosse ditada apenas pelo chassis, suspensão e talento do piloto. Jovens pilotos têm aproveitado essa uniformidade para mostrar consistência e ritmo de prova. A organização planeja manter o formato por mais duas temporadas, avaliando o impacto no desenvolvimento de carreiras.', 
 	'img-noticia/15-moto2-chassis.png', 
-	'2026-05-05', 12, 2);
+	'2026-04-27', 12, 2);
 
 INSERT INTO noticias (titulo_noticia, texto_noticia, imagem_noticia, data_noticia, categoria_id, usuario_id) VALUES
 (	'Estratégias de rascunho dominam batalhas finais nas etapas de rua', 
 	'Com a limitação de potência, os pilotos dependem do vácuo e de manobras tardias para superar adversários. A nova regra de limite de inclinação em curvas de baixa velocidade busca reduzir quedas e priorizar a técnica sobre a agressividade. Equipes menores têm se beneficiado da estabilidade regulatória para competir de igual para igual com as tradicionais.', 
 	'img-noticia/16-moto3-draft.png', 
-	'2026-05-08', 13, 1);
+	'2026-04-30', 13, 1);
 
 INSERT INTO noticias (titulo_noticia, texto_noticia, imagem_noticia, data_noticia, categoria_id, usuario_id) VALUES
 (	'Red Bull Racing testa novo conceito de sidepod em Silverstone', 
 	'A equipe austríaca trouxe uma solução radical para os radiadores laterais, buscando melhorar o fluxo de ar para o difusor traseiro. Os primeiros dados de túnel de vento indicam ganhos significativos de downforce sem aumento de arrasto. A validação na pista será crucial para definir a direção de desenvolvimento do carro para a segunda metade da temporada.', 
-	'img-noticia/17-rb-silverstone.jpg', '2026-05-10', 1, 2);
+	'img-noticia/17-rb-silverstone.jpg', 
+	'2026-05-01', 1, 2);
 
 INSERT INTO noticias (titulo_noticia, texto_noticia, imagem_noticia, data_noticia, categoria_id, usuario_id) VALUES
 (	'Disputa pelo título da F2 se acirra após rodada dupla em Mônaco', 
 	'Com a diferença de pontos reduzida para apenas 12, a briga pela liderança do campeonato entrou em nova fase. A consistência nas largadas e a gestão de pneus degradados têm sido os fatores decisivos. Analistas apontam que a pressão psicológica pode ser tão determinante quanto o desempenho técnico nas próximas etapas.', 
-	'img-noticia/18-f2-title-fight.png', '2026-05-12', 2, 1);
+	'img-noticia/18-f2-title-fight.png', 
+	'2026-05-03', 2, 1);
 
 INSERT INTO noticias (titulo_noticia, texto_noticia, imagem_noticia, data_noticia, categoria_id, usuario_id) VALUES
 (	'Piloto argentino conquista pole position surpreendente em Spa-Francorchamps', 
 	'Em condições de pista molhada, o jovem talento da F3 demonstrou controle excepcional, cravando o melhor tempo na Q3. A equipe, que lutava por pontos no início do ano, vê essa conquista como um ponto de virada. A chuva intensa durante a classificação embaralhou as expectativas e favoreceu pilotos com maior sensibilidade ao limite de aderência.', 
-	'img-noticia/19-f3-spa-pole.png', '2026-05-14', 3, 2);
+	'img-noticia/19-f3-spa-pole.png', 
+	'2026-05-05', 3, 2);
 
 INSERT INTO noticias (titulo_noticia, texto_noticia, imagem_noticia, data_noticia, categoria_id, usuario_id) VALUES
 (	'Nova regulamentação de segurança para F4 entra em vigor imediatamente', 
 	'Após revisão dos protocolos de impacto lateral, a FIA exigiu reforços estruturais nos cockpits de todos os chassis homologados. As equipes tiveram 48 horas para adaptar os carros antes da próxima etapa. A medida visa proteger os pilotos em incidentes de alta energia, alinhando a categoria aos padrões das fórmulas superiores.', 
-	'img-noticia/20-f4-safety.png', '2026-05-16', 4, 1);
+	'img-noticia/20-f4-safety.png', 
+	'2026-05-07', 4, 1);
 
 INSERT INTO noticias (titulo_noticia, texto_noticia, imagem_noticia, data_noticia, categoria_id, usuario_id) VALUES
 (	'Nissan Formula E Team revela atualização de software para recuperação de energia', 
 	'A fabricante japonesa focou em algoritmos de predição de frenagem, permitindo que os pilotos recuperem mais energia em descidas e curvas lentas. O update foi testado em simulador e mostrou potencial para ganhar até 5% de eficiência por volta. A equipe espera subir no campeonato de construtores com essa vantagem técnica.', 
-	'img-noticia/21-nissan-fe-software.png', '2026-05-20', 6, 1);
+	'img-noticia/21-nissan-fe-software.png', 
+	'2026-05-09', 6, 1);
 
 INSERT INTO noticias (titulo_noticia, texto_noticia, imagem_noticia, data_noticia, categoria_id, usuario_id) VALUES
 (	'IndyCar confirma calendário expandido para 2027 com etapa no Brasil',
 	'A série americana oficializou uma corrida em circuito urbano no Rio de Janeiro, marcando seu retorno ao país após mais de uma década. O traçado provisório contorna pontos turísticos da cidade e deve exigir alto nível de precisão dos pilotos. A organização vê o mercado brasileiro como estratégico para a expansão internacional da categoria.', 
-	'img-noticia/22-indy-rio.png', '2026-05-22', 7, 2);
+	'img-noticia/22-indy-rio.png', 
+	'2026-05-11', 7, 2);
 
 INSERT INTO noticias (titulo_noticia, texto_noticia, imagem_noticia, data_noticia, categoria_id, usuario_id) VALUES
 (	'Ferrari AF Corse vence as 6 Horas de Spa com estratégia agressiva',
 	'A equipe italiana optou por parar menos vezes que os rivais, confiando na durabilidade dos pneus e na eficiência do híbrido. A decisão arriscada pagou dividends nas voltas finais, quando os adversários enfrentaram degradação severa. A vitória consolida a Ferrari na liderança do WEC e aumenta a confiança para Le Mans.', 
-	'img-noticia/23-wec-spa-win.png', '2026-05-24', 8, 1);
+	'img-noticia/23-wec-spa-win.png', 
+	'2026-05-12', 8, 1);
 
 INSERT INTO noticias (titulo_noticia, texto_noticia, imagem_noticia, data_noticia, categoria_id, usuario_id) VALUES
 (	'Hyundai domina rally de terra na Grécia com novo pacote de suspensão', 
 	'A equipe coreana explorou ao máximo as irregularidades do terreno, mantendo velocidade média superior mesmo em seções técnicas. O ajuste fino da suspensão permitiu que os carros absorvessem impactos sem perder tração. O resultado coloca a Hyundai em posição favorável na disputa pelo título de fabricantes.', 
-	'img-noticia/24-wrc-greece.jpg', '2026-05-26', 9, 2);
+	'img-noticia/24-wrc-greece.jpg', 
+	'2026-05-13', 9, 2);
 
 INSERT INTO noticias (titulo_noticia, texto_noticia, imagem_noticia, data_noticia, categoria_id, usuario_id) VALUES
 (	'NASCAR Cup Series introduz zona de desaceleração obrigatória em ovais curtos', 
 	'Para reduzir colisões em banda e melhorar a segurança, trechos específicos das pistas terão limite de velocidade imposto eletronicamente. A medida gera debate entre pilotos veteranos, que argumentam sobre a perda de espontaneidade, mas é apoiada por equipes focadas na redução de custos de reparo. A implementação será monitorada nas próximas três corridas.', 
-	'img-noticia/25-nascar-slow-zone.jpeg', '2026-05-28', 10, 1);
+	'img-noticia/25-nascar-slow-zone.jpeg', 
+	'2026-05-14', 10, 1);
 
 PRAGMA table_info(categorias);
 PRAGMA table_info(perfis);

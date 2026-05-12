@@ -17,7 +17,13 @@ require "model_conexao.php";
 
 $id_noticia    = $_GET['id_noticia'];
 $perfilUsuario = (int) $_SESSION['usuario']['perfil_id'];
-$destino       = $perfilUsuario === 1 ? '../noticias.php' : '../minhas-noticias.php';
+
+// Pega a página de origem passada pela URL; se não vier, usa fallback pelo perfil
+$origens_permitidas = ['noticias.php', 'minhas-noticias.php'];
+$origem  = $_GET['origem'] ?? null;
+$destino = in_array($origem, $origens_permitidas)
+    ? '../' . $origem
+    : ($perfilUsuario === 1 ? '../noticias.php' : '../minhas-noticias.php');
 
 try {
     $stmt = $pdo->prepare("DELETE FROM noticias WHERE id_noticia = :id_noticia");

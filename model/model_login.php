@@ -62,7 +62,6 @@ try {
             'tipo'     => 'aviso',
             'mensagem' => 'Por segurança, defina uma nova senha.',
         ];
-        header('Location: perfil.php');
         exit;
     }
 
