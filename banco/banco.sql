@@ -71,7 +71,7 @@ INSERT INTO noticias (titulo_noticia, texto_noticia, imagem_noticia, data_notici
 (	'Max Verstappen acabou.', 
 	'Verstappen tá um bagre nesse regulamento. kkkkkkkkkkkkk', 
 	'img-noticia/1-max-sid.jpg', 
-	'2026-03-16', 1, 1);
+	'2026-05-15', 1, 1);
 
 INSERT INTO noticias (titulo_noticia, texto_noticia, imagem_noticia, data_noticia, categoria_id, usuario_id) VALUES
 (	'Rumores: BYD estuda entrada na F1 como fornecedora de motores?', 
