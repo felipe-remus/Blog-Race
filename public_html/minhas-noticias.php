@@ -38,7 +38,7 @@ if (!isset($_SESSION['usuario'])) {
 
         <!-- Filtros: carrega categorias do banco -->
         <template
-            hx-get="/proxy.php?p=model_filtros"
+            hx-get="/proxy.php?p=model_filtros&contexto=minhas-noticias"
             hx-target="#filtro"
             hx-swap="innerHTML"
             hx-trigger="load">

@@ -1,6 +1,6 @@
 <div class="filtros-wrapper"
-    hx-get="/proxy.php?p=model_noticia"
-    hx-target="#noticia"
+    hx-get="/proxy.php?p=<?= $filtros_endpoint ?>"
+    hx-target="<?= $filtros_target ?>"
     hx-swap="innerHTML"
     hx-trigger="input delay:400ms from:#busca-texto,
                 change from:#filtro-categoria,
